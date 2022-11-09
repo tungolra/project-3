@@ -1,0 +1,86 @@
+ Response {
+from (integer, optional),
+to (integer, optional),
+count (integer, optional),
+_links (Links, optional),
+hits (Array[Hit], optional)
+}
+Links {
+self (Link, optional),
+next (Link, optional)
+}
+Hit {
+recipe (Recipe, optional),
+_links (Links, optional)
+}
+Link {
+href (string, optional),
+title (string, optional)
+}
+Recipe {
+uri (string, optional),
+label (string, optional),
+image (string, optional),
+images (Inline Model 1, optional),
+source (string, optional),
+url (string, optional),
+shareAs (string, optional),
+yield (number, optional),
+dietLabels (Array[string], optional),
+healthLabels (Array[string], optional),
+cautions (Array[string], optional),
+ingredientLines (Array[string], optional),
+ingredients (Array[Ingredient], optional),
+calories (number, optional),
+glycemicIndex (number, optional),
+totalCO2Emissions (number, optional):
+
+BETA feature ,
+co2EmissionsClass (string, optional):
+
+BETA feature = ['A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
+totalWeight (number, optional),
+cuisineType (Array[string], optional),
+mealType (Array[string], optional),
+dishType (Array[string], optional),
+instructions (Array[string], optional),
+tags (Array[string], optional),
+externalId (string, optional),
+totalNutrients (NutrientsInfo, optional),
+totalDaily (NutrientsInfo, optional),
+digest (Digest, optional)
+}
+Inline Model 1 {
+THUMBNAIL (ImageInfo, optional),
+SMALL (ImageInfo, optional),
+REGULAR (ImageInfo, optional),
+LARGE (ImageInfo, optional)
+}
+Ingredient {
+text (string, optional),
+quantity (number, optional),
+measure (string, optional),
+food (string, optional),
+weight (number, optional),
+foodId (string, optional)
+}
+NutrientsInfo {
+}
+Digest [
+DigestEntry
+]
+ImageInfo {
+url (string, optional),
+width (integer, optional),
+height (integer, optional)
+}
+DigestEntry {
+label (string, optional),
+tag (string, optional),
+schemaOrgTag (string, optional),
+total (number, optional),
+hasRDI (boolean, optional),
+daily (number, optional),
+unit (string, optional),
+sub (Digest, optional)
+} 

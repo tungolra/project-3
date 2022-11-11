@@ -20,6 +20,9 @@ def recipe_collection_index(request):
 
 # delete recipe collection
 
+"""CRUD for Recipes"""
+# 
+
 
 """OAuth Functions"""
 def signup(request):

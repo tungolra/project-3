@@ -11,7 +11,7 @@ class Recipes(models.Model):
 
 class RecipeCollection(models.Model):
     title = models.CharField(max_length=50)
-    create_date = models.DateField
+    create_date = models.DateField()
     recipe_id = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

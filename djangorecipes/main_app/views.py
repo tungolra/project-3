@@ -12,6 +12,7 @@ def home(request):
 
 @login_required
 def recipe_collection_index(request): 
+    # grab API data, pass in object
     return render(request, 'recipe_collections/index.html')
 
 # create recipe collection

@@ -2,9 +2,9 @@
 endpoints = [
     ("recipes/auto-complete", "Auto complete results for you search"),
     ("recipes/list", "Search by filter or name"),
-    ("recipes/list-similarities", "List similar recipes for a given recipe")
+    ("recipes/list-similarities", "List similar recipes for a given recipe"),
     ("recipes/get-more-info", "Get detailed info on a recipe if available, if 404 no information to obtian"),
-    ("tips/list", "Get reviews for a given recipe")
+    ("tips/list", "Get reviews for a given recipe"),
     ("tags/list", "Get a list of all tags"),
     ("feeds/list", "A list of new recipes and updates"),
 ]

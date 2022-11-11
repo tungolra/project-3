@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Set up environment variables
 env = environ.Env()
 environ.Env.read_env()
-
+print(env('MY_KEY'), "FROM SETTINGS")
 ### Notes on django-environ module
 
 # Steps to install django-environ
@@ -44,7 +44,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'main_app'
+    'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

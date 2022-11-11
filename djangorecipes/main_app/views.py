@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
+from . import API_Sample
 
 """Recipe Collection"""
 def home(request):
@@ -13,7 +14,9 @@ def home(request):
 @login_required
 def recipe_collection_index(request): 
     # grab API data, pass in object
-    return render(request, 'recipe_collections/index.html')
+    apisample = API_Sample.recipes["auto_complete"]
+    print(apisample)
+    return render(request, 'recipe_collections/index.html', apisample)
 
 # create recipe collection
 

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Cat Collector</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper teal lighten-2">
+          <ul>
+            <li>
+              <a href="/" class="left brand-logo">&nbsp;&nbsp;BookCollector</a>
+            </li>
+          </ul>
+          <ul class="right">
+            {%if user.is_authenticated%}
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'logout'%}">Log Out</a></li>
+            {%else%}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login'%}">Log In</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <ul id="slide-out" class="sidenav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="images/office.jpg" />
+            </div>
+            <a href="#user"><img class="circle" src="images/yuna.jpg" /></a>
+            <a href="#name"><span class="white-text name">John Doe</span></a>
+            <a href="#email"
+              ><span class="white-text email">jdandturk@gmail.com</span></a
+            >
+          </div>
+        </li>
+        <li>
+          <a href="#!"
+            ><i class="material-icons">cloud</i>First Link With Icon</a
+          >
+        </li>
+        <li><a href="#!">Second Link</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+      </ul>
+      <a href="#" data-target="slide-out" class="sidenav-trigger"
+        ><i class="material-icons">menu</i></a
+      >
+    </header>
+    <main class="container">{% block content %} {% endblock %}</main>
+    <footer class="page-footer">
+      <div class="right">
+        All Rights Reserved, &copy; 2019 Cat Collector &nbsp;
+      </div>
+    </footer>
+  </body>
+</html>

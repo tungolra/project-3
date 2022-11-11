@@ -6,9 +6,26 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
 
+"""Recipe Collection"""
 def home(request):
     return render(request, 'home.html')
 
+@login_required
+def recipe_collection_index(request): 
+    # grab API data, pass in object
+    return render(request, 'recipe_collections/index.html')
+
+# create recipe collection
+
+# update recipe collection
+
+# delete recipe collection
+
+"""CRUD for Recipes"""
+# 
+
+
+"""OAuth Functions"""
 def signup(request):
     error_message = ''
     if request.method == 'POST':

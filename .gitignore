@@ -1,2 +1,8 @@
-ignored
+# ignores enviornment variables for production and development
 .env
+
+# ignores all test files
+/test/
+
+# ignore all utils
+/utils

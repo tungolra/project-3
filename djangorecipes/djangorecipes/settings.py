@@ -19,6 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Set up environment variables
 env = environ.Env()
 environ.Env.read_env()
+print("\n", env('MY_KEY'), "\t FROM SETTINGS\n")
 ### Notes on django-environ module
 
 # Steps to install django-environ
@@ -136,3 +137,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

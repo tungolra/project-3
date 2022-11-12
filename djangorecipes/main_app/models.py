@@ -4,19 +4,19 @@ from django.contrib.auth.models import User
 
 class Recipes(models.Model):
     # for API only; create own recipe TBD
-    name = models.CharField(max_length=50)
+    recipe_id = models.IntegerField()
     def __str__(self): 
-        return self.name
+        return self.id
 
 
 class RecipeCollection(models.Model):
     title = models.CharField(max_length=50)
-    create_date = models.DateField()
-    recipe_id = models.IntegerField()
+
+    recipes = models.ManyToManyField(Recipes)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'Collection Name: {self.title}, Created: {self.create_date}'
+        return f'Collection Name: {self.title}'
 
     def get_absolute_url(self):
         return reverse('index')

@@ -62,8 +62,8 @@ if __name__ == "__main__":
 
     p = {}
 
-    data = client.get_recipes_auto_complete(p)
-    # data = client.get_recipes_list(p)
+    data = client.get_recipes_auto_complete(p) #for the search bar
+    # data = client.get_recipes_list(p) # for all recipes
     # data = client.get_recipes_similar(p)
     # data = client.get_recipes_details(p)
     # data = client.get_tips(p)

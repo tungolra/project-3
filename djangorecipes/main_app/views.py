@@ -6,7 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
 from . import API_Sample
-
+from . import tc_api
+from . import utils
 """Recipe Collection"""
 def home(request):
     return render(request, 'home.html')
@@ -42,3 +43,14 @@ def signup(request):
     form = UserCreationForm
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
+def example(request):
+    p = {
+        "recipe_id":"8138" #REQUIRED
+    }
+
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipe_detail(response)
+    
+    return render(request, "example.html", {"data" : data} )

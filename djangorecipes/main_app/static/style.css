@@ -1,0 +1,31 @@
+.nav-wrapper {
+  background-color: white;
+  color: black;
+}
+
+.carousel-img {
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+.carousel {
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.header-img {
+  width: 450px;
+}
+
+.rec-cat {
+  display: grid;
+  grid-template-columns: 50vh 50vh;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 10px;
+}
+
+.rec-cat-img {
+  border-radius: 25px;
+  max-width: 100%;
+}

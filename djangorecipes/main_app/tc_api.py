@@ -31,7 +31,7 @@ class TastyCoAPI():
         response = self.get(endpoint, params)
         return response.json()
 
-    def get_recipes_detailS(self,params):
+    def get_recipes_details(self,params):
         endpoint = "recipes/get-more-info"
         response = self.get(endpoint, params)
         return response.json()
@@ -58,6 +58,17 @@ class TastyCoAPI():
 
 client = TastyCoAPI()
 
+p = {}
+
+data = client.get_recipes_auto_complete(p)
+# data = client.get_recipes_list(p)
+# data = client.get_recipes_similar(p)
+# data = client.get_recipes_details(p)
+# data = client.get_tips(p)
+# data = client.get_tags(p)
+# data = client.get_feeds(p)
+print(data)
+
 '''
     EXAMPLE PARAMETER OBJECTS
 
@@ -68,7 +79,7 @@ p = {
 
 client.get_recipes_similar(p)
 p = {
-    "recipe_id":"8138 #REQUIRED
+    "recipe_id":"8138" #REQUIRED
 }
 
 client.get_recipes_list(p)
@@ -81,7 +92,7 @@ p = {
 
 client.get_recipes_details(p)
 p = {
-    "recipe_id":"8138 #REQUIRED
+    "recipe_id":"8138" #REQUIRED
 }
 
 
@@ -100,7 +111,7 @@ p = {
     "size":"5",             #REQUIRED
     "timezone":"+0700",     #REQUIRED 
     "vegetarian":"false",   #REQUIRED
-    "from":"0               #REQUIRED
+    "from":"0"               #REQUIRED
 }
 '''
 

@@ -15,8 +15,8 @@ def home(request):
 def recipe_collection_index(request): 
     # grab API data, pass in object
     apisample = API_Sample.recipes["auto_complete"]
-    print(apisample)
-    return render(request, 'recipe_collections/index.html', apisample)
+    apiSampleList = list(apisample.values())[0]
+    return render(request, 'recipe_collections/index.html', {'apiSampleList': apiSampleList})
 
 # create recipe collection
 

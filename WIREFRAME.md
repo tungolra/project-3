@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Agenda Items
 
 ## Design Specs
@@ -55,3 +56,24 @@
         - Displays name of user-created Meal Collection
         - Renders a list of ingredients with quantities 
         - user should be able to remove items or change quantities 
+=======
+## Agenda Items
+
+- [ ] Design Specs
+    - [ ] Colour Theme
+    - [ ] Logo
+    - [ ] Font
+- [ ] Pages
+    - [ ] Home Page
+        - [ ] Search bar feature: 
+            - search for one specific recipe if chosen from dropdown list
+            - search for all matching recipes if incomplete input (on enter)
+        - [ ] 
+        - [ ] 
+        - [ ] 
+    - [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+>>>>>>> 1f645927b121fcc313dd143038d57ea03f935c7c

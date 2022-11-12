@@ -1,11 +1,7 @@
-nav {
-  background-image: url();
-}
-
 .nav-wrapper {
   background-color: transparent;
-  color: black;
   width: 100vw;
+  z-index: 1;
 }
 
 .header-img {

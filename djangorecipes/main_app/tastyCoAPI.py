@@ -1,25 +1,25 @@
-from requests_threads import AsyncSession
-from requests import Session
+import aiohttp
 import asyncio
+import environ
 
-URL = "https://tasty.p.rapidapi.com/recipes/auto-complete"
-QUERY = {
-    "prefix" : "chicken soup"
-}
+env = environ.Env()
+environ.Env.read_env()
+
+URL_BASE = env('TASTYCO_BASE_URL')
+API_HOST = env("TASTYCO_HOST")
+API_KEY = env("TASTYCO_KEY")
 
 HEADERS = {
-    "X-RapidAPI-Key" : "a9b8732634mshd9c5ade8ea5bfdap16b3c9jsn4296560a02db",
-    "X-RapidAPI-Host" : "tasty.p.rapidapi.com"
+    "X-RapidAPI-Key" : API_KEY,
+    "X-RapidAPI-Host" : API_HOST
 }
 
-session = AsyncSession(n=100)
+async def API_HIT(session, url, query=None):
+    
+    async with session.get(url) as resp:
+        res = await resp.json()
+        print (res)
+        return res
 
-async def _main():
-    print("main1:")
-    rs = []
-    for _ in range(1):
-        resp = await session.request("GET", URL, headers = HEADERS, params=QUERY)
-        rs.append(resp.text)
-    print(rs[0])
-
-res = session.run(_main)    
+async def initialize_Session():
+    pass

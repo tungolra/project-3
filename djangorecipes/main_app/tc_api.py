@@ -58,16 +58,18 @@ class TastyCoAPI():
 
 client = TastyCoAPI()
 
-p = {}
+if __name__ == "__main__":
 
-data = client.get_recipes_auto_complete(p)
-# data = client.get_recipes_list(p)
-# data = client.get_recipes_similar(p)
-# data = client.get_recipes_details(p)
-# data = client.get_tips(p)
-# data = client.get_tags(p)
-# data = client.get_feeds(p)
-print(data)
+    p = {}
+
+    data = client.get_recipes_auto_complete(p)
+    # data = client.get_recipes_list(p)
+    # data = client.get_recipes_similar(p)
+    # data = client.get_recipes_details(p)
+    # data = client.get_tips(p)
+    # data = client.get_tags(p)
+    # data = client.get_feeds(p)
+    print(data)
 
 '''
     EXAMPLE PARAMETER OBJECTS

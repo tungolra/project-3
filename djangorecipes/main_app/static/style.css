@@ -30,8 +30,6 @@ nav {
 .carousel-img {
   border-radius: 50%;
   border: 3px solid black;
-  height: 200px;
-  width: 200px;
 }
 
 .carousel {
@@ -83,4 +81,8 @@ h4 {
 
 i {
   font-size: 100px;
+}
+
+.logo {
+  max-width: 100%;
 }

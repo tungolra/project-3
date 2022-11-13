@@ -7,8 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import MealPlans
 from .forms import MealPlanForm
-from . import API_Sample
 
+from . import tc_api
+from . import utils
+
+"""Recipe Collection"""
 def home(request):
     return render(request, 'home.html')
 
@@ -59,3 +62,23 @@ def signup(request):
     form = UserCreationForm
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def recipe_view(request):
+    p = {
+        "recipe_id":"8138" #REQUIRED
+    }
+
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipe_detail(response["results"][0])
+
+    return render(request, "details.html", {"recipe" :data})
+
+def example(request):
+    p = {
+        "recipe_id":"8138" #REQUIRED
+    }
+
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipe_detail(response["results"][0])
+    
+    return render(request, "example.html", {"data" : data} )

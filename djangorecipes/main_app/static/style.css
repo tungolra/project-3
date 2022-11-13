@@ -1,3 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+main {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+}
+
+nav {
+  background-color: transparent;
+}
+
 .nav-wrapper {
   background-color: transparent;
   width: 100vw;
@@ -38,9 +49,13 @@
   grid-gap: 10px;
 }
 
+.rec-cat-cont {
+  display: flex;
+}
+
 .rec-cat-cont > img {
   border-radius: 25px;
-  width: 100%;
+  max-width: 100vw;
   max-height: 100%;
   object-fit: cover;
 }
@@ -56,4 +71,10 @@ body {
 
 h4 {
   text-align: left;
+  font-weight: 900;
+}
+
+.main {
+  margin-left: 15px;
+  margin-right: 15px;
 }

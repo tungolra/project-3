@@ -9,6 +9,7 @@ def parse_recipe_detail(recipe):
         "id" : recipe["id"],
         "name": recipe["name"],
         "instructions" : [],
+        "ingredients": [],
         "num_servings" : recipe["num_servings"],
         "rating" : recipe["user_ratings"], 
         "image_url" : recipe["thumbnail_url"],
@@ -24,7 +25,12 @@ def parse_recipe_detail(recipe):
     for instruction in recipe["instructions"]:
         result["instructions"].append(parse_instruction(instruction))
     
+
+    for component in recipe["sections"][0]["components"]:
+        result["ingredients"].append(parse_ingredient(component))
+        
     return result
+
 
 def parse_recipe_summary(recipe):
     result = {
@@ -41,6 +47,18 @@ def parse_recipe_summary(recipe):
 
 def parse_instruction(instruction):
     res = str(instruction["position"]) + " " + instruction["display_text"]
+    return res
+
+def parse_ingredient(recipe_component):
+    ingredient = recipe_component["ingredient"]
+    measurement = recipe_component["measurements"][0]
+
+    res = {
+        "name"  : ingredient["name"],
+        "id"    : ingredient["id"],
+        "quantity"  : measurement["quantity"],
+        "measurement" : measurement["unit"]["abbreviation"]
+    }
     return res
 
 def parse_response(response):

@@ -81,7 +81,7 @@ p = {
 
 client.get_recipes_similar(p)
 p = {
-    "recipe_id":"8138" #REQUIRED
+    "id":"8138" #REQUIRED
 }
 
 client.get_recipes_list(p)

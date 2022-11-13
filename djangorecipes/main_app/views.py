@@ -98,7 +98,6 @@ def example(request):
     }
 
     response = tc_api.client.get_recipes_details(p)
-    print(response)
-    data = utils.parse_recipes_details(response, "s")
+    data = utils.parse_recipes_details(response, "d")
     
     return render(request, "example.html", {"data" : data} )

@@ -7,7 +7,7 @@ from . import tc_api
 def parse_recipe_detail(recipe):
     result = {
         "id" : recipe["id"],
-        "name": recipe["show"]["name"],
+        "name": recipe["name"],
         "instructions" : [],
         "num_servings" : recipe["num_servings"],
         "rating" : recipe["user_ratings"], 
@@ -15,6 +15,10 @@ def parse_recipe_detail(recipe):
         "image_alt_text" : recipe["thumbnail_alt_text"],
         "video_url" : recipe["original_video_url"],
         "nutrition" : recipe["nutrition"]
+        # TO ADD,
+        # Ingredients,
+        # Cook Time
+        # Author
     }
 
     for instruction in recipe["instructions"]:
@@ -25,7 +29,7 @@ def parse_recipe_detail(recipe):
 def parse_recipe_summary(recipe):
     result = {
         "id" : recipe["id"],
-        "name": recipe["show"]["name"],
+        "name": recipe["name"],
         "num_servings" : recipe["num_servings"],
         "rating" : recipe["user_ratings"], 
         "image_url" : recipe["thumbnail_url"],
@@ -69,7 +73,14 @@ def parse_recipes_similar(response, mode):
     pass
 
 def parse_recipes_details(response, mode):
-    pass
+    func = None
+    
+    if mode == "d":
+        func = parse_recipe_detail
+    elif mode == "s":
+        func = parse_recipe_summary
+
+    return func(response)
 
 def parse_tips(response,mode):
     pass

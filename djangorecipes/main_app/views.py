@@ -81,20 +81,21 @@ def signup(request):
 
 def recipe_view(request):
     p = {
-        "recipe_id":"8138" #REQUIRED
+        "id":"8138" #REQUIRED
     }
 
     response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipe_detail(response["results"][0])
+    data = utils.parse_recipes_details(response, "d")
     return render(request, "recipes/details.html", {"recipe":data})
 
 
 def example(request):
     p = {
-        "recipe_id":"8138" #REQUIRED
+        "id":"8108" #REQUIRED
     }
 
     response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipe_detail(response["results"][0])
+    print(response)
+    data = utils.parse_recipes_details(response, "s")
     
     return render(request, "example.html", {"data" : data} )

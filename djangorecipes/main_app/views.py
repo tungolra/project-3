@@ -10,7 +10,6 @@ from .forms import MealPlanForm
 from . import tc_api
 from . import utils
 
-"""Recipe Collection"""
 def home(request):
     return render(request, 'home.html')
 

@@ -7,7 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import MealPlans
 from .forms import MealPlanForm
-
 from . import tc_api
 from . import utils
 
@@ -16,17 +15,18 @@ def home(request):
     return render(request, 'home.html')
 
 """Meal Plans"""
-@login_required
+# @login_required
 def meal_plan_index(request): 
-    return render(request, 'meal_plans/index.html')
+    meal_plans = MealPlans.objects.filter(user=request.user)
+    return render(request, 'meal_plans/index.html', {'meal_plans': meal_plans})
 
 # create Meal Plans
-@login_required
+# @login_required
 def meal_plan_new(request):
     form = MealPlanForm()
     return render(request, 'meal_plans/meal_plan_form.html', {'form': form})
 
-@login_required
+# @login_required
 def meal_plan_create(request):
     context = {}
     form = MealPlanForm(request.POST)

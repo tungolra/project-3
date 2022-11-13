@@ -1,7 +1,9 @@
 {% extends 'base.html'%} {% block content %}
 <h1>All Meal Plans</h1>
 <a href="{% url 'meal_plan_new' %}">Add New Meal Plan</a>
-<ul>
-
-</ul>
+{% for plans in meal_plans %}
+<div>
+    {{plans.title}}
+</div>
+{% endfor %}
 {% endblock %}

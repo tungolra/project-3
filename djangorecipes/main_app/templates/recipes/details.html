@@ -1,1 +1,45 @@
-{% extends 'base.html'%} {% block content %} {% endblock %}
+{% extends 'base.html'%} {% block content %}
+<div class="header-img" style="position: relative; top: -65px">
+  <img src="{{ recipe.image_url }}" />
+</div>
+
+<div class="main">
+  <div class="author">Author</div>
+  <div class="center">
+    <div>
+      <a href=""><i class="material-icons grey-text">date_range</i></a>
+    </div>
+    <div>
+      <a href=""><i class="material-icons grey-text">favorite</i></a>
+    </div>
+    <div>
+      <a href=""><i class="material-icons grey-text">share</i></a>
+    </div>
+  </div>
+
+  <h3>{{ recipe.name }}</h3>
+
+  <div>
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

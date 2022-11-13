@@ -88,6 +88,7 @@ def recipe_view(request):
     data = utils.parse_recipe_detail(response["results"][0])
     return render(request, "recipes/details.html", {"recipe":data})
 
+
 def example(request):
     p = {
         "recipe_id":"8138" #REQUIRED

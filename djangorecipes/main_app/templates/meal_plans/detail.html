@@ -1,4 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 THIS IS THE MEAL PLAN DETAIL PAGE
-{{meal_plan.title}}
+<br>
+<div>
+    {{meal_plan.title}}
+    <a href="{% url 'meal_plan_edit' meal_plan.id %}">Edit</a>
+</div>
 {% endblock %}

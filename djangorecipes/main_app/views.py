@@ -18,14 +18,21 @@ def meal_plan_index(request):
     return render(request, 'meal_plans/index.html')
 
 # create Meal Plans
-
+@login_required
 def meal_plan_new(request):
     form = MealPlanForm()
-    return render(request, 'meal_plans/meal_plan_form.html')
+    return render(request, 'meal_plans/meal_plan_form.html', {'form': form})
 
+@login_required
 def meal_plan_create(request):
     context = {}
-    pass
+    form = MealPlanForm(request.POST)
+    if form.is_valid(): 
+        form.save(commit=False)
+        form.instance.user = request.user
+        form.save()
+    context['form'] = form
+    return redirect('/meal-plans')
 
 # update Meal Plans
 def edit_collection(request): 

@@ -43,9 +43,6 @@ def meal_plan_detail(request, mealplan_id):
     return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan})
 
 # update Meal Plans
-# class MealPlanUpdate(generic.UpdateView):
-#     model = MealPlans
-#     fields = ['title']
 def meal_plan_edit(request, mealplan_id):
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
     return render(request, 'meal_plans/new.html', {'meal_plan': meal_plan})
@@ -59,6 +56,7 @@ def meal_plan_update(request, mealplan_id):
 # delete Meal Plans
 class MealPlanDelete(generic.DeleteView):
     model = MealPlans
+    success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
 # 
@@ -79,6 +77,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+"""TEMP"""
 def recipe_view(request):
     p = {
         "recipe_id":"8138" #REQUIRED

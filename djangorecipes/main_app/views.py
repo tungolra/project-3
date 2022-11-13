@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
 from .models import MealPlans
+from .forms import MealPlanForm
 from . import API_Sample
 
 def home(request):
@@ -18,9 +19,13 @@ def meal_plan_index(request):
 
 # create Meal Plans
 
-class MealPlanCreate(LoginRequiredMixin, generic.CreateView): 
-    model = MealPlans
-    fields = ['title']
+def meal_plan_new(request):
+    form = MealPlanForm()
+    return render(request, 'meal_plans/meal_plan_form.html')
+
+def meal_plan_create(request):
+    context = {}
+    pass
 
 # update Meal Plans
 def edit_collection(request): 

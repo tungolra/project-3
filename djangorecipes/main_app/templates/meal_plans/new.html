@@ -1,0 +1,12 @@
+{% extends 'base.html'%} {% block content %} THIS IS THE MEAL PLAN UPDATE PAGE
+<br />
+<div>
+  <h1>{{meal_plan.title}}</h1>
+  <form action="{% url 'meal_plan_update' meal_plan.id %}" method="post">
+    {%csrf_token%}
+    <h4>Title:</h4>
+    <input name="name" />
+    <button type="submit">Update</button>
+  </form>
+</div>
+{% endblock %}

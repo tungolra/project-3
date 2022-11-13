@@ -1,0 +1,9 @@
+{% extends 'base.html'%} {% block content %}
+<form action="{% url 'meal_plan_create' %}" method="post">
+  {% csrf_token %}
+<br>
+    {{ form.as_table }}
+
+  <input type="submit" value="Submit!" />
+</form>
+{% endblock %}

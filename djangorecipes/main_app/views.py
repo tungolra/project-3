@@ -5,25 +5,44 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
-from . import API_Sample
+from .models import MealPlans
+from .forms import MealPlanForm
+
 from . import tc_api
 from . import utils
+
 """Recipe Collection"""
 def home(request):
     return render(request, 'home.html')
 
+"""Meal Plans"""
 @login_required
-def recipe_collection_index(request): 
-    # grab API data, pass in object
-    apisample = API_Sample.recipes["auto_complete"]
-    apiSampleList = list(apisample.values())[0]
-    return render(request, 'recipe_collections/index.html', {'apiSampleList': apiSampleList})
+def meal_plan_index(request): 
+    return render(request, 'meal_plans/index.html')
 
-# create recipe collection
+# create Meal Plans
+@login_required
+def meal_plan_new(request):
+    form = MealPlanForm()
+    return render(request, 'meal_plans/meal_plan_form.html', {'form': form})
 
-# update recipe collection
+@login_required
+def meal_plan_create(request):
+    context = {}
+    form = MealPlanForm(request.POST)
+    if form.is_valid(): 
+        form.save(commit=False)
+        form.instance.user = request.user
+        form.save()
+    context['form'] = form
+    return redirect('/meal-plans')
 
-# delete recipe collection
+# update Meal Plans
+def edit_collection(request): 
+    pass
+# delete Meal Plans
+def delete_collection(request):
+    pass
 
 """CRUD for Recipes"""
 # 

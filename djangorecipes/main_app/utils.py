@@ -1,6 +1,7 @@
 '''
     Utility file for parsing TastyCo API results
 '''
+
 from . import tc_api
 
 def parse_recipe_detail(recipe):
@@ -92,3 +93,4 @@ if __name__ == "__main__":
 
     data = parse_recipe_detail(recipe)
     print(data)
+

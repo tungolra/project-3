@@ -3,8 +3,7 @@
 '''
 from . import tc_api
 
-def parse_recipe_detail(response):
-    recipe = response["results"][0]
+def parse_recipe_detail(recipe):
     result = {
         "id" : recipe["id"],
         "name": recipe["show"]["name"],
@@ -19,16 +18,69 @@ def parse_recipe_detail(response):
 
     for instruction in recipe["instructions"]:
         result["instructions"].append(parse_instruction(instruction))
-
-    print(result)
+    
     return result
 
 def parse_recipe_summary(recipe):
-    pass
+    result = {
+        "id" : recipe["id"],
+        "name": recipe["show"]["name"],
+        "num_servings" : recipe["num_servings"],
+        "rating" : recipe["user_ratings"], 
+        "image_url" : recipe["thumbnail_url"],
+        "image_alt_text" : recipe["thumbnail_alt_text"],
+        "nutrition" : recipe["nutrition"]
+    }
+
+    return result
 
 def parse_instruction(instruction):
     res = str(instruction["position"]) + " " + instruction["display_text"]
     return res
+
+def parse_response(response):
+    result = response.get("results")
+    if result:
+        return result
+    else:
+        return response
+
+def parse_recipes_list(recipes, mode):
+    func = None
+    
+    if mode == "d":
+        func = parse_recipe_detail
+    elif mode == "s":
+        func = parse_recipe_summary
+    
+
+    for i in range(len(recipes)):
+        recipes[i] = func(recipes[i])
+    
+    return recipes
+
+def parse_recipes_auto_complete(response, mode):
+    result = parse_response(response)
+
+    return result[0]
+
+def parse_recipes_similar(response, mode):
+    pass
+
+def parse_recipes_details(response, mode):
+    pass
+
+def parse_tips(response,mode):
+    pass
+
+def parse_tags(response, mode):
+    pass
+
+def parse_feeds(responsee, mode):
+    pass
+
+
+
 
 
 if __name__ == "__main__":

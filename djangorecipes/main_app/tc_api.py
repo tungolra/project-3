@@ -76,7 +76,7 @@ if __name__ == "__main__":
 
 client.get_auto_complete(p)
 p = { 
-    "prefix" : "chicken soup" 
+    "prefix" : "chicken soup"   #REQUIRED
 }
 
 client.get_recipes_similar(p)

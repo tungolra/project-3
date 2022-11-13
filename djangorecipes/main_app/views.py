@@ -70,7 +70,9 @@ def recipe_view(request):
 
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipe_detail(response["results"][0])
+
     return render(request, "recipes/details.html", {"recipe" :data})
+
 
 def example(request):
     p = {

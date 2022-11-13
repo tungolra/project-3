@@ -54,7 +54,7 @@ def meal_plan_update(request, mealplan_id):
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
     meal_plan.title = request.POST['name']
     meal_plan.save()
-    return redirect(f'/meal-plan/{mealplan_id}')
+    return redirect(f'/meal-plans/{mealplan_id}/')
 
 # delete Meal Plans
 def delete_collection(request):

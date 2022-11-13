@@ -37,14 +37,18 @@
         <ul class="right">
           {% if user.is_authenticated %}
           <li>
-            <a href="{%url 'logout'%}"><i class="material-icons">account_circle</i></a>
+            <a href="{%url 'logout'%}"
+              ><i class="material-icons">account_circle</i></a
+            >
           </li>
           {% else %}
           <li>
             <a href="{% url 'signup'%}">Sign Up</a>
           </li>
           <li>
-            <a href="{% url 'login'%}"><i class="material-icons">account_circle</i></a>
+            <a href="{% url 'login'%}"
+              ><i class="material-icons">account_circle</i></a
+            >
           </li>
           {% endif %}
           <li>
@@ -69,6 +73,11 @@
       <li>
         <a href="#!">All Recipes</a>
       </li>
+      {% if user.is_authenticated %}
+      <li>
+        <a href="/meal-plans/">My Meal Plans</a>
+      </li>
+      {% else %} {%endif%}
       <li><a href="#!">Cuisines</a></li>
       <li><a href="#!">Surprise Me!</a></li>
     </ul>

@@ -35,9 +35,18 @@
         >
         <a href="#">Logo</a>
         <ul class="right">
+          {% if user.is_authenticated %}
           <li>
-            <a href=""><i class="material-icons">account_circle</i></a>
+            <a href="{%url 'logout'%}"><i class="material-icons">account_circle</i></a>
           </li>
+          {% else %}
+          <li>
+            <a href="{% url 'signup'%}">Sign Up</a>
+          </li>
+          <li>
+            <a href="{% url 'login'%}"><i class="material-icons">account_circle</i></a>
+          </li>
+          {% endif %}
           <li>
             <a href="sass.html"><i class="material-icons">search</i></a>
           </li>

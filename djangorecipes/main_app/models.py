@@ -19,7 +19,7 @@ class MealPlans(models.Model):
         return f'Collection Name: {self.title}'
 
     def get_absolute_url(self):
-        return reverse('details', kwargs={})
+        return reverse('details', kwargs={'mealplan_id': self.id})
 
 
 

@@ -37,6 +37,11 @@ def meal_plan_create(request):
     context['form'] = form
     return redirect('/meal-plans')
 
+# view mealplan details
+def meal_plan_detail(request, mealplan_id):
+    meal_plan = MealPlans.objects.get(id=mealplan_id)
+    return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan})
+
 # update Meal Plans
 def edit_collection(request): 
     pass

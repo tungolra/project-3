@@ -24,7 +24,7 @@ def meal_plan_index(request):
 # @login_required
 def meal_plan_new(request):
     form = MealPlanForm()
-    return render(request, 'meal_plans/meal_plan_form.html', {'form': form})
+    return render(request, 'meal_plans/mealplan_form.html', {'form': form})
 
 # @login_required
 def meal_plan_create(request):
@@ -37,9 +37,25 @@ def meal_plan_create(request):
     context['form'] = form
     return redirect('/meal-plans')
 
+# view mealplan details
+def meal_plan_detail(request, mealplan_id):
+    meal_plan = MealPlans.objects.get(id=mealplan_id)
+    return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan})
+
 # update Meal Plans
-def edit_collection(request): 
-    pass
+# class MealPlanUpdate(generic.UpdateView):
+#     model = MealPlans
+#     fields = ['title']
+def meal_plan_edit(request, mealplan_id):
+    meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
+    return render(request, 'meal_plans/new.html', {'meal_plan': meal_plan})
+
+def meal_plan_update(request, mealplan_id):
+    meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
+    meal_plan.title = request.POST['name']
+    meal_plan.save()
+    return redirect(f'/meal-plan/{mealplan_id}')
+
 # delete Meal Plans
 def delete_collection(request):
     pass
@@ -70,7 +86,8 @@ def recipe_view(request):
 
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipe_detail(response["results"][0])
-    return render(request, "recipes/details.html", {"recipe" :data,})
+    return render(request, "recipes/details.html", {"recipe":data})
+
 
 def example(request):
     p = {

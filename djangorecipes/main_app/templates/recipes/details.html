@@ -42,4 +42,50 @@
     <div>Calories</div>
   </div>
 </div>
+
+<div class="anchor-links">
+  <div><a class="anch-link" href="#ingredients">Directions</a></div>
+  <div><a class="anch-link" href="#nutrition">Nutrition</a></div>
+  <div><a class="anch-link" href="#reviews">Reviews</a></div>
+  <div><a class="anch-link" href="#photos">Photos</a></div>
+</div>
+
+<div class="ingredients">
+  <h5>Ingredients</h5>
+</div>
+
+<div class="directions">
+  <h5>Directions</h5>
+</div>
+
+<div class="nutrition">
+  <h5>Nutrition</h5>
+  <div class="nutrition-container">
+    <div class="nutrition-content">
+      <div>{{ recipe.nutrition.protein}}g</div>
+      <div>Protein</div>
+    </div>
+    <div class="nutrition-content">
+      <div>{{ recipe.nutrition.sugar}}g</div>
+      <div>Sugar</div>
+    </div>
+    <div class="nutrition-content">
+      <div>{{ recipe.nutrition.carbohydrates}}g</div>
+      <div>Carbs</div>
+    </div>
+    <div class="nutrition-content">
+      <div>{{ recipe.nutrition.fat}}g</div>
+      <div>Fats</div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews">
+  <h5>Reviews</h5>
+</div>
+
+<div class="photos">
+  <h5>Photos</h5>
+</div>
+
 {% endblock %}

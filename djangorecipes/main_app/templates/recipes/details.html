@@ -18,28 +18,28 @@
   </div>
 
   <h3>{{ recipe.name }}</h3>
+</div>
 
-  <div>
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+<div class="summary">
+  <div class="reviews">
+    <div><i class="material-icons black-text">star</i></div>
+    <div class="sum-value">{{recipe.rating.count_positive}}</div>
+    <div>Reviews</div>
+  </div>
+  <div class="time">
+    <div><i class="material-icons black-text">access_time</i></div>
+    <div class="sum-value">100 yrs</div>
+    <div>Cook Time</div>
+  </div>
+  <div class="servings">
+    <div><i class="material-icons black-text">local_dining</i></div>
+    <div class="sum-value">{{ recipe.num_servings}}</div>
+    <div>Servings</div>
+  </div>
+  <div class="calories">
+    <div><i class="material-icons black-text">pregnant_woman</i></div>
+    <div class="sum-value">{{ recipe.nutrition.calories }}</div>
+    <div>Calories</div>
   </div>
 </div>
 {% endblock %}

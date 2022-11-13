@@ -113,3 +113,36 @@ h3 {
   margin-top: 10px;
   text-align: center;
 }
+
+.summary {
+  margin-left: 40px;
+  margin-right: 40px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  font-size: large;
+  font-weight: 300;
+  color: grey;
+}
+
+.summary > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sum-value {
+  font-size: x-large;
+  color: black;
+}
+
+.time {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.servings {
+  border-right: 2px solid black;
+}

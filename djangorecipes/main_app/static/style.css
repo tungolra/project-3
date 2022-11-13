@@ -149,11 +149,55 @@ h3 {
 
 .anchor-links {
   margin: 20px;
+  margin-top: 40px;
   text-align: center;
   display: grid;
+  grid-gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: space-around;
   align-items: center;
   font-size: medium;
   font-weight: 300;
+}
+
+.anchor-links > div {
+  border: 2px solid black;
+  border-radius: 25px;
+  color: black;
+}
+
+.anch-link {
+  color: black;
+}
+
+.anch-link:visited {
+  color: black;
+}
+
+.anch-link:hover {
+  color: white;
+  background-color: black;
+}
+
+.anchor-links > div:hover {
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 25px;
+  color: rgb(255, 255, 255);
+  background-color: black;
+}
+
+.nutrition-container {
+  text-align: center;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  font-size: large;
+  font-weight: 300;
+}
+
+.nutrition-content {
+  border-radius: 50px;
+  background-color: grey;
 }

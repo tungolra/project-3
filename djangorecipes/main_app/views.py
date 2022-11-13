@@ -5,24 +5,29 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
+from .models import MealPlans
 from . import API_Sample
 
-"""Recipe Collection"""
 def home(request):
     return render(request, 'home.html')
 
+"""Meal Plans"""
 @login_required
-def recipe_collection_index(request): 
-    # grab API data, pass in object
-    apisample = API_Sample.recipes["auto_complete"]
-    apiSampleList = list(apisample.values())[0]
-    return render(request, 'recipe_collections/index.html', {'apiSampleList': apiSampleList})
+def meal_plan_index(request): 
+    return render(request, 'meal_plans/index.html')
 
-# create recipe collection
+# create Meal Plans
 
-# update recipe collection
+class MealPlanCreate(LoginRequiredMixin, generic.CreateView): 
+    model = MealPlans
+    fields = ['title']
 
-# delete recipe collection
+# update Meal Plans
+def edit_collection(request): 
+    pass
+# delete Meal Plans
+def delete_collection(request):
+    pass
 
 """CRUD for Recipes"""
 # 

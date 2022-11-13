@@ -9,7 +9,7 @@ class Recipes(models.Model):
         return self.id
 
 
-class RecipeCollection(models.Model):
+class MealPlans(models.Model):
     title = models.CharField(max_length=50)
 
     recipes = models.ManyToManyField(Recipes)
@@ -20,6 +20,8 @@ class RecipeCollection(models.Model):
 
     def get_absolute_url(self):
         return reverse('index')
+
+
 
 
 # class Photos 

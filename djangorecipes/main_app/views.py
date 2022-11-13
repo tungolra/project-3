@@ -15,18 +15,18 @@ def home(request):
     return render(request, 'home.html')
 
 """Meal Plans"""
-# @login_required
+@login_required
 def meal_plan_index(request): 
     meal_plans = MealPlans.objects.filter(user=request.user)
     return render(request, 'meal_plans/index.html', {'meal_plans': meal_plans})
 
 # create Meal Plans
-# @login_required
+@login_required
 def meal_plan_new(request):
     form = MealPlanForm()
     return render(request, 'meal_plans/mealplan_form.html', {'form': form})
 
-# @login_required
+@login_required
 def meal_plan_create(request):
     context = {}
     form = MealPlanForm(request.POST)
@@ -38,23 +38,28 @@ def meal_plan_create(request):
     return redirect('/meal-plans')
 
 # view mealplan details
+@login_required
 def meal_plan_detail(request, mealplan_id):
     meal_plan = MealPlans.objects.get(id=mealplan_id)
     return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan})
 
 # update Meal Plans
+@login_required
 def meal_plan_edit(request, mealplan_id):
+    """renders page to edit meal plan"""
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
     return render(request, 'meal_plans/new.html', {'meal_plan': meal_plan})
 
+@login_required
 def meal_plan_update(request, mealplan_id):
+    """updates database"""
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
     meal_plan.title = request.POST['name']
     meal_plan.save()
     return redirect(f'/meal-plans/{mealplan_id}/')
 
 # delete Meal Plans
-class MealPlanDelete(generic.DeleteView):
+class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     model = MealPlans
     success_url = '/meal-plans/'
 

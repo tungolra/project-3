@@ -13,7 +13,7 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
-        "size" : "3",
+        "size" : "2",
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
     # cuisine_tags_values = cuisine_tags.values()
@@ -23,10 +23,10 @@ def home(request):
     # data.rating.score = data.rating.score * 5
     for idx, item in enumerate(data):
         data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
-        print(data[idx]['rating']['score'])
+        # print(data[idx]['rating']['score'])
         
 
-    # print(data)
+    print(data)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):

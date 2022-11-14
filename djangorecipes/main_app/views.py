@@ -13,20 +13,18 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
+<<<<<<< HEAD
         "size" : "6",
+=======
+        "size" : "4",
+>>>>>>> bd47df67b58ca61d6d9d7f0c57b0058f24c74426
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
-    # cuisine_tags_values = cuisine_tags.values()
-    # print(f"Cuisine Tags\n{cuisine_tags}")
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
-    # data.rating.score = data.rating.score * 5
     for idx, item in enumerate(data):
         data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
-        # print(data[idx]['rating']['score'])
-        
-
-    print(data)
+        data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):
@@ -43,6 +41,7 @@ def example(request):
     # cuisine_tag_values = utils.get_tag_values("cuisine")
     # print(f"Cusine Tags\n{cuisine_tag_values}")
     return render(request, "example.html", {"data" : data} )
+
 """Meal Plans"""
 @login_required
 def meal_plan_index(request): 
@@ -93,7 +92,36 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
-# 
+
+def recipe_index(request): 
+    return render(request, 'recipes/index.html')
+
+def recipe_cuisine_index(request): 
+    return render(request, 'recipes/cuisine_index.html')
+
+def recipe_detail(request, recipe_id):
+    p = {
+        "id":f"{recipe_id}" #REQUIRED
+    }
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipes_details(response, "d")
+    print(data)
+    return render(request, "recipes/details.html", {"recipe":data})
+
+# for UX team 
+# def recipe_view(request):
+#     p = {
+#         "id":"7324" #REQUIRED
+#     }
+
+#     response = tc_api.client.get_recipes_details(p)
+#     data = utils.parse_recipes_details(response, "d")
+#     print(data)
+#     return render(request, "recipes/details.html", {"recipe":data})
+
+# def multi_recipe_view(req):
+    
+#     return render(req, "home.html")
 
 """OAuth Functions"""
 def signup(request):
@@ -111,6 +139,7 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 """TEMP"""
+<<<<<<< HEAD
 def recipe_view(request):
     p = {
         "id":"5494" #REQUIRED
@@ -124,5 +153,7 @@ def recipe_view(request):
 def multi_recipe_view(req):
     
     return render(req, "home.html")
+=======
+>>>>>>> bd47df67b58ca61d6d9d7f0c57b0058f24c74426
 
 

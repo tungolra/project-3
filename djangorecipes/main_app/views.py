@@ -19,7 +19,8 @@ def home(request):
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
     for idx, item in enumerate(data):
-        data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
+        if data[idx]['rating']['score']:
+            data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 5, 2)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 

@@ -29,7 +29,7 @@ def meal_plan_index(request):
     meal_plans = MealPlans.objects.filter(user=request.user)
     return render(request, 'meal_plans/index.html', {'meal_plans': meal_plans})
 
-# create Meal Plans
+## create Meal Plans
 @login_required
 def meal_plan_new(request):
     form = MealPlanForm()

@@ -1,5 +1,8 @@
 {% extends 'base.html'%} {% block content %} THIS IS THE MEAL PLAN UPDATE PAGE
 <br />
+<div class="header-img" style="position: relative; top: -65px">
+  <img src="https://i.imgur.com/btbBlMF.jpeg" />
+</div>
 <div>
   <h1>{{meal_plan.title}}</h1>
   <form action="{% url 'meal_plan_update' meal_plan.id %}" method="post">

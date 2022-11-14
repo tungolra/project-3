@@ -1,0 +1,6 @@
+.brush_underline > img {
+  visibility: hidden;
+}
+.brush-underline:hover > img {
+  visibility: visible;
+}

@@ -65,7 +65,6 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 """CRUD for Recipes"""
 # 
 
-
 """OAuth Functions"""
 def signup(request):
     error_message = ''

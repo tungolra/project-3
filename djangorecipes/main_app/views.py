@@ -13,14 +13,15 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
-        "size" : "2",
+        "size" : "4",
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
     for idx, item in enumerate(data):
         data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
-    print(data)
+        data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
+        print (data[idx]['rating'])
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):
@@ -37,6 +38,7 @@ def example(request):
     # cuisine_tag_values = utils.get_tag_values("cuisine")
     # print(f"Cusine Tags\n{cuisine_tag_values}")
     return render(request, "example.html", {"data" : data} )
+
 """Meal Plans"""
 @login_required
 def meal_plan_index(request): 
@@ -104,15 +106,15 @@ def recipe_detail(request, recipe_id):
     return render(request, "recipes/details.html", {"recipe":data})
 
 # for UX team 
-def recipe_view(request):
-    p = {
-        "id":"7324" #REQUIRED
-    }
+# def recipe_view(request):
+#     p = {
+#         "id":"7324" #REQUIRED
+#     }
 
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    print(data)
-    return render(request, "recipes/details.html", {"recipe":data})
+#     response = tc_api.client.get_recipes_details(p)
+#     data = utils.parse_recipes_details(response, "d")
+#     print(data)
+#     return render(request, "recipes/details.html", {"recipe":data})
 
 # def multi_recipe_view(req):
     

@@ -44,7 +44,7 @@
 </div>
 
 <div class="anchor-links">
-  <div><a class="anch-link" href="#ingredients">Directions</a></div>
+  <div><a class="anch-link" href="#directionss">Directions</a></div>
   <div><a class="anch-link" href="#nutrition">Nutrition</a></div>
   <div><a class="anch-link" href="#reviews">Reviews</a></div>
   <div><a class="anch-link" href="#photos">Photos</a></div>
@@ -54,11 +54,16 @@
   <h5>Ingredients</h5>
 </div>
 
-<div class="directions">
+<div id="directions" class="directions">
   <h5>Directions</h5>
+  {% for step in recipe.instructions %}
+  <ul class="instructions">
+    <li>{{ step }}</li>
+  </ul>
+  {% endfor%}
 </div>
 
-<div class="nutrition">
+<div id="nutrition" class="nutrition">
   <h5>Nutrition</h5>
   <div class="nutrition-container">
     <div class="nutrition-content">
@@ -80,11 +85,11 @@
   </div>
 </div>
 
-<div class="reviews">
+<div id="reviews" class="reviews">
   <h5>Reviews</h5>
 </div>
 
-<div class="photos">
+<div id="photos" class="photos">
   <h5>Photos</h5>
 </div>
 

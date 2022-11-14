@@ -114,6 +114,11 @@ h3 {
   text-align: center;
 }
 
+h5 {
+  font-weight: 500;
+  margin-left: 20px;
+}
+
 .summary {
   margin-left: 20px;
   margin-right: 20px;
@@ -187,6 +192,7 @@ h3 {
 }
 
 .nutrition-container {
+  margin: 25px;
   text-align: center;
   display: grid;
   grid-gap: 20px;
@@ -198,6 +204,28 @@ h3 {
 }
 
 .nutrition-content {
-  border-radius: 50px;
-  background-color: grey;
+  height: 130px;
+  width: 130px;
+  border-radius: 65px;
+  padding: 33px 0;
+  background-color: lightgrey;
+}
+
+.instructions {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.instructions > li {
+  font-size: large;
+  font-weight: 100;
+}
+
+@media only screen and (max-width: 600px) {
+  .nutrition-content {
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    padding: 15px 0;
+  }
 }

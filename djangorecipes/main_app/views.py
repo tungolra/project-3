@@ -11,8 +11,38 @@ from . import tc_api
 from . import utils
 
 def home(request):
-    return render(request, 'home.html')
+    p = {
+        "from" : "0",
+        "size" : "2",
+    }
+    cuisine_tags_values = utils.get_tag_values("cuisine").values()
+    # cuisine_tags_values = cuisine_tags.values()
+    # print(f"Cuisine Tags\n{cuisine_tags}")
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
+    # data.rating.score = data.rating.score * 5
+    for idx, item in enumerate(data):
+        data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
+        # print(data[idx]['rating']['score'])
+        
 
+    print(data)
+    return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
+
+def example(request):
+    p = {
+        "from" : "0",
+        "size" : "2",
+        "tags" : "american"
+    }
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
+
+    # response_tags = utils.get_all_tag_types()
+    # print(f"Response tags\n{response_tags}")
+    # cuisine_tag_values = utils.get_tag_values("cuisine")
+    # print(f"Cusine Tags\n{cuisine_tag_values}")
+    return render(request, "example.html", {"data" : data} )
 """Meal Plans"""
 @login_required
 def meal_plan_index(request): 
@@ -65,7 +95,6 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 """CRUD for Recipes"""
 # 
 
-
 """OAuth Functions"""
 def signup(request):
     error_message = ''
@@ -97,17 +126,3 @@ def multi_recipe_view(req):
     return render(req, "home.html")
 
 
-def example(request):
-    p = {
-        "from" : "0",
-        "size" : "2",
-        "tags" : "american"
-    }
-    response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
-
-    # response_tags = utils.get_all_tag_types()
-    # print(f"Response tags\n{response_tags}")
-    # cuisine_tag_values = utils.get_tag_values("cuisine")
-    # print(f"Cusine Tags\n{cuisine_tag_values}")
-    return render(request, "example.html", {"data" : data} )

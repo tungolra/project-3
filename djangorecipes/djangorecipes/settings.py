@@ -15,7 +15,6 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(f"This is directory {BASE_DIR}")
 
 # Set up environment variables
 env = environ.Env()
@@ -39,7 +38,7 @@ SECRET_KEY = 'django-insecure-cy&@b&gnz4oso&(8n=ee=ls-brngz-(b+l_sa%-l(ryyx#sae6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".culinarian-sei55.herokuapp.com"]
+ALLOWED_HOSTS = [".culinarian-sei55.herokuapp.com", "localhost"]
 
 
 # Application definition
@@ -131,9 +130,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = ''
+STATIC_URL = 'staticfiles/'
 STATICFILES_DIRS = [
-    BASE_DIR / "/static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
@@ -144,3 +142,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+from django.conf import settings
+
+dir(settings)

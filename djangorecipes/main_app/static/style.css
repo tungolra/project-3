@@ -201,3 +201,9 @@ h3 {
   border-radius: 50px;
   background-color: grey;
 }
+.brush_underline {
+  visibility: hidden;
+}
+.brush-underline:hover {
+  visibility: visible;
+}

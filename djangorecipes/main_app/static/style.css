@@ -210,3 +210,13 @@ h5 {
   padding: 33px;
   background-color: lightgrey;
 }
+
+.instructions {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.instructions > li {
+  font-size: large;
+  font-weight: 100;
+}

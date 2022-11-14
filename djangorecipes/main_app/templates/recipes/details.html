@@ -56,6 +56,11 @@
 
 <div class="directions">
   <h5>Directions</h5>
+  {% for step in recipe.instructions %}
+  <ul class="instructions">
+    <li>{{ step }}</li>
+  </ul>
+  {% endfor%}
 </div>
 
 <div class="nutrition">

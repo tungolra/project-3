@@ -114,9 +114,14 @@ h3 {
   text-align: center;
 }
 
+h5 {
+  font-weight: 500;
+  margin-left: 20px;
+}
+
 .summary {
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -145,4 +150,82 @@ h3 {
 
 .servings {
   border-right: 2px solid black;
+}
+
+.anchor-links {
+  margin: 20px;
+  margin-top: 40px;
+  text-align: center;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  font-size: medium;
+  font-weight: 300;
+}
+
+.anchor-links > div {
+  border: 2px solid black;
+  border-radius: 25px;
+  color: black;
+}
+
+.anch-link {
+  color: black;
+}
+
+.anch-link:visited {
+  color: black;
+}
+
+.anch-link:hover {
+  color: white;
+  background-color: black;
+}
+
+.anchor-links > div:hover {
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 25px;
+  color: rgb(255, 255, 255);
+  background-color: black;
+}
+
+.nutrition-container {
+  margin: 25px;
+  text-align: center;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  font-size: large;
+  font-weight: 300;
+}
+
+.nutrition-content {
+  height: 130px;
+  width: 130px;
+  border-radius: 65px;
+  padding: 33px 0;
+  background-color: lightgrey;
+}
+
+.instructions {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.instructions > li {
+  font-size: large;
+  font-weight: 100;
+}
+
+@media only screen and (max-width: 600px) {
+  .nutrition-content {
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    padding: 15px 0;
+  }
 }

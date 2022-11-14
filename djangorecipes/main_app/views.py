@@ -94,11 +94,12 @@ def signup(request):
 """TEMP"""
 def recipe_view(request):
     p = {
-        "id":"8138" #REQUIRED
+        "id":"7324" #REQUIRED
     }
 
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
+    print(data)
     return render(request, "recipes/details.html", {"recipe":data})
 
 def multi_recipe_view(req):

@@ -6,7 +6,7 @@ main {
 }
 
 nav {
-  background-color: transparent;
+  background-color: rgb(0, 0, 0, 0.5);
 }
 
 .nav-wrapper {
@@ -38,6 +38,7 @@ nav {
   font-size: small;
   color: black;
   width: 100%;
+  height: 330px !important;
 }
 
 .rec-cat {
@@ -74,6 +75,7 @@ body {
 h4 {
   text-align: left;
   font-weight: 900;
+  margin: 0 0 20px 0;
 }
 
 .main {
@@ -217,12 +219,79 @@ h5 {
 }
 
 .instructions > li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-size: large;
   font-weight: 100;
 }
 
 .logo > img {
   margin-top: 10px;
+}
+
+.ingredients-list {
+  margin: 0px 0px 0px 20px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+i.material-icons.grey-text {
+  font-size: 26px !important;
+}
+
+.i-list-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.i-list-text > div {
+  margin: 5px 30px;
+}
+
+.i-name {
+  font-style: italic;
+}
+
+.sim-ing {
+  color: white;
+  font-size: large;
+  font-weight: 200;
+  margin: 30px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(169, 169, 169, 0.5);
+  border: 1px solid white;
+  border-radius: 50px;
+}
+
+.feature-recipe-link {
+  text-align: center;
+  margin: 20px;
+  margin-bottom: 70px;
+  padding: 10px;
+  background-color: rgb(211, 211, 211, 0.5);
+}
+
+.brush_underline {
+  visibility: hidden;
+}
+
+.brush-underline:hover {
+  visibility: visible;
+}
+
+h2 {
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.feature-recipe-link > h5 {
+  text-decoration: underline;
+  text-decoration-color: rgb(42, 99, 168);
+  text-decoration-thickness: 4px;
 }
 
 @media only screen and (max-width: 600px) {

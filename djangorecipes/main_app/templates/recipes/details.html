@@ -1,4 +1,4 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html'%} {% block content %} {% load static%}
 <div class="header-img" style="position: relative; top: -65px">
   <img src="{{ recipe.image_url }}" />
 </div>
@@ -37,14 +37,16 @@
     <div>Servings</div>
   </div>
   <div class="calories">
-    <div><i class="material-icons black-text">pregnant_woman</i></div>
+    <div>
+      <img src="{% static 'images/icons8-calories-30 1@2x.png'%}" alt="" />
+    </div>
     <div class="sum-value">{{ recipe.nutrition.calories }}</div>
     <div>Calories</div>
   </div>
 </div>
 
 <div class="anchor-links">
-  <div><a class="anch-link" href="#directionss">Directions</a></div>
+  <div><a class="anch-link" href="#directions">Directions</a></div>
   <div><a class="anch-link" href="#nutrition">Nutrition</a></div>
   <div><a class="anch-link" href="#reviews">Reviews</a></div>
   <div><a class="anch-link" href="#photos">Photos</a></div>
@@ -52,7 +54,22 @@
 
 <div class="ingredients">
   <h5>Ingredients</h5>
+  <ul class="ingredients-list">
+    {% for i in recipe.ingredients %}
+    <li>
+      <div class="i-list-text">
+        <i class="material-icons grey-text">add_circle</i>
+        <div>
+          {{ i.quantity }} {{ i.measurement }}
+          <span class="i-name">{{ i.name }}</span>
+        </div>
+      </div>
+    </li>
+    {% endfor%}
+  </ul>
 </div>
+
+<div class="sim-ing">Show me recipes with similar ingredients</div>
 
 <div id="directions" class="directions">
   <h5>Directions</h5>

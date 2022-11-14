@@ -11,16 +11,6 @@ from . import tc_api
 from . import utils
 
 def home(request):
-    p = {
-        "from" : "7234",
-        "size" : "5"
-    }
-    ## KENDRA & LUCAS
-    ## Data contains recipes (n = size from above)
-    ## Use to populate homepage with unique images from our API
-    response = tc_api.client.get_recipes_list(p)
-    recipes = utils.parse_recipes_list(response["results"], "s")
-    print(recipes)
     return render(request, 'home.html')
 
 """Meal Plans"""
@@ -29,7 +19,7 @@ def meal_plan_index(request):
     meal_plans = MealPlans.objects.filter(user=request.user)
     return render(request, 'meal_plans/index.html', {'meal_plans': meal_plans})
 
-# create Meal Plans
+## create Meal Plans
 @login_required
 def meal_plan_new(request):
     form = MealPlanForm()
@@ -57,7 +47,7 @@ def meal_plan_detail(request, mealplan_id):
 def meal_plan_edit(request, mealplan_id):
     """renders page to edit meal plan"""
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
-    return render(request, 'meal_plans/new.html', {'meal_plan': meal_plan})
+    return render(request, 'meal_plans/edit.html', {'meal_plan': meal_plan})
 
 @login_required
 def meal_plan_update(request, mealplan_id):
@@ -108,10 +98,15 @@ def multi_recipe_view(req):
 
 def example(request):
     p = {
-        "id":"8108" #REQUIRED
+        "from" : "0",
+        "size" : "2",
+        "tags" : "american"
     }
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
 
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    
+    # response_tags = utils.get_all_tag_types()
+    # print(f"Response tags\n{response_tags}")
+    # cuisine_tag_values = utils.get_tag_values("cuisine")
+    # print(f"Cusine Tags\n{cuisine_tag_values}")
     return render(request, "example.html", {"data" : data} )

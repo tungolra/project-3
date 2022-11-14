@@ -57,7 +57,7 @@ def meal_plan_detail(request, mealplan_id):
 def meal_plan_edit(request, mealplan_id):
     """renders page to edit meal plan"""
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
-    return render(request, 'meal_plans/new.html', {'meal_plan': meal_plan})
+    return render(request, 'meal_plans/edit.html', {'meal_plan': meal_plan})
 
 @login_required
 def meal_plan_update(request, mealplan_id):

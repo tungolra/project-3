@@ -13,7 +13,7 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
-        "size" : "4",
+        "size" : "6",
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
     response = tc_api.client.get_recipes_list(p)
@@ -134,6 +134,6 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-"""TEMP"""
+
 
 

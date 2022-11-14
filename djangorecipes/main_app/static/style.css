@@ -43,24 +43,35 @@ nav {
 
 .rec-cat {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   justify-content: center;
   align-items: center;
   grid-gap: 10px;
+  font-weight: 100;
 }
 
 .rec-cat-cont {
-  display: flex;
+  display: grid;
+  grid-template-rows: 1fr 0.175fr 0.175fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   justify-content: center;
+  margin: 10px;
 }
 
 .rec-cat-cont > img {
+  grid-column: 1 / 3;
+  display: flex;
   border-radius: 25px;
   max-width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.rec-cat-cont > h6 {
+  grid-column: 1 / 3;
+  text-align: center;
 }
 
 .container {

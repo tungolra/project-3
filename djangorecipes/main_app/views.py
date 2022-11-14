@@ -13,14 +13,14 @@ from . import utils
 def home(request):
     p = {
         "from" : "7234",
-        "size" : "5"
+        "size" : "10"
     }
     ## KENDRA & LUCAS
     ## Data contains recipes (n = size from above)
     ## Use to populate homepage with unique images from our API
     response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
-
+    recipes = utils.parse_recipes_list(response["results"], "s")
+    print(recipes)
     return render(request, 'home.html')
 
 """Meal Plans"""
@@ -74,7 +74,6 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 
 """CRUD for Recipes"""
 # 
-
 
 """OAuth Functions"""
 def signup(request):

@@ -221,6 +221,10 @@ h5 {
   font-weight: 100;
 }
 
+.logo > img {
+  margin-top: 10px;
+}
+
 @media only screen and (max-width: 600px) {
   .nutrition-content {
     height: 90px;

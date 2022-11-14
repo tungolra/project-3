@@ -1,13 +1,13 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html'%} {% block content %}{% load static %}
 <div class="header-img" style="position: relative; top: -65px">
   <img src="https://i.imgur.com/btbBlMF.jpeg" />
 </div>
 <div class="main">
   <div class="carousel">
+    <!-- <div class="brush-underline"> -->
     <h4>EXPLORE</h4>
-    <div class="brush-underline">
-      <img src="images/Underline.png" />
-    </div>
+    <!-- <img src="{% static 'images/Underline.png'%}" />
+    </div> -->
     <a class="carousel-item" href="#one!"
       ><img class="carousel-img" src="https://i.imgur.com/b6jR7Ls.jpeg" />
       <div class="carousel-text black-text">THANKSGIVING</div></a

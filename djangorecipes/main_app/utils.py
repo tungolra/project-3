@@ -8,6 +8,7 @@ def parse_recipe_detail(recipe):
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],
+        "time": recipe["cook_time_minutes"],
         "instructions" : [],
         "ingredients": [],
         "num_servings" : recipe["num_servings"],
@@ -36,6 +37,7 @@ def parse_recipe_summary(recipe):
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],
+        "time": recipe["cook_time_minutes"],
         "num_servings" : recipe["num_servings"],
         "rating" : recipe["user_ratings"], 
         "image_url" : recipe["thumbnail_url"],

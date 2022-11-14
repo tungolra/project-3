@@ -20,6 +20,7 @@ def home(request):
     data = utils.parse_recipes_list(response["results"], "s")
     for idx, item in enumerate(data):
         data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
+    print(data)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):
@@ -91,10 +92,16 @@ def recipe_index(request):
     return render(request, 'recipes/index.html')
 
 def recipe_cuisine_index(request): 
-    pass
+    return render(request, 'recipes/cuisine_index.html')
 
-def recipe_detail(request):
-    pass
+def recipe_detail(request, recipe_id):
+    p = {
+        "id":f"{recipe_id}" #REQUIRED
+    }
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipes_details(response, "d")
+    print(data)
+    return render(request, "recipes/details.html", {"recipe":data})
 
 # for UX team 
 def recipe_view(request):

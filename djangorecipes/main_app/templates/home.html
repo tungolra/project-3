@@ -25,49 +25,12 @@
     >
     {% endfor %}
     <!-- dynamic carousel end -->
-
-    <!-- <div class="carousel">
-      <div class="brush-underline">
-        <h4>EXPLORE</h4>
-      </div>
-      <a class="carousel-item" href="#one!"
-        ><img
-          class="carousel-img"
-          src="https://www.wholesomeyum.com/wp-content/uploads/2020/10/wholesomeyum-Easy-Roasted-Thanksgiving-Turkey-Recipe-45.jpg"
-        />
-        <div class="carousel-text black-text">THANKSGIVING</div></a
-      >
-      <a class="carousel-item" href="#two!"
-        ><img
-          class="carousel-img"
-          src="https://www.seriouseats.com/thmb/YwaJNJc7_TDAjdo8pzN_JElsgb4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2021__02__20210214-stovetop-mac-cheese-reshoot-vicky-wasik-9-0760b642ca704cf8b2c5121a363a60a2.jpg"
-        />
-        <div class="carousel-text black-text">KID-FRIENDLY</div></a
-      >
-      <a class="carousel-item" href="#three!"
-        ><img
-          class="carousel-img"
-          src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/dessert-main-image-molten-cake-0fbd4f2.jpg?quality=90&webp=true&resize=500,454"
-        />
-        <div class="carousel-text black-text">DESSERTS</div></a
-      >
-      <a class="carousel-item" href="#four!"
-        ><img class="carousel-img" src="https://i.imgur.com/btbBlMF.jpeg" />
-        <div class="carousel-text black-text">VEGETARIAN</div></a
-      >
-      <a class="carousel-item" href="#five!"
-        ><img
-          class="carousel-img"
-          src="https://www.averiecooks.com/wp-content/uploads/2015/11/stuffing-11.jpg"
-        />
-        <div class="carousel-text black-text">CHRISTMAS</div></a
-      > -->
   </div>
   <!-- Random recipes start -->
   <h4>Featured Recipes (just randomly generated...)</h4>
   <div class="rec-cat">
     {% for recipe in data %}
-    <div class="rec-cat-cont">
+    <a href="{% url 'recipe_detail' recipe.id %}"><div class="rec-cat-cont">
       <img src="{{recipe.image_url}}" style="max-width: 100px" alt="" />
       <p>{{ recipe.name }}</p>
       <p>Rating: {{recipe.rating.score}}/5</p>
@@ -77,7 +40,7 @@
       <p>Cook Time: {{recipe.time}}min</p>
       {% endif %}
       <p>Servings: {{ recipe.num_servings}}</p>
-    </div>
+    </div></a>
     {% endfor %}
     <!-- Random recipes end -->
   </div>

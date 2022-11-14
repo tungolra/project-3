@@ -1,4 +1,4 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html'%} {% block content %}{% load static %}
 <div class="header-img" style="position: relative; top: -65px">
   <img
     src="https://www.recipetineats.com/wp-content/uploads/2022/11/Firecracker-beef-mince_2-2.jpg?w=900&h=900&crop=1"
@@ -12,6 +12,7 @@
   <div class="carousel">
     <div class="brush-underline">
       <h4>EXPLORE</h4>
+      <img src="{% static 'images/underline.png'%}" />
     </div>
     <a class="carousel-item" href="#one!"
       ><img

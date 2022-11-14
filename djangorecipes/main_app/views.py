@@ -13,11 +13,7 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
-<<<<<<< HEAD
         "size" : "6",
-=======
-        "size" : "4",
->>>>>>> bd47df67b58ca61d6d9d7f0c57b0058f24c74426
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
     response = tc_api.client.get_recipes_list(p)
@@ -138,22 +134,6 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-"""TEMP"""
-<<<<<<< HEAD
-def recipe_view(request):
-    p = {
-        "id":"5494" #REQUIRED
-    }
 
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    print(data)
-    return render(request, "recipes/details.html", {"recipe":data})
-
-def multi_recipe_view(req):
-    
-    return render(req, "home.html")
-=======
->>>>>>> bd47df67b58ca61d6d9d7f0c57b0058f24c74426
 
 

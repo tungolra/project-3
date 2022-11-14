@@ -10,7 +10,6 @@
     <h5>VIETNAMESE</h5>
     <h2>Spicy Firecracker<br />Beef</h2>
   </div>
-  <!-- dynamic carousel start -->
   <div class="carousel">
     <div class="brush-underline">
       <h4>EXPLORE</h4>
@@ -25,35 +24,33 @@
       <div class="carousel-text black-text">{{ tag }}</div></a
     >
     {% endfor %}
-<<<<<<< HEAD
-=======
-    <!-- dynamic carousel end -->
->>>>>>> bd47df67b58ca61d6d9d7f0c57b0058f24c74426
   </div>
   <!-- Random recipes start -->
   <h4>Featured Recipes (just randomly generated...)</h4>
   <div class="rec-cat">
     {% for recipe in data %}
-<<<<<<< HEAD
+
     <div class="rec-cat-cont">
       <img src="{{recipe.image_url}}" alt="" />
       <h6>{{ recipe.name }}</h6>
-=======
-    <a href="{% url 'recipe_detail' recipe.id %}"><div class="rec-cat-cont">
-      <img src="{{recipe.image_url}}" style="max-width: 100px" alt="" />
-      <p>{{ recipe.name }}</p>
-      <p>Count of Reviews: {{recipe.rating.total_count}}</p>
->>>>>>> bd47df67b58ca61d6d9d7f0c57b0058f24c74426
-      <p>Rating: {{recipe.rating.score}}/5</p>
-      {% if recipe.time == None%}
-      <p>Cook Time: 30-45min</p>
-      {% else %}
-      <p>Cook Time: {{recipe.time}}min</p>
-      {% endif %}
-      <p>Servings: {{ recipe.num_servings}}</p>
-    </div></a>
-    {% endfor %}
-    <!-- Random recipes end -->
+      =========
+      <a href="{% url 'recipe_detail' recipe.id %}"
+        ><div class="rec-cat-cont">
+          <img src="{{recipe.image_url}}" style="max-width: 100px" alt="" />
+          <p>{{ recipe.name }}</p>
+          <p>Count of Reviews: {{recipe.rating.total_count}}</p>
+          <p>Rating: {{recipe.rating.score}}/5</p>
+          {% if recipe.time == None%}
+          <p>Cook Time: 30-45min</p>
+          {% else %}
+          <p>Cook Time: {{recipe.time}}min</p>
+          {% endif %}
+          <p>Servings: {{ recipe.num_servings}}</p>
+        </div></a
+      >
+      {% endfor %}
+      <!-- Random recipes end -->
+    </div>
+    {% endblock %}
   </div>
-  {% endblock %}
 </div>

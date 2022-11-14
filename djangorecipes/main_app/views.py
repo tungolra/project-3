@@ -12,8 +12,8 @@ from . import utils
 
 def home(request):
     p = {
-        "from" : "7234",
-        "size" : "5"
+        "from" : "0",
+        "size" : "20"
     }
     ## KENDRA & LUCAS
     ## Data contains recipes (n = size from above)

@@ -5,6 +5,10 @@
 from . import tc_api
 
 def parse_recipe_detail(recipe):
+    nested_recipes = recipe.get("recipes")
+    if nested_recipes:
+        recipe = nested_recipes[0]
+
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],
@@ -34,6 +38,9 @@ def parse_recipe_detail(recipe):
 
 
 def parse_recipe_summary(recipe):
+    nested_recipes = recipe.get("recipes")
+    if nested_recipes:
+        recipe = nested_recipes[0]
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],

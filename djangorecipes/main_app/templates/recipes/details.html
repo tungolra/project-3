@@ -1,4 +1,4 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html'%} {% block content %} {% load static%}
 <div class="header-img" style="position: relative; top: -65px">
   <img src="{{ recipe.image_url }}" />
 </div>
@@ -37,7 +37,9 @@
     <div>Servings</div>
   </div>
   <div class="calories">
-    <div><i class="material-icons black-text">pregnant_woman</i></div>
+    <div>
+      <img src="{% static 'images/icons8-calories-30 1@2x.png'%}" alt="" />
+    </div>
     <div class="sum-value">{{ recipe.nutrition.calories }}</div>
     <div>Calories</div>
   </div>

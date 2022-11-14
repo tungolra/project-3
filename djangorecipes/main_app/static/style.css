@@ -6,11 +6,11 @@ main {
 }
 
 nav {
-  background-color: transparent;
+  background-color: darkgray !important;
 }
 
 .nav-wrapper {
-  background-color: transparent;
+  background-color: darkgrey !important;
   width: 100vw;
   z-index: 1;
 }

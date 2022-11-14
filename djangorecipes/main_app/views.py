@@ -13,7 +13,7 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
-        "size" : "1",
+        "size" : "3",
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
     # cuisine_tags_values = cuisine_tags.values()
@@ -21,9 +21,11 @@ def home(request):
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
     # data.rating.score = data.rating.score * 5
-    for rating in data: 
-        print(rating)
-    # print(data[0]['rating']['score'])
+    for idx, item in enumerate(data):
+        data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
+        print(data[idx]['rating']['score'])
+        
+
     # print(data)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 

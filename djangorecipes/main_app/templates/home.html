@@ -68,9 +68,9 @@
   <div class="rec-cat">
     {% for recipe in data %}
     <div class="rec-cat-cont">
-      <p>{{ recipe.name }}</p>
       <img src="{{recipe.image_url}}" style="max-width: 100px" alt="" />
-      <p>Rating: {{recipe.rating.score}}/1</p>
+      <p>{{ recipe.name }}</p>
+      <p>Rating: {{recipe.rating.score}}/5</p>
       {% if recipe.time == None%}
       <p>Cook Time: 30-45min</p>
       {% else %}

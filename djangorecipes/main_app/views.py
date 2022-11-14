@@ -11,16 +11,6 @@ from . import tc_api
 from . import utils
 
 def home(request):
-    p = {
-        "from" : "0",
-        "size" : "20"
-    }
-    ## KENDRA & LUCAS
-    ## Data contains recipes (n = size from above)
-    ## Use to populate homepage with unique images from our API
-    response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
-
     return render(request, 'home.html')
 
 """Meal Plans"""
@@ -109,10 +99,15 @@ def multi_recipe_view(req):
 
 def example(request):
     p = {
-        "id":"8108" #REQUIRED
+        "from" : "0",
+        "size" : "2",
+        "tags" : "american"
     }
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
 
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    
+    # response_tags = utils.get_all_tag_types()
+    # print(f"Response tags\n{response_tags}")
+    # cuisine_tag_values = utils.get_tag_values("cuisine")
+    # print(f"Cusine Tags\n{cuisine_tag_values}")
     return render(request, "example.html", {"data" : data} )

@@ -112,7 +112,39 @@ def parse_recipes_details(response, mode):
 def parse_tips(response,mode):
     pass
 
-def parse_tags(response, mode):
+def parse_tags(response, type):
+    return [tag for tag in response["results"] if tag["type"] == type]        
+
+def get_all_tag_types():
+    p = {}
+    response = tc_api.client.get_tags(p)
+    tags_list = {}
+
+    for tag in response["results"]:
+        tag_type = tag["type"]
+        
+        if tags_list.get(tag_type):
+            continue
+        tags_list[tag_type] = 1
+
+    return tags_list
+
+def get_tag_values(tag_type: str):
+    p = {}
+    response = tc_api.client.get_tags(p)
+    tag_values_list = {}
+
+    for tag in response["results"]:
+        if tag["type"] != tag_type:
+            continue
+        
+        if tag["name"] in tag_values_list:
+            continue
+        
+        tag_values_list[tag["name"]] = tag["display_name"]
+
+    return tag_values_list
+    
     pass
 
 def parse_feeds(responsee, mode):

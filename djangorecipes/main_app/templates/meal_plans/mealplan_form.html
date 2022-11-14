@@ -1,11 +1,8 @@
 {% extends 'base.html'%} {% block content %}
 
-{% if object %}
-<h1>Edit Meal Plan {{object.title}}</h1>
-{%else%}
+
 <h1>Create New Meal Plan</h1>
-{%endif%}
-<form action="" method="post">
+<form action="{% url 'meal_plan_create' %}" method="post">
   {% csrf_token %}
 <br>
     {{ form.as_table }}

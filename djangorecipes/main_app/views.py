@@ -94,7 +94,7 @@ def signup(request):
 """TEMP"""
 def recipe_view(request):
     p = {
-        "id":"7324" #REQUIRED
+        "id":"5494" #REQUIRED
     }
 
     response = tc_api.client.get_recipes_details(p)

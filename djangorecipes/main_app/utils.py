@@ -48,7 +48,7 @@ def parse_recipe_summary(recipe):
     return result
 
 def parse_instruction(instruction):
-    res = str(instruction["position"]) + " " + instruction["display_text"]
+    res = str(instruction["position"]) + ". " + instruction["display_text"]
     return res
 
 def parse_ingredient(recipe_component):

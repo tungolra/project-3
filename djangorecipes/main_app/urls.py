@@ -12,6 +12,11 @@ urlpatterns = [
     path('meal-plans/<int:mealplan_id>/edit', views.meal_plan_edit, name='meal_plan_edit'),
     path('meal-plans/<int:mealplan_id>/submit_update_form', views.meal_plan_update, name='meal_plan_update'),
     path('meal-plans/<int:pk>/delete', views.MealPlanDelete.as_view(), name='meal_plan_delete'),
-    path('recipe/', views.recipe_view, name="recipe_view"),
+    #temp start
+    # path('recipe/', views.recipe_view, name="recipe_view"),
+    #temp end
+    path('recipe/index/', views.recipe_index, name="recipe_index"),
+    path('recipe/<int:recipe_id>/', views.recipe_detail, name="recipe_detail"),
+    path('recipe/<int:cuisine_id>/', views.recipe_cuisine_index, name="recipe_cuisine_index"),
     path('example/', views.example, name="example"),
 ]

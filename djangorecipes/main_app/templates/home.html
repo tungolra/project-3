@@ -10,7 +10,6 @@
     <h5>VIETNAMESE</h5>
     <h2>Spicy Firecracker<br />Beef</h2>
   </div>
-  <!-- dynamic carousel start -->
   <div class="carousel">
     <div class="brush-underline">
       <h4>EXPLORE</h4>
@@ -30,9 +29,15 @@
   <h4>Featured Recipes (just randomly generated...)</h4>
   <div class="rec-cat">
     {% for recipe in data %}
+
     <div class="rec-cat-cont">
       <img src="{{recipe.image_url}}" alt="" />
       <h6>{{ recipe.name }}</h6>
+
+    <a href="{% url 'recipe_detail' recipe.id %}"><div class="rec-cat-cont">
+      <img src="{{recipe.image_url}}" style="max-width: 100px" alt="" />
+      <p>{{ recipe.name }}</p>
+      <p>Count of Reviews: {{recipe.rating.total_count}}</p>
       <p>Rating: {{recipe.rating.score}}/5</p>
       {% if recipe.time == None%}
       <p>Cook Time: 30-45min</p>
@@ -40,7 +45,7 @@
       <p>Cook Time: {{recipe.time}}min</p>
       {% endif %}
       <p>Servings: {{ recipe.num_servings}}</p>
-    </div>
+    </div></a>
     {% endfor %}
     <!-- Random recipes end -->
   </div>

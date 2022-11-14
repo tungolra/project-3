@@ -16,17 +16,10 @@ def home(request):
         "size" : "2",
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
-    # cuisine_tags_values = cuisine_tags.values()
-    # print(f"Cuisine Tags\n{cuisine_tags}")
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
-    # data.rating.score = data.rating.score * 5
     for idx, item in enumerate(data):
         data[idx]['rating']['score'] = round(data[idx]['rating']['score']*5, 2)
-        # print(data[idx]['rating']['score'])
-        
-
-    print(data)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):
@@ -93,7 +86,30 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
-# 
+
+def recipe_index(request): 
+    return render(request, 'recipes/index.html')
+
+def recipe_cuisine_index(request): 
+    pass
+
+def recipe_detail(request):
+    pass
+
+# for UX team 
+def recipe_view(request):
+    p = {
+        "id":"7324" #REQUIRED
+    }
+
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipes_details(response, "d")
+    print(data)
+    return render(request, "recipes/details.html", {"recipe":data})
+
+# def multi_recipe_view(req):
+    
+#     return render(req, "home.html")
 
 
 """OAuth Functions"""
@@ -112,18 +128,5 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 """TEMP"""
-def recipe_view(request):
-    p = {
-        "id":"7324" #REQUIRED
-    }
-
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    print(data)
-    return render(request, "recipes/details.html", {"recipe":data})
-
-def multi_recipe_view(req):
-    
-    return render(req, "home.html")
 
 

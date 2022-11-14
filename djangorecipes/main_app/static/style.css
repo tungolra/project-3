@@ -233,3 +233,10 @@ h5 {
     padding: 15px 0;
   }
 }
+.brush_underline {
+  visibility: hidden;
+  position: relative;
+}
+.brush-underline:hover {
+  visibility: visible;
+}

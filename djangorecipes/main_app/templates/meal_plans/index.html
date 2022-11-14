@@ -1,9 +1,10 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html'%}{% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
+<a href="#" class="logo"
+  ><img src="{% static 'images/logo-blk.png'%}" alt=""
+/></a>
 <h1>All Meal Plans</h1>
 <a href="{% url 'meal_plan_new' %}">Add New Meal Plan</a>
 {% for plan in meal_plans %}
-<a href="{% url 'meal_plan_detail' plan.id %}"><div>
-    {{plan.title}}
-</div></a>
-{% endfor %}
-{% endblock %}
+<a href="{% url 'meal_plan_detail' plan.id %}"><div>{{plan.title}}</div></a>
+{% endfor %} {% endblock %}

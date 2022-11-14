@@ -207,7 +207,7 @@ h5 {
   height: 130px;
   width: 130px;
   border-radius: 65px;
-  padding: 33px;
+  padding: 33px 0;
   background-color: lightgrey;
 }
 
@@ -219,4 +219,13 @@ h5 {
 .instructions > li {
   font-size: large;
   font-weight: 100;
+}
+
+@media only screen and (max-width: 600px) {
+  .nutrition-content {
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
+    padding: 15px 0;
+  }
 }

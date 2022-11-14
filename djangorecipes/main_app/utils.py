@@ -68,7 +68,7 @@ def parse_response(response):
     else:
         return response
 
-def parse_recipes_list(recipes, mode):
+def parse_recipes_list(recipes, mode="s"):
     func = None
     
     if mode == "d":

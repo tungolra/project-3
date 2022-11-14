@@ -11,6 +11,16 @@ from . import tc_api
 from . import utils
 
 def home(request):
+    p = {
+        "from" : "7234",
+        "size" : "5"
+    }
+    ## KENDRA & LUCAS
+    ## Data contains recipes (n = size from above)
+    ## Use to populate homepage with unique images from our API
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
+
     return render(request, 'home.html')
 
 """Meal Plans"""
@@ -90,6 +100,10 @@ def recipe_view(request):
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
     return render(request, "recipes/details.html", {"recipe":data})
+
+def multi_recipe_view(req):
+    
+    return render(req, "home.html")
 
 
 def example(request):

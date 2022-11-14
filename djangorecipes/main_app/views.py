@@ -13,7 +13,7 @@ from . import utils
 def home(request):
     p = {
         "from" : "0",
-        "size" : "2",
+        "size" : "6",
     }
     cuisine_tags_values = utils.get_tag_values("cuisine").values()
     # cuisine_tags_values = cuisine_tags.values()

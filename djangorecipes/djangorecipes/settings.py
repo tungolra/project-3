@@ -133,7 +133,6 @@ USE_TZ = True
 STATIC_URL = 'staticfiles/'
 STATICFILES_DIRS = [
     str(BASE_DIR) + "/static",
-    str(BASE_DIR) + "/staticfiles"
 ]
 STATIC_ROOT = str(BASE_DIR) + "/staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"

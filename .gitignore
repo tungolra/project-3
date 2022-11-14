@@ -6,3 +6,6 @@
 
 # ignore all utils
 /utils
+
+#venv
+/venv

@@ -1,14 +1,25 @@
 a.button {
   font-weight: bold;
-  color: blue;
+  color: black;
   text-align: center;
 }
 .button-container {
-  border: 2px blue solid;
-  border-radius: 10%;
+  border: 2px black solid;
+  padding: 5px;
+  border-radius: 10px;
   max-width: fit-content;
-  padding-left: 20px;
   text-align: center;
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+a.button:hover: {
+  color: white;
+}
+.button-container:hover {
+  background-color: grey;
+  color: white;
+  a
 }
 .brush_underline > img {
   visibility: hidden;

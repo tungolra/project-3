@@ -1,6 +1,4 @@
-{% extends 'base.html'%} {% block content %} THIS IS THE MEAL PLAN DETAIL PAGE
-
-<div>{{recipes}}</div>
+{% extends 'base.html'%} {% block content %} {% load static %}
 
 <a href="{%url 'meal_plan_index'%}">All Meal Plans</a>
 <br />
@@ -11,20 +9,36 @@
 </div>
 <h4>(Recipes for this meal plan)</h4>
 <div class="rec-cat">
-    {%for recipe in recipe_collection%} 
-  <a href=""
+  {%for recipe in recipe_collection%}
+  <a href="{% url 'recipe_detail' recipe.id%}"
     ><div class="rec-cat-cont">
-      <img src="{{recipe.image_url}}" alt="" />
+      <img width="150px" src="{{recipe.image_url}}" />
       <h6>{{ recipe.name }}</h6>
-      <p>Count of Reviews: {{recipe.rating.total_count}}</p>
-      <p>Rating: {{recipe.rating.score}}/5</p>
+      <div class="info">
+        <div class="key">Reviews:</div>
+        <div class="value">{{recipe.rating.total_count}}</div>
+      </div>
+      <div class="info">
+        <div class="key">Rating:</div>
+        <div class="value">{{recipe.rating.score|floatformat}}</div>
+      </div>
       {% if recipe.time == None%}
-      <p>Cook Time: 30-45min</p>
+      <div class="info">
+        <div class="key">Cook Time:</div>
+        <div class="value">30-45min</div>
+      </div>
       {% else %}
-      <p>Cook Time: {{recipe.time}}min</p>
+      <div class="info">
+        <div class="key">Cook Time:</div>
+        <div class="value">{{recipe.time}}min</div>
+      </div>
       {% endif %}
-      <p>Servings: {{ recipe.num_servings}}</p>
-    </div></a>
+      <div class="info">
+        <div class="key">Servings:</div>
+        <div class="value">{{ recipe.num_servings}}</div>
+      </div>
+    </div></a
+  >
   {%endfor%}
 </div>
 {% endblock %}

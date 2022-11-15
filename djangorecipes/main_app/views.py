@@ -66,7 +66,17 @@ def meal_plan_create(request):
 @login_required
 def meal_plan_detail(request, mealplan_id):
     meal_plan = MealPlans.objects.get(id=mealplan_id)
-    return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan})
+    recipes = meal_plan.recipes.all().values()
+    recipe_collection = []
+    for idx, item in enumerate(recipes): 
+        recipe_id = recipes[idx]['recipe_id']
+        p = {
+        "id":f"{recipe_id}"
+        }
+        response = tc_api.client.get_recipes_details(p)
+        data = utils.parse_recipes_details(response, "d")
+        recipe_collection.append(data)
+    return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan, 'recipes': recipes, 'recipe_collection': recipe_collection})
 
 # update Meal Plans
 @login_required
@@ -106,6 +116,7 @@ def add_recipe(request, recipe_id):
 
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
+    # add guard for existing recipes in DB
     new_recipe = Recipes.objects.create(recipe_id = recipe_id)
     MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
     return redirect('recipe_detail', recipe_id=recipe_id)

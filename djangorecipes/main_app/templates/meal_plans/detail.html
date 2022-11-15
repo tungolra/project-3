@@ -1,10 +1,30 @@
-{% extends 'base.html'%} {% block content %}
-THIS IS THE MEAL PLAN DETAIL PAGE
+{% extends 'base.html'%} {% block content %} THIS IS THE MEAL PLAN DETAIL PAGE
+
+<div>{{recipes}}</div>
+
 <a href="{%url 'meal_plan_index'%}">All Meal Plans</a>
-<br>
+<br />
 <div>
-    {{meal_plan.title}}
-    <a href="{% url 'meal_plan_edit' meal_plan.id %}">Edit</a>
-    <a href="{% url 'meal_plan_delete' meal_plan.id %}">Delete</a>
+  {{meal_plan.title}}
+  <a href="{% url 'meal_plan_edit' meal_plan.id %}">Edit</a>
+  <a href="{% url 'meal_plan_delete' meal_plan.id %}">Delete</a>
+</div>
+<h4>(Recipes for this meal plan)</h4>
+<div class="rec-cat">
+    {%for recipe in recipe_collection%} 
+  <a href=""
+    ><div class="rec-cat-cont">
+      <img src="{{recipe.image_url}}" alt="" />
+      <h6>{{ recipe.name }}</h6>
+      <p>Count of Reviews: {{recipe.rating.total_count}}</p>
+      <p>Rating: {{recipe.rating.score}}/5</p>
+      {% if recipe.time == None%}
+      <p>Cook Time: 30-45min</p>
+      {% else %}
+      <p>Cook Time: {{recipe.time}}min</p>
+      {% endif %}
+      <p>Servings: {{ recipe.num_servings}}</p>
+    </div></a>
+  {%endfor%}
 </div>
 {% endblock %}

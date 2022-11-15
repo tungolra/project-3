@@ -115,6 +115,7 @@ def random_recipe(request):
 
 @login_required
 def recipe_index(request):
+    # only grab recipes
     recipes = Recipes.objects.all().values()
     recipe_collection = []
     for idx, item in enumerate(recipes): 
@@ -125,7 +126,11 @@ def recipe_index(request):
         response = tc_api.client.get_recipes_details(p)
         data = utils.parse_recipes_details(response, "s")
         recipe_collection.append(data)
-    return render(request, 'recipes/index.html', {'recipe_collection': recipe_collection})
+    #remove duplicates from cllection list
+    unique = []
+    [unique.append(recipe) for recipe in recipe_collection if recipe not in unique]
+    print(unique)
+    return render(request, 'recipes/index.html', {'recipe_collection': unique})
 
 @login_required
 def add_recipe(request, recipe_id):
@@ -141,14 +146,11 @@ def add_recipe(request, recipe_id):
 @login_required
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
-    # add guard for existing recipes in DB
-    # if recipe not in recipe db, create recipe in db
     if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
         MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
     else: 
         new_recipe = Recipes.objects.create(recipe_id = recipe_id)
         MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
-    #else grab recipe from db and add to meal plan 
     return redirect('recipe_detail', recipe_id=recipe_id)
 
 def delete_recipe(request, recipe_id):

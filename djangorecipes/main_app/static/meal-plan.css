@@ -1,5 +1,18 @@
-a {
-  text-decoration: underline;
+a.button {
   font-weight: bold;
-  margin-top: 20px;
+  color: blue;
+  text-align: center;
+}
+.button-container {
+  border: 2px blue solid;
+  border-radius: 10%;
+  max-width: fit-content;
+  padding-left: 20px;
+  text-align: center;
+}
+.brush_underline > img {
+  visibility: hidden;
+}
+.brush-underline:hover > img {
+  visibility: visible;
 }

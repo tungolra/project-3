@@ -12,7 +12,7 @@
   {%for recipe in recipe_collection%}
   <a href="{% url 'recipe_detail' recipe.id%}"
     ><div class="rec-cat-cont">
-      <img width="150px" src="{{recipe.image_url}}" />
+      <img src="{{recipe.image_url}}" />
       <h6>{{ recipe.name }}</h6>
       <div class="info">
         <div class="key">Reviews:</div>

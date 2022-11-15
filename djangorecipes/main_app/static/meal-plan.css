@@ -13,17 +13,18 @@ a.button {
   top: 10px;
   left: 20px;
 }
-a.button:hover: {
+a.button:hover {
   color: white;
 }
 .button-container:hover {
-  background-color: grey;
-  color: white;
-  a
+  background-color: black;
 }
 .brush_underline > img {
   visibility: hidden;
 }
 .brush-underline:hover > img {
   visibility: visible;
+}
+.header-img > img {
+  height: 10% !important;
 }

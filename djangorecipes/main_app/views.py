@@ -22,7 +22,6 @@ def home(request):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-        print(data)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):

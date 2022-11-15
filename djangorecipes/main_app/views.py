@@ -23,23 +23,22 @@ def home(request):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-        
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
-def example(request):
-    p = {
-        "from" : "0",
-        "size" : "2",
-        "tags" : "american"
-    }
-    response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
+# def example(request):
+#     p = {
+#         "from" : "0",
+#         "size" : "2",
+#         "tags" : "american"
+#     }
+#     response = tc_api.client.get_recipes_list(p)
+#     data = utils.parse_recipes_list(response["results"], "s")
 
-    # response_tags = utils.get_all_tag_types()
-    # print(f"Response tags\n{response_tags}")
-    # cuisine_tag_values = utils.get_tag_values("cuisine")
-    # print(f"Cusine Tags\n{cuisine_tag_values}")
-    return render(request, "example.html", {"data" : data} )
+#     # response_tags = utils.get_all_tag_types()
+#     # print(f"Response tags\n{response_tags}")
+#     # cuisine_tag_values = utils.get_tag_values("cuisine")
+#     # print(f"Cusine Tags\n{cuisine_tag_values}")
+#     return render(request, "example.html", {"data" : data} )
 
 """Meal Plans"""
 @login_required
@@ -104,19 +103,15 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 def random_recipe(request):
     p = {
     "from" : "0",
-    "size" : "50",
+    "size" : "20",
     }
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
-    
     collect_ids = []
     for idx, item in enumerate(data):
         collect_ids.append(data[idx]['id'])
     recipe_id = collect_ids[random.randint(0, len(collect_ids))]
-
     return recipe_detail(request, recipe_id)
-
-
 
 def recipe_index(request):
     recipes = Recipes.objects.all().values()
@@ -134,7 +129,7 @@ def recipe_index(request):
 def add_recipe(request, recipe_id):
     mealplans = MealPlans.objects.filter(user=request.user)
     p = {
-        "id":f"{recipe_id}" #REQUIRED
+        "id":f"{recipe_id}"
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
@@ -148,33 +143,13 @@ def add_recipe_to_meal_plan(request, recipe_id):
     MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
     return redirect('recipe_detail', recipe_id=recipe_id)
 
-# def recipe_cuisine_index(request): 
-#     return render(request, 'recipes/cuisine_index.html')
-
 def recipe_detail(request, recipe_id):
-    # print(recipe_id)
     p = {
-        "id":f"{recipe_id}" #REQUIRED
+        "id":f"{recipe_id}" 
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
-
     return render(request, "recipes/details.html", {"recipe":data})
-
-# for UX team 
-# def recipe_view(request):
-#     p = {
-#         "id":"7324" #REQUIRED
-#     }
-
-#     response = tc_api.client.get_recipes_details(p)
-#     data = utils.parse_recipes_details(response, "d")
-#     print(data)
-#     return render(request, "recipes/details.html", {"recipe":data})
-
-# def multi_recipe_view(req):
-    
-#     return render(req, "home.html")
 
 """OAuth Functions"""
 def signup(request):

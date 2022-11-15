@@ -21,5 +21,5 @@ urlpatterns = [
     path('recipe/<int:recipe_id>/', views.recipe_detail, name="recipe_detail"),
     path('recipe/random/', views.random_recipe, name="random_recipe"),
     # path('recipe/<int:cuisine_id>/', views.recipe_cuisine_index, name="recipe_cuisine_index"),
-    path('example/', views.example, name="example"),
+    # path('example/', views.example, name="example"),
 ]

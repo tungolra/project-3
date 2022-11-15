@@ -1,15 +1,17 @@
-{% extends 'base.html'%} {% block content %} THIS IS THE MEAL PLAN UPDATE PAGE
-<br />
-<div class="header-img" style="position: relative; top: -65px">
-  <img src="https://i.imgur.com/btbBlMF.jpeg" />
-</div>
-<div>
-  <h1>{{meal_plan.title}}</h1>
+{% extends 'base.html'%} {% block content %}
+<div class="main">
+  <h2>{{meal_plan.title}}</h2>
   <form action="{% url 'meal_plan_update' meal_plan.id %}" method="post">
     {%csrf_token%}
-    <h4>Title:</h4>
+    <h5>New Title:</h5>
     <input name="name" />
-    <button type="submit">Update</button>
+    <button
+      class="btn waves-effect waves-light right"
+      type="submit"
+      name="action"
+    >
+      Update!
+    </button>
   </form>
 </div>
 {% endblock %}

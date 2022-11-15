@@ -329,6 +329,24 @@ a {
   width: 160px;
 }
 
+.dropdown-content li > a,
+.dropdown-content li > span {
+  color: #4a7ba1;
+}
+
+.btn {
+  background-color: #4a7ba1;
+  border-radius: 15px;
+}
+
+.btn:hover {
+  background-color: #37678c;
+}
+
+h4 > .cust-text {
+  color: #aa381e;
+}
+
 @media only screen and (max-width: 600px) {
   .nutrition-content {
     height: 90px;

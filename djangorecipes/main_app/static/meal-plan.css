@@ -28,3 +28,15 @@ a.button:hover {
 .header-div {
   object-fit: cover;
 }
+.card-content {
+  border: 1px solid black;
+}
+.card {
+  border-radius: 10px;
+  position: relative;
+  top: 20px;
+  display: flex;
+  border: 2px black solid;
+  padding: 5px;
+  border-radius: 10px;
+}

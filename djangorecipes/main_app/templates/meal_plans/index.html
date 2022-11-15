@@ -2,18 +2,34 @@
 <link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
 <div class="cover"></div>
 >
-<div class="header-div">
-</div>
+<div class="header-div"></div>
 <h5>All Meal Plans</h5>
 <div class="button-container">
   <a class="button" href="{% url 'meal_plan_new' %}">Add New Meal Plan</a>
   {% for plan in meal_plans %}
 </div>
-<div class="brush-underline">
-  <img src="{% static 'images/underline.png'%}" />
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card z-depth-0">
+      <div class="card-content">
+        <div>
+          <a href="{% url 'meal_plan_detail' plan.id %}"
+            ><div>{{plan.title}}</div>
+          </a>
+        </div>
+
+    </div>
+        <span class="card-title">Ca</span>
+      </div>
+      <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- <div class="brush-underline">
+    <img src="{% static 'images/underline.png'%}" />
+</div> -->
 <br />
-<div>
-  <a href="{% url 'meal_plan_detail' plan.id %}"><div>{{plan.title}}</div></a>
-  {% endfor %} {% endblock %}
-</div>
+{% endfor %} {% endblock %}

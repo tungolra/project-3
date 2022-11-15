@@ -115,7 +115,6 @@ def random_recipe(request):
 
 @login_required
 def recipe_index(request):
-    # only grab recipes
     recipes = Recipes.objects.all().values()
     recipe_collection = []
     for idx, item in enumerate(recipes): 
@@ -126,10 +125,8 @@ def recipe_index(request):
         response = tc_api.client.get_recipes_details(p)
         data = utils.parse_recipes_details(response, "s")
         recipe_collection.append(data)
-    #remove duplicates from cllection list
     unique = []
     [unique.append(recipe) for recipe in recipe_collection if recipe not in unique]
-    print(unique)
     return render(request, 'recipes/index.html', {'recipe_collection': unique})
 
 @login_required
@@ -146,6 +143,9 @@ def add_recipe(request, recipe_id):
 @login_required
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
+    ## if recipe already exists in the data base, don't create a new recipe instance
+    ## if recipe already exists in the meal plan, add prompt "already added to meal plan"
+    ## if recipe isn't in recipe db and it's not in the meal plan, create and add
     if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
         MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
     else: 

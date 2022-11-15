@@ -1,11 +1,17 @@
 {% extends 'base.html'%} {% block content %} {% load static %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var elems = document.querySelectorAll("select");
+    var instances = M.FormSelect.init(elems);
+  });
+</script>
 
 <h1>Add "{{data.name}}" to a Meal Plan!</h1>
 <form action="{% url 'add_recipe_to_meal_plan' recipe_id %}" method="post">
   {% csrf_token %}
   <div class="input-field col s12">
     <select name="mealplan">
-      <option>Please select a Meal Plan</option>
+      <option disabled selected >Please select a Meal Plan</option>
       {% for mealplan in mealplans %}
       <option value="{{mealplan.id}}">{{ mealplan.title }}</option>
       {%endfor%}
@@ -20,10 +26,4 @@
   </button>
 </form>
 
-<script defer>
-  document.addEventListener("DOMContentLoaded", function () {
-    var elems = document.querySelectorAll("select");
-    var instances = M.FormSelect.init(elems);
-  });
-</script>
 {% endblock %}

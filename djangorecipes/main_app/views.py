@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
-from .models import MealPlans
+from .models import MealPlans, Recipes
 from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
@@ -106,10 +106,9 @@ def add_recipe(request, recipe_id):
 
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
-    print(MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id))
-    # MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
-    return redirect('add_recipe', recipe_id=recipe_id) #return to same page for dev
-    # return redirect('recipe_detail', recipe_id=recipe_id)
+    new_recipe = Recipes.objects.create(recipe_id = recipe_id)
+    MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+    return redirect('recipe_detail', recipe_id=recipe_id)
 
 # def recipe_cuisine_index(request): 
 #     return render(request, 'recipes/cuisine_index.html')

@@ -9,6 +9,7 @@ from .models import MealPlans, Recipes
 from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
+import random
 
 def home(request):
     p = {
@@ -22,7 +23,7 @@ def home(request):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-        print(data)
+        
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def example(request):
@@ -100,6 +101,22 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
+def random_recipe(request):
+    p = {
+    "from" : "0",
+    "size" : "50",
+    }
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
+    
+    collect_ids = []
+    for idx, item in enumerate(data):
+        collect_ids.append(data[idx]['id'])
+    recipe_id = collect_ids[random.randint(0, len(collect_ids))]
+
+    return recipe_detail(request, recipe_id)
+
+
 
 def recipe_index(request):
     recipes = Recipes.objects.all().values()
@@ -107,16 +124,14 @@ def recipe_index(request):
     for idx, item in enumerate(recipes): 
         recipe_id = recipes[idx]['recipe_id']
         p = {
-        "id":f"{recipe_id}"
+            "id":f"{recipe_id}"
         }
         response = tc_api.client.get_recipes_details(p)
         data = utils.parse_recipes_details(response, "s")
         recipe_collection.append(data)
-    print(recipe_collection)
     return render(request, 'recipes/index.html', {'recipe_collection': recipe_collection})
 
 def add_recipe(request, recipe_id):
-
     mealplans = MealPlans.objects.filter(user=request.user)
     p = {
         "id":f"{recipe_id}" #REQUIRED
@@ -137,11 +152,13 @@ def add_recipe_to_meal_plan(request, recipe_id):
 #     return render(request, 'recipes/cuisine_index.html')
 
 def recipe_detail(request, recipe_id):
+    # print(recipe_id)
     p = {
         "id":f"{recipe_id}" #REQUIRED
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
+
     return render(request, "recipes/details.html", {"recipe":data})
 
 # for UX team 

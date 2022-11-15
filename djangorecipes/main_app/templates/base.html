@@ -81,7 +81,7 @@
       </li>
       {% else %} {%endif%}
       <li><a href="#!">Cuisines</a></li>
-      <li><a href="#!">Surprise Me!</a></li>
+      <li><a href="{% url 'random_recipe' %}">Surprise Me!</a></li>
     </ul>
     <main class="container">{% block content %} {% endblock %}</main>
   </body>

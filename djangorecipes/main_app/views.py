@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
 from .models import MealPlans
-from .forms import MealPlanForm
+from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
 
@@ -93,6 +93,21 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 def recipe_index(request): 
     return render(request, 'recipes/index.html')
 
+def add_recipe(request, recipe_id):
+    # form = RecipesForm()
+    mealplans = MealPlans.objects.filter(user=request.user)
+    p = {
+        "id":f"{recipe_id}" #REQUIRED
+    }
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipes_details(response, "d")
+
+    return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
+
+def add_recipe_to_meal_plan(request):
+
+    pass
+
 def recipe_cuisine_index(request): 
     return render(request, 'recipes/cuisine_index.html')
 
@@ -102,7 +117,6 @@ def recipe_detail(request, recipe_id):
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
-    print(data)
     return render(request, "recipes/details.html", {"recipe":data})
 
 # for UX team 

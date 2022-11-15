@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 {% extends 'base.html'%} {% block content %}{% load static %} {% if object %}
 <link rel="stylesheet" href="{% static meal" />
 <h1>Edit Meal Plan {{object.title}}</h1>
 {%else%}
+=======
+{% extends 'base.html'%} {% block content %}
+
+
+>>>>>>> 83dda316821f543442da796eef126b0e46032403
 <h1>Create New Meal Plan</h1>
-{%endif%}
-<form action="" method="post">
+<form action="{% url 'meal_plan_create' %}" method="post">
   {% csrf_token %}
   <br />
   {{ form.as_table }}

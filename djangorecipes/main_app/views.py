@@ -12,16 +12,33 @@ from . import utils
 
 def home(request):
     p = {
-        "from" : "7234",
-        "size" : "5"
+        "from" : "938",
+        "size" : "12",
     }
-    ## KENDRA & LUCAS
-    ## Data contains recipes (n = size from above)
-    ## Use to populate homepage with unique images from our API
+    cuisine_tags_values = utils.get_tag_values("cuisine").values()
     response = tc_api.client.get_recipes_list(p)
-    recipes = utils.parse_recipes_list(response["results"], "s")
-    print(recipes)
-    return render(request, 'home.html')
+    data = utils.parse_recipes_list(response["results"], "s")
+    for idx, item in enumerate(data):
+        if data[idx]['rating']['score']:
+            data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
+        data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
+        print(data)
+    return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
+
+def example(request):
+    p = {
+        "from" : "0",
+        "size" : "2",
+        "tags" : "american"
+    }
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
+
+    # response_tags = utils.get_all_tag_types()
+    # print(f"Response tags\n{response_tags}")
+    # cuisine_tag_values = utils.get_tag_values("cuisine")
+    # print(f"Cusine Tags\n{cuisine_tag_values}")
+    return render(request, "example.html", {"data" : data} )
 
 """Meal Plans"""
 @login_required
@@ -29,7 +46,7 @@ def meal_plan_index(request):
     meal_plans = MealPlans.objects.filter(user=request.user)
     return render(request, 'meal_plans/index.html', {'meal_plans': meal_plans})
 
-# create Meal Plans
+## create Meal Plans
 @login_required
 def meal_plan_new(request):
     form = MealPlanForm()
@@ -57,7 +74,7 @@ def meal_plan_detail(request, mealplan_id):
 def meal_plan_edit(request, mealplan_id):
     """renders page to edit meal plan"""
     meal_plan = MealPlans.objects.get(user=request.user, id=mealplan_id)
-    return render(request, 'meal_plans/new.html', {'meal_plan': meal_plan})
+    return render(request, 'meal_plans/edit.html', {'meal_plan': meal_plan})
 
 @login_required
 def meal_plan_update(request, mealplan_id):
@@ -73,7 +90,36 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
-# 
+
+def recipe_index(request): 
+    return render(request, 'recipes/index.html')
+
+def recipe_cuisine_index(request): 
+    return render(request, 'recipes/cuisine_index.html')
+
+def recipe_detail(request, recipe_id):
+    p = {
+        "id":f"{recipe_id}" #REQUIRED
+    }
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipes_details(response, "d")
+    print(data)
+    return render(request, "recipes/details.html", {"recipe":data})
+
+# for UX team 
+# def recipe_view(request):
+#     p = {
+#         "id":"7324" #REQUIRED
+#     }
+
+#     response = tc_api.client.get_recipes_details(p)
+#     data = utils.parse_recipes_details(response, "d")
+#     print(data)
+#     return render(request, "recipes/details.html", {"recipe":data})
+
+# def multi_recipe_view(req):
+    
+#     return render(req, "home.html")
 
 """OAuth Functions"""
 def signup(request):
@@ -90,28 +136,6 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
-"""TEMP"""
-def recipe_view(request):
-    p = {
-        "id":"7324" #REQUIRED
-    }
-
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    print(data)
-    return render(request, "recipes/details.html", {"recipe":data})
-
-def multi_recipe_view(req):
-    
-    return render(req, "home.html")
 
 
-def example(request):
-    p = {
-        "id":"8108" #REQUIRED
-    }
 
-    response = tc_api.client.get_recipes_details(p)
-    data = utils.parse_recipes_details(response, "d")
-    
-    return render(request, "example.html", {"data" : data} )

@@ -1,51 +1,66 @@
 {% extends 'base.html'%} {% block content %}{% load static %}
-<div class="header-img" style="position: relative; top: -65px">
-  <img src="https://i.imgur.com/btbBlMF.jpeg" />
-</div>
-<div class="main">
+<a href="{% url 'recipe_detail' data.4.id %}"
+  ><div class="header-img" style="position: relative; top: -65px">
+    <img src="{{ data.4.image_url}}" />
+  </div>
+</a>
+<div class="main" style="position: relative; top: -320px">
+  <a href="{% url 'recipe_detail' data.4.id %}"
+    ><div class="feature-recipe-link">
+      <h5>WHAT'S HOT</h5>
+      <h2>{{ data.4.name}}</h2>
+    </div></a
+  >
   <div class="carousel">
     <div class="brush-underline">
       <h4>EXPLORE</h4>
       <!-- <img src="{% static 'images/underline.png'%}" /> -->
     </div>
+    {% for tag in cuisine_tag_values %}
     <a class="carousel-item" href="#one!"
-      ><img class="carousel-img" src="https://i.imgur.com/b6jR7Ls.jpeg" />
-      <div class="carousel-text black-text">THANKSGIVING</div></a
+      ><img
+        class="carousel-img"
+        src="https://www.wholesomeyum.com/wp-content/uploads/2020/10/wholesomeyum-Easy-Roasted-Thanksgiving-Turkey-Recipe-45.jpg"
+      />
+      <div class="carousel-text black-text">{{ tag }}</div></a
     >
-    <a class="carousel-item" href="#two!"
-      ><img class="carousel-img" src="https://i.imgur.com/dMwHmTW.jpeg" />
-      <div class="carousel-text black-text">KID-FRIENDLY</div></a
-    >
-    <a class="carousel-item" href="#three!"
-      ><img class="carousel-img" src="https://i.imgur.com/UGsFmOg.jpeg" />
-      <div class="carousel-text black-text">DESSERTS</div></a
-    >
-    <a class="carousel-item" href="#four!"
-      ><img class="carousel-img" src="https://i.imgur.com/yy7DeBK.jpeg" />
-      <div class="carousel-text black-text">VEGETARIAN</div></a
-    >
-    <a class="carousel-item" href="#five!"
-      ><img class="carousel-img" src="https://i.imgur.com/e9yNPjx.jpeg" />
-      <div class="carousel-text black-text">CHRISTMAS</div></a
-    >
+    {% endfor %}
   </div>
-  <h4>FALL PRODUCE RECIPES</h4>
+  <!-- Random recipes start -->
+  <h4>Featured Recipes (just randomly generated...)</h4>
   <div class="rec-cat">
-    <div class="rec-cat-cont">
-      <img src="https://i.imgur.com/dMwHmTW.jpeg" alt="" />
-    </div>
-    <div class="rec-cat-cont">
-      <img src="https://i.imgur.com/yy7DeBK.jpeg" alt="" />
-    </div>
+    {% for recipe in data %}
+    <a href="{% url 'recipe_detail' recipe.id %}"
+      ><div class="rec-cat-cont">
+        <img src="{{recipe.image_url}}" />
+        <h6>{{ recipe.name }}</h6>
+        <div class="info">
+          <div class="key">Reviews:</div>
+          <div class="value">{{recipe.rating.total_count}}</div>
+        </div>
+        <div class="info">
+          <div class="key">Rating:</div>
+          <div class="value">{{recipe.rating.score|floatformat}}</div>
+        </div>
+        {% if recipe.time == None%}
+        <div class="info">
+          <div class="key">Cook Time:</div>
+          <div class="value">30-45min</div>
+        </div>
+        {% else %}
+        <div class="info">
+          <div class="key">Cook Time:</div>
+          <div class="value">{{recipe.time}}min</div>
+        </div>
+        {% endif %}
+        <div class="info">
+          <div class="key">Servings:</div>
+          <div class="value">{{ recipe.num_servings}}</div>
+        </div>
+      </div></a
+    >
+    {% endfor %}
+    <!-- Random recipes end -->
   </div>
-  <h4>COZY COCKTAILS</h4>
-  <div class="rec-cat">
-    <div class="rec-cat-cont">
-      <img src="https://i.imgur.com/dMwHmTW.jpeg" alt="" />
-    </div>
-    <div class="rec-cat-cont">
-      <img src="https://i.imgur.com/yy7DeBK.jpeg" alt="" />
-    </div>
-  </div>
+  {% endblock %}
 </div>
-{% endblock %}

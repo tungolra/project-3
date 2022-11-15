@@ -5,6 +5,10 @@
 from . import tc_api
 
 def parse_recipe_detail(recipe):
+    nested_recipes = recipe.get("recipes")
+    if nested_recipes:
+        recipe = nested_recipes[0]
+
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],
@@ -16,10 +20,9 @@ def parse_recipe_detail(recipe):
         "image_url" : recipe["thumbnail_url"],
         "image_alt_text" : recipe["thumbnail_alt_text"],
         "video_url" : recipe["original_video_url"],
-        "nutrition" : recipe["nutrition"]
+        "nutrition" : recipe["nutrition"],
         # TO ADD,
-        # Ingredients,
-        # Cook Time
+        # tags
         # Author
     }
 
@@ -34,6 +37,9 @@ def parse_recipe_detail(recipe):
 
 
 def parse_recipe_summary(recipe):
+    nested_recipes = recipe.get("recipes")
+    if nested_recipes:
+        recipe = nested_recipes[0]
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],
@@ -48,7 +54,7 @@ def parse_recipe_summary(recipe):
     return result
 
 def parse_instruction(instruction):
-    res = str(instruction["position"]) + " " + instruction["display_text"]
+    res = str(instruction["position"]) + ". " + instruction["display_text"]
     return res
 
 def parse_ingredient(recipe_component):
@@ -105,7 +111,39 @@ def parse_recipes_details(response, mode):
 def parse_tips(response,mode):
     pass
 
-def parse_tags(response, mode):
+def parse_tags(response, type):
+    return [tag for tag in response["results"] if tag["type"] == type]        
+
+def get_all_tag_types():
+    p = {}
+    response = tc_api.client.get_tags(p)
+    tags_list = {}
+
+    for tag in response["results"]:
+        tag_type = tag["type"]
+        
+        if tags_list.get(tag_type):
+            continue
+        tags_list[tag_type] = 1
+
+    return tags_list
+
+def get_tag_values(tag_type: str):
+    p = {}
+    response = tc_api.client.get_tags(p)
+    tag_values_list = {}
+
+    for tag in response["results"]:
+        if tag["type"] != tag_type:
+            continue
+        
+        if tag["name"] in tag_values_list:
+            continue
+        
+        tag_values_list[tag["name"]] = tag["display_name"]
+
+    return tag_values_list
+    
     pass
 
 def parse_feeds(responsee, mode):

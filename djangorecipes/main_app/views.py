@@ -16,13 +16,17 @@ def home(request):
         "from" : "938",
         "size" : "12",
     }
-    cuisine_tags_values = utils.get_tag_values("cuisine").values()
+
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response["results"], "s")
+
+    cuisine_tags_values = utils.get_tags_by_type("cuisine", "display_name")
+
     for idx, item in enumerate(data):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
+        print(data)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 # def example(request):
@@ -34,11 +38,11 @@ def home(request):
 #     response = tc_api.client.get_recipes_list(p)
 #     data = utils.parse_recipes_list(response["results"], "s")
 
-#     # response_tags = utils.get_all_tag_types()
-#     # print(f"Response tags\n{response_tags}")
-#     # cuisine_tag_values = utils.get_tag_values("cuisine")
-#     # print(f"Cusine Tags\n{cuisine_tag_values}")
-#     return render(request, "example.html", {"data" : data} )
+    # response_tags = utils.get_all_tag_types()
+    # print(f"Response tags\n{response_tags}")
+    # cuisine_tag_values = utils.get_tag_values("cuisine")
+    # print(f"Cusine Tags\n{cuisine_tag_values}")
+    return render(request, "example.html", {"data" : data} )
 
 """Meal Plans"""
 @login_required

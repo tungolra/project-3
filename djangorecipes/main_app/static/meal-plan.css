@@ -25,6 +25,6 @@ a.button:hover {
 .brush-underline:hover > img {
   visibility: visible;
 }
-.header-img > img {
-  height: 10% !important;
+.header-div {
+  object-fit: cover;
 }

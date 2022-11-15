@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # for all CBV models
 from django.views import generic
-from .models import MealPlans
-from .forms import MealPlanForm
+from .models import MealPlans, Recipes
+from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
 
@@ -67,7 +67,17 @@ def meal_plan_create(request):
 @login_required
 def meal_plan_detail(request, mealplan_id):
     meal_plan = MealPlans.objects.get(id=mealplan_id)
-    return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan})
+    recipes = meal_plan.recipes.all().values()
+    recipe_collection = []
+    for idx, item in enumerate(recipes): 
+        recipe_id = recipes[idx]['recipe_id']
+        p = {
+        "id":f"{recipe_id}"
+        }
+        response = tc_api.client.get_recipes_details(p)
+        data = utils.parse_recipes_details(response, "d")
+        recipe_collection.append(data)
+    return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan, 'recipes': recipes, 'recipe_collection': recipe_collection})
 
 # update Meal Plans
 @login_required
@@ -94,8 +104,26 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 def recipe_index(request): 
     return render(request, 'recipes/index.html')
 
-def recipe_cuisine_index(request): 
-    return render(request, 'recipes/cuisine_index.html')
+def add_recipe(request, recipe_id):
+
+    mealplans = MealPlans.objects.filter(user=request.user)
+    p = {
+        "id":f"{recipe_id}" #REQUIRED
+    }
+    response = tc_api.client.get_recipes_details(p)
+    data = utils.parse_recipes_details(response, "d")
+
+    return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
+
+def add_recipe_to_meal_plan(request, recipe_id):
+    mealplan_id = request.POST['mealplan']
+    # add guard for existing recipes in DB
+    new_recipe = Recipes.objects.create(recipe_id = recipe_id)
+    MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+    return redirect('recipe_detail', recipe_id=recipe_id)
+
+# def recipe_cuisine_index(request): 
+#     return render(request, 'recipes/cuisine_index.html')
 
 def recipe_detail(request, recipe_id):
     p = {
@@ -103,7 +131,6 @@ def recipe_detail(request, recipe_id):
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
-    print(data)
     return render(request, "recipes/details.html", {"recipe":data})
 
 # for UX team 

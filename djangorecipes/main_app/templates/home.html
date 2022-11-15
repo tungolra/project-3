@@ -1,15 +1,16 @@
 {% extends 'base.html'%} {% block content %}{% load static %}
-<div class="header-img" style="position: relative; top: -65px">
-  <img
-    src="https://www.recipetineats.com/wp-content/uploads/2022/11/Firecracker-beef-mince_2-2.jpg?w=900&h=900&crop=1"
-  />
-</div>
-
-<div class="main" style="position: relative; top: -320px">
-  <div class="feature-recipe-link">
-    <h5>VIETNAMESE</h5>
-    <h2>Spicy Firecracker<br />Beef</h2>
+<a href="{% url 'recipe_detail' data.4.id %}"
+  ><div class="header-img" style="position: relative; top: -65px">
+    <img src="{{ data.4.image_url}}" />
   </div>
+</a>
+<div class="main" style="position: relative; top: -320px">
+  <a href="{% url 'recipe_detail' data.4.id %}"
+    ><div class="feature-recipe-link">
+      <h5>WHAT'S HOT</h5>
+      <h2>{{ data.4.name}}</h2>
+    </div></a
+  >
   <div class="carousel">
     <div class="brush-underline">
       <h4>EXPLORE</h4>
@@ -31,16 +32,31 @@
     {% for recipe in data %}
     <a href="{% url 'recipe_detail' recipe.id %}"
       ><div class="rec-cat-cont">
-        <img src="{{recipe.image_url}}" alt="" />
+        <img src="{{recipe.image_url}}" />
         <h6>{{ recipe.name }}</h6>
-        <p>Count of Reviews: {{recipe.rating.total_count}}</p>
-        <p>Rating: {{recipe.rating.score}}/5</p>
+        <div class="info">
+          <div class="key">Reviews:</div>
+          <div class="value">{{recipe.rating.total_count}}</div>
+        </div>
+        <div class="info">
+          <div class="key">Rating:</div>
+          <div class="value">{{recipe.rating.score|floatformat}}</div>
+        </div>
         {% if recipe.time == None%}
-        <p>Cook Time: 30-45min</p>
+        <div class="info">
+          <div class="key">Cook Time:</div>
+          <div class="value">30-45min</div>
+        </div>
         {% else %}
-        <p>Cook Time: {{recipe.time}}min</p>
+        <div class="info">
+          <div class="key">Cook Time:</div>
+          <div class="value">{{recipe.time}}min</div>
+        </div>
         {% endif %}
-        <p>Servings: {{ recipe.num_servings}}</p>
+        <div class="info">
+          <div class="key">Servings:</div>
+          <div class="value">{{ recipe.num_servings}}</div>
+        </div>
       </div></a
     >
     {% endfor %}

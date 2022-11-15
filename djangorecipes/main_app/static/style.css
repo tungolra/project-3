@@ -305,11 +305,48 @@ h2 {
   text-decoration-thickness: 4px;
 }
 
+.rec-cat > a {
+  color: black;
+}
+
+.info {
+  text-align: center;
+}
+
+.key {
+  font-weight: 500;
+}
+
+h6 {
+  font-weight: 600;
+}
+
+a {
+  color: black;
+}
+
+.brush-underline > img {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: -20px;
+  width: 160px;
+}
+
 @media only screen and (max-width: 600px) {
   .nutrition-content {
     height: 90px;
     width: 90px;
     border-radius: 45px;
     padding: 15px 0;
+  }
+  i {
+    font-size: 24px !important;
+  }
+  h2 {
+    font-size: 2.6rem;
+  }
+  .logo > img {
+    height: 50%;
   }
 }

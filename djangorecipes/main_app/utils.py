@@ -20,10 +20,9 @@ def parse_recipe_detail(recipe):
         "image_url" : recipe["thumbnail_url"],
         "image_alt_text" : recipe["thumbnail_alt_text"],
         "video_url" : recipe["original_video_url"],
-        "nutrition" : recipe["nutrition"]
+        "nutrition" : recipe["nutrition"],
         # TO ADD,
-        # Ingredients,
-        # Cook Time
+        # tags
         # Author
     }
 

@@ -113,6 +113,7 @@ def random_recipe(request):
     recipe_id = collect_ids[random.randint(0, len(collect_ids))]
     return recipe_detail(request, recipe_id)
 
+@login_required
 def recipe_index(request):
     recipes = Recipes.objects.all().values()
     recipe_collection = []
@@ -126,6 +127,7 @@ def recipe_index(request):
         recipe_collection.append(data)
     return render(request, 'recipes/index.html', {'recipe_collection': recipe_collection})
 
+@login_required
 def add_recipe(request, recipe_id):
     mealplans = MealPlans.objects.filter(user=request.user)
     p = {
@@ -136,12 +138,22 @@ def add_recipe(request, recipe_id):
 
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
+@login_required
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
     # add guard for existing recipes in DB
-    new_recipe = Recipes.objects.create(recipe_id = recipe_id)
-    MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+    # if recipe not in recipe db, create recipe in db
+    if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
+        MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
+    else: 
+        new_recipe = Recipes.objects.create(recipe_id = recipe_id)
+        MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+    #else grab recipe from db and add to meal plan 
     return redirect('recipe_detail', recipe_id=recipe_id)
+
+def delete_recipe(request, recipe_id):
+    MealPlans.objects.get(user=request.user)
+    redirect("")
 
 def recipe_detail(request, recipe_id):
     p = {

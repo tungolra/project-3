@@ -3,6 +3,7 @@
 <a href="{% url 'meal_plan_new' %}">Add New Meal Plan</a>
 {% for plan in meal_plans %}
 <a href="{% url 'meal_plan_detail' plan.id %}"><div>
+    {{plan.recipes_set.all}}
     {{plan.title}}
 </div></a>
 {% endfor %}

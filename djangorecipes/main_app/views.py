@@ -101,8 +101,19 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 
 """CRUD for Recipes"""
 
-def recipe_index(request): 
-    return render(request, 'recipes/index.html')
+def recipe_index(request):
+    recipes = Recipes.objects.all().values()
+    recipe_collection = []
+    for idx, item in enumerate(recipes): 
+        recipe_id = recipes[idx]['recipe_id']
+        p = {
+        "id":f"{recipe_id}"
+        }
+        response = tc_api.client.get_recipes_details(p)
+        data = utils.parse_recipes_details(response, "s")
+        recipe_collection.append(data)
+    print(recipe_collection)
+    return render(request, 'recipes/index.html', {'recipe_collection': recipe_collection})
 
 def add_recipe(request, recipe_id):
 

@@ -72,10 +72,10 @@
           >
         </div>
       </li>
-      <li>
-        <a href="#!">All Recipes</a>
-      </li>
       {% if user.is_authenticated %}
+      <li>
+        <a href="{% url 'recipe_index' %}">My Recipes</a>
+      </li>
       <li>
         <a href="/meal-plans/">My Meal Plans</a>
       </li>

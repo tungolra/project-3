@@ -94,7 +94,7 @@ def recipe_index(request):
     return render(request, 'recipes/index.html')
 
 def add_recipe(request, recipe_id):
-    # form = RecipesForm()
+
     mealplans = MealPlans.objects.filter(user=request.user)
     p = {
         "id":f"{recipe_id}" #REQUIRED
@@ -104,12 +104,15 @@ def add_recipe(request, recipe_id):
 
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
-def add_recipe_to_meal_plan(request):
+def add_recipe_to_meal_plan(request, recipe_id):
+    mealplan_id = request.POST['mealplan']
+    print(MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id))
+    # MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
+    return redirect('add_recipe', recipe_id=recipe_id) #return to same page for dev
+    # return redirect('recipe_detail', recipe_id=recipe_id)
 
-    pass
-
-def recipe_cuisine_index(request): 
-    return render(request, 'recipes/cuisine_index.html')
+# def recipe_cuisine_index(request): 
+#     return render(request, 'recipes/cuisine_index.html')
 
 def recipe_detail(request, recipe_id):
     p = {

@@ -16,9 +16,9 @@ urlpatterns = [
     # path('recipe/', views.recipe_view, name="recipe_view"),
     #temp end
     path('recipe/<int:recipe_id>/add', views.add_recipe, name='add_recipe'),
-    path('recipe/add-to-mealplan', views.add_recipe_to_meal_plan, name='add_recipe_to_meal_plan'),
+    path('recipe/<int:recipe_id>/add-to-mealplan/', views.add_recipe_to_meal_plan, name='add_recipe_to_meal_plan'),
     path('recipe/index/', views.recipe_index, name="recipe_index"),
     path('recipe/<int:recipe_id>/', views.recipe_detail, name="recipe_detail"),
-    path('recipe/<int:cuisine_id>/', views.recipe_cuisine_index, name="recipe_cuisine_index"),
+    # path('recipe/<int:cuisine_id>/', views.recipe_cuisine_index, name="recipe_cuisine_index"),
     path('example/', views.example, name="example"),
 ]

@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Recipes(models.Model):
     # for API only; create own recipe TBD
     recipe_id = models.IntegerField()
-    def __str__(self): 
-        return self.id
+    # def __str__(self): 
+    #     return self.id
 
 
 class MealPlans(models.Model):

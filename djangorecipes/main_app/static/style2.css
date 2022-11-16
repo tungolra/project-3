@@ -1,5 +1,3 @@
-/* this style is for white logo: home.html,recipe/details.html */
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 main {
@@ -8,13 +6,14 @@ main {
 }
 
 nav {
-  background-color: #4a7ba1;
+  background-color: transparent;
 }
 
 .nav-wrapper {
   background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
+  /* visibility: hidden; */
 }
 
 .header-img {
@@ -101,14 +100,8 @@ i {
 
 .logo {
   max-width: 100%;
-  margin-top: 10px;
 }
-.logo-blk {
-  visibility: hidden;
-}
-.logo-wht {
-  visibility: visible;
-}
+
 .author {
   text-align: center;
   font-size: 24px;
@@ -371,6 +364,21 @@ h4 > .cust-text {
 .brush-underline:hover {
   visibility: visible;
 }
-.style2 {
+.logo {
+  max-width: 100%;
+  margin-top: 10px;
+}
+.logo-blk {
+  visibility: visible;
+  position: absolute;
+  left: 50px;
+}
+.logo-wht {
   visibility: hidden;
+}
+.logo > img {
+  margin-top: 10px;
+}
+.style2 {
+  visibility: visible;
 }

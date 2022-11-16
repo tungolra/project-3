@@ -33,8 +33,14 @@
         <a href="#" data-target="slide-out" class="sidenav-trigger"
           ><i class="material-icons">menu</i></a
         >
-        <a href="/" class="logo"
+        <!-- <a href="#" data-target="slide-out" class="sidenav-trigger style2"
+        ><i class="material-icons">menu</i></a
+      > -->
+        <a href="/" class="logo logo-wht"
           ><img src="{% static 'images/logo-wht.png'%}" alt=""
+        /></a>
+        <a href="/" class="logo logo-blk"
+          ><img src="{% static 'images/logo-blk.png'%}" alt=""
         /></a>
         <ul class="right">
           {% if user.is_authenticated %}

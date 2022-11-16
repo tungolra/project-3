@@ -101,11 +101,14 @@ i {
 
 .logo {
   max-width: 100%;
+  margin-top: 10px;
 }
 .logo-blk {
-  max-width: 100%;
+  visibility: hidden;
 }
-
+.logo-wht {
+  visibility: visible;
+}
 .author {
   text-align: center;
   font-size: 24px;

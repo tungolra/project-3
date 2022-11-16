@@ -363,3 +363,16 @@ h4 > .cust-text {
 .brush-underline:hover {
   visibility: visible;
 }
+.logo {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+  .logo-blk {
+    visibility: hidden;
+  }
+  .logo-wht {
+    visibility: visible;
+  }
+  .logo > img {
+    margin-top: 10px;
+  }

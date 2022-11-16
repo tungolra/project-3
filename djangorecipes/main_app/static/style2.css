@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 /* parent */
 .logo {
-  width: 100%;
-  margin-top: 10px;
+  /* max-width: 100%; */
+  position: absolute;
+  top: 10px;
+  left: 80px;
 }
 /* not sure if this is necessary */
 /* .logo > img {
@@ -10,15 +12,15 @@
 } */
 /* child */
 .logo-blk {
-  display: block;
-  margin: auto;
   visibility: visible;
-  position: absolute;
-  left: 50px;
+  height: 39;
+  width: 158;
 }
 /* child */
 .logo-wht {
   visibility: hidden;
+  height: 39;
+  width: 158;
 }
 main {
   font-family: "Poppins", sans-serif;
@@ -30,7 +32,6 @@ nav {
 }
 
 .nav-wrapper {
-  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
 }

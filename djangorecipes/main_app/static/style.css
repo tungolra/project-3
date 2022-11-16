@@ -3,19 +3,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 /* parent */
 .logo {
-  max-width: 100%;
-  margin-top: 10px;
+  /* max-width: 100%; */
+  position: absolute;
+  top: 10px;
+  left: 80px;
+  /* margin-top: 10px; */
 }
-.logo > img {
+/* .logo > img {
   margin-top: 10px;
-}
+} */
 /* child */
 .logo-blk {
   visibility: hidden;
+  height: 39;
+  width: 158;
 }
 /* child */
 .logo-wht {
   visibility: visible;
+  height: 39;
+  width: 158;
 }
 main {
   font-family: "Poppins", sans-serif;

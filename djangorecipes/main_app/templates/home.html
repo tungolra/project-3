@@ -1,9 +1,10 @@
 {% extends 'base.html'%} {% block content %}{% load static %}
-<a href="{% url 'recipe_detail' data.4.id %}"
+<<link rel="stylesheet" href="{% static 'style.css' %}" />
+  a href="{% url 'recipe_detail' data.4.id %}"
   ><div class="header-img" style="position: relative; top: -65px">
     <img src="{{ data.4.image_url}}" />
   </div>
-</a>
+</>
 <div class="main" style="position: relative; top: -270px">
   <a href="{% url 'recipe_detail' data.4.id %}"
     ><div class="feature-recipe-link">

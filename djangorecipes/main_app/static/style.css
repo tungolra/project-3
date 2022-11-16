@@ -6,13 +6,18 @@ main {
 }
 
 nav {
-  background-color: #4a7ba1;
+  background-color: transparent;
 }
 
 .nav-wrapper {
   background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
+}
+
+#black-icon {
+  display: none;
+  color: black;
 }
 
 .header-img {
@@ -333,12 +338,18 @@ a {
   color: black;
 }
 
-.brush-underline > img {
+.brush-underline > img,
+.brush-underline-long > img {
   display: flex;
   align-items: center;
   position: relative;
   top: -20px;
   width: 160px;
+}
+
+.brush-underline-long > img {
+  width: 320px;
+  max-height: 5.5px;
 }
 
 .dropdown-content li > a,
@@ -368,6 +379,10 @@ h4 > .cust-text {
   }
   i {
     font-size: 24px !important;
+  }
+  .cal-icon {
+    height: 24px;
+    width: 24px;
   }
   h4 {
     font-size: 1.4rem;
@@ -417,6 +432,20 @@ h4 > .cust-text {
 
   .all {
     margin-left: 250px;
+  }
+  nav {
+    background-color: transparent !important;
+    box-shadow: none;
+  }
+  .nav-wrapper {
+    background-image: none;
+    background-color: transparent !important;
+  }
+  #black-icon {
+    display: block;
+  }
+  #white-icon {
+    display: none;
   }
 }
 @media only screen and (min-width: 993px) {

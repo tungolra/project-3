@@ -40,21 +40,35 @@
           {% if user.is_authenticated %}
           <li>
             <a href="{%url 'logout'%}"
-              ><i class="material-icons">account_circle</i></a
+              ><i id="white-icon" class="material-icons">logout</i></a
+            >
+            <a href="{%url 'logout'%}"
+              ><i id="black-icon" class="material-icons">logout</i></a
             >
           </li>
           {% else %}
           <li>
-            <a href="{% url 'signup'%}">Sign Up</a>
+            <a id="white-icon" href="{% url 'signup'%}">Sign Up</a>
+            <a id="black-icon" href="{% url 'signup'%}">Sign Up</a>
           </li>
           <li>
             <a href="{% url 'login'%}"
-              ><i class="material-icons">account_circle</i></a
+              ><i id="white-icon" class="material-icons">login</i></a
+            >
+            <a href="{% url 'login'%}"
+              ><i id="black-icon" class="material-icons black-text">login</i></a
             >
           </li>
           {% endif %}
           <li>
-            <a href="sass.html"><i class="material-icons">search</i></a>
+            <a href="sass.html"
+              ><i id="white-icon" class="material-icons">search</i></a
+            >
+            <a href="sass.html"
+              ><i id="black-icon" class="material-icons black-text"
+                >search</i
+              ></a
+            >
           </li>
         </ul>
       </div>

@@ -28,7 +28,10 @@
       {% endfor %}
     </div>
     <!-- Random recipes start -->
-    <h4>Featured Recipes (just randomly generated...)</h4>
+    <div class="brush-underline-long">
+      <h4>FEATURED RECIPES</h4>
+      <img src="{% static 'images/underline.png'%}" />
+    </div>
     <div class="rec-cat">
       {% for recipe in data %}
       <a href="{% url 'recipe_detail' recipe.id %}"

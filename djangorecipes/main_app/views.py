@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -26,7 +27,7 @@ def home(request):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-        print(data)
+
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 # def example(request):
@@ -42,7 +43,7 @@ def home(request):
     # print(f"Response tags\n{response_tags}")
     # cuisine_tag_values = utils.get_tag_values("cuisine")
     # print(f"Cusine Tags\n{cuisine_tag_values}")
-    return render(request, "example.html", {"data" : data} )
+    # return render(request, "example.html", {"data" : data} )
 
 """Meal Plans"""
 @login_required
@@ -147,14 +148,30 @@ def add_recipe(request, recipe_id):
 @login_required
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
-    ## if recipe already exists in the data base, don't create a new recipe instance
-    ## if recipe already exists in the meal plan, add prompt "already added to meal plan"
-    ## if recipe isn't in recipe db and it's not in the meal plan, create and add
+    recipeDB = Recipes.objects.all().values()
+
+        ## if recipe already exists in the data base, don't create a new recipe instance
+    # if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
+    #     print("hit first if")
+    #     return HttpResponse("This recipe is already in your meal plan!")
+    # for idx, item in enumerate(recipeDB):
+    #     if recipe_id == recipeDB[idx]['recipe_id']:
+    #         print("hit second if")
+    #         MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
+    #         break
+
+            
+        ## if recipe already exists in the meal plan, add prompt "already added to meal plan"
+        # else:
+        #     print("hit nested else")
+        # else: 
+        #     print("else")
+        # ## if recipe isn't in recipe db and it's not in the meal plan, create and add
+        #     new_recipe = Recipes.objects.create(recipe_id = recipe_id)
+        #     MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
     if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
         MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
-    else: 
-        new_recipe = Recipes.objects.create(recipe_id = recipe_id)
-        MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+
     return redirect('recipe_detail', recipe_id=recipe_id)
 
 def delete_recipe(request, recipe_id):

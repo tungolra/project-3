@@ -42,14 +42,15 @@ def home(request):
     # response_similar = tc_api.client.get_recipes_similar(p_similar)
     # data_similar = utils.parse_recipes_similar(response_similar, "s")
     # print(data_similar)
+    """
+        Usage for getting autocomplete suggestions
+    """
 
-    p_autocomplete = {
-        "prefix" : "chicken soup"
-    }
-
-    response_autocomplete = tc_api.client.get_recipes_auto_complete(p_autocomplete)
-    data_autocomplete = utils.parse_recipes_auto_complete(response_autocomplete)
-    print(data_autocomplete)
+    # p_autocomplete = {
+    #     "prefix" : "chicken soup"
+    # }
+    # response_autocomplete = tc_api.client.get_recipes_auto_complete(p_autocomplete)
+    # data_autocomplete = utils.parse_recipes_auto_complete(response_autocomplete)
 
 
     for idx, item in enumerate(data):

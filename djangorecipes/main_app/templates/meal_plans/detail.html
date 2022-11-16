@@ -1,53 +1,57 @@
 {% extends 'base.html'%} {% block content %} {% load static %}
-<div class="main">
-  <a href="{%url 'meal_plan_index'%}"><h6>All Meal Plans</h6></a>
-  <br />
-  <div>
-    <h2>
-      {{meal_plan.title}}
-
+<div class="all">
+  <div class="main">
+    <a href="{%url 'meal_plan_index'%}"><h6>All Meal Plans</h6></a>
+    <br />
+    <div>
+      <h2>
+        {{meal_plan.title}}
+  
       <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
-      <a href="{% url 'meal_plan_delete' meal_plan.id %}" class="btn">Delete</a>
-    </h2>
-  </div>
-  <h5>(Recipes for this meal plan)</h5>
-  <div class="rec-cat">
-    {%for recipe in recipe_collection%}
-    <a href="{% url 'delete_recipe_from_meal_plan' recipe.id meal_plan.id %}"
+        <a href="{% url 'meal_plan_delete' meal_plan.id %}" class="btn"
+          >Delete</a
+        >
+      </h2>
+    </div>
+    <h5>(Recipes for this meal plan)</h5>
+    <div class="rec-cat">
+      {%for recipe in recipe_collection%}
+      <a href="{% url 'delete_recipe_from_meal_plan' recipe.id meal_plan.id %}"
     ><span class="material-symbols-outlined" style="position: inherit">
       delete
     </span>(delete {{recipe.name}})</a
   >
     <a href="{% url 'recipe_detail' recipe.id%}"
-      ><div class="rec-cat-cont">
-        <img src="{{recipe.image_url}}" />
-        <h6>{{ recipe.name }}</h6>
-        <div class="info">
-          <div class="key">Reviews:</div>
-          <div class="value">{{recipe.rating.total_count}}</div>
-        </div>
-        <div class="info">
-          <div class="key">Rating:</div>
-          <div class="value">{{recipe.rating.score|floatformat}}</div>
-        </div>
-        {% if recipe.time == None%}
-        <div class="info">
-          <div class="key">Cook Time:</div>
-          <div class="value">30-45min</div>
-        </div>
-        {% else %}
-        <div class="info">
-          <div class="key">Cook Time:</div>
-          <div class="value">{{recipe.time}}min</div>
-        </div>
-        {% endif %}
-        <div class="info">
-          <div class="key">Servings:</div>
-          <div class="value">{{ recipe.num_servings}}</div>
-        </div>
-      </div></a
-    >
-    {%endfor%}
+        ><div class="rec-cat-cont">
+          <img src="{{recipe.image_url}}" />
+          <h6>{{ recipe.name }}</h6>
+          <div class="info">
+            <div class="key">Reviews:</div>
+            <div class="value">{{recipe.rating.total_count}}</div>
+          </div>
+          <div class="info">
+            <div class="key">Rating:</div>
+            <div class="value">{{recipe.rating.score|floatformat}}</div>
+          </div>
+          {% if recipe.time == None%}
+          <div class="info">
+            <div class="key">Cook Time:</div>
+            <div class="value">30-45min</div>
+          </div>
+          {% else %}
+          <div class="info">
+            <div class="key">Cook Time:</div>
+            <div class="value">{{recipe.time}}min</div>
+          </div>
+          {% endif %}
+          <div class="info">
+            <div class="key">Servings:</div>
+            <div class="value">{{ recipe.num_servings}}</div>
+          </div>
+        </div></a
+      >
+      {%endfor%}
+    </div>
   </div>
 </div>
 {% endblock %}

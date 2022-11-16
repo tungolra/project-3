@@ -60,19 +60,27 @@ def home(request):
     #PASS IN TOP-RATED RECIPES INSTEAD OF FIRST N FROM LIST
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
-def recipe_list(request, cuisine="american"):
-    search_params = {
-        "from" : random.randrange(30),
-        "size" : "12",
-        "tags" : "american"
-    }
+def recipe_list(request, search_params = {
+        "tag" : "american"
+    }):
+
+    search_params["size"] = "12"
+    search_params["from"] = random.randrange(30)
+
     response = tc_api.client.get_recipes_list(search_params)
     recipes = utils.parse_recipes_list(response)
+   
+    for idx, item in enumerate(recipes):
+        if recipes[idx]['rating']['score']:
+            recipes[idx]['rating']['score'] = round(recipes[idx]['rating']['score'] * 100, 0)
+        recipes[idx]['rating']['total_count'] = recipes[idx]['rating']['count_positive'] + recipes[idx]['rating']['count_negative']
+   
+    tag_title = utils.get_tag_by_name(search_params["tag"])["display_name"]
 
     data = {
         'recipes' : recipes,
         'search_params' : search_params,
-        'title' : "American Cuisine"
+        'title' : tag_title
     }
 
     return render(request, 'recipes/recipe_list.html', data)

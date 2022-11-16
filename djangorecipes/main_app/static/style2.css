@@ -1,5 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
+/* parent */
+.logo {
+  width: 100%;
+  margin-top: 10px;
+}
+/* not sure if this is necessary */
+/* .logo > img {
+  margin-top: 10px;
+} */
+/* child */
+.logo-blk {
+  display: block;
+  margin: auto;
+  visibility: visible;
+  position: absolute;
+  left: 50px;
+}
+/* child */
+.logo-wht {
+  visibility: hidden;
+}
 main {
   font-family: "Poppins", sans-serif;
   font-weight: 900;
@@ -95,11 +115,6 @@ h4 {
 
 i {
   font-size: 40px !important;
-}
-
-.logo {
-  max-width: 100%;
-  margin-top: 10px;
 }
 
 .author {
@@ -234,10 +249,6 @@ h5 {
   font-weight: 100;
 }
 
-.logo > img {
-  margin-top: 10px;
-}
-
 .ingredients-list {
   margin: 0px 0px 0px 20px;
   font-size: 20px;
@@ -364,20 +375,7 @@ h4 > .cust-text {
 .brush-underline:hover {
   visibility: visible;
 }
-.logo {
-  width: 100%;
-  margin-top: 10px;
-}
-.logo-blk {
-  display: block;
-  margin: auto;
-  visibility: visible;
-  position: absolute;
-  left: 50px;
-}
-.logo-wht {
-  visibility: hidden;
-}
+
 .style2 {
   visibility: visible;
 }

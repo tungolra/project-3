@@ -1,7 +1,22 @@
 /* this style is for white logo: home.html,recipe/details.html */
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
+/* parent */
+.logo {
+  max-width: 100%;
+  margin-top: 10px;
+}
+.logo > img {
+  margin-top: 10px;
+}
+/* child */
+.logo-blk {
+  visibility: hidden;
+}
+/* child */
+.logo-wht {
+  visibility: visible;
+}
 main {
   font-family: "Poppins", sans-serif;
   font-weight: 900;
@@ -97,17 +112,6 @@ h4 {
 
 i {
   font-size: 40px !important;
-}
-
-.logo {
-  max-width: 100%;
-  margin-top: 10px;
-}
-.logo-blk {
-  visibility: hidden;
-}
-.logo-wht {
-  visibility: visible;
 }
 .author {
   text-align: center;
@@ -239,10 +243,6 @@ h5 {
   align-items: center;
   font-size: large;
   font-weight: 100;
-}
-
-.logo > img {
-  margin-top: 10px;
 }
 
 .ingredients-list {

@@ -10,9 +10,10 @@ nav {
 }
 
 .nav-wrapper {
-  /* background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent); */
+  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
+  /* visibility: hidden; */
 }
 
 .header-img {
@@ -364,15 +365,20 @@ h4 > .cust-text {
   visibility: visible;
 }
 .logo {
-    max-width: 100%;
-    margin-top: 10px;
-  }
-  .logo-blk {
-    visibility: hidden;
-  }
-  .logo-wht {
-    visibility: visible;
-  }
-  .logo > img {
-    margin-top: 10px;
-  }
+  max-width: 100%;
+  margin-top: 10px;
+}
+.logo-blk {
+  visibility: visible;
+  position: absolute;
+  left: 50px;
+}
+.logo-wht {
+  visibility: hidden;
+}
+.logo > img {
+  margin-top: 10px;
+}
+.style2 {
+  visibility: visible;
+}

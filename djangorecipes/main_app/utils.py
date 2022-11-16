@@ -153,7 +153,7 @@ def parse_tips(response: dict) -> list:
 
 # Return all tag objects for recipes within the API
 def get_all_tags() -> dict:
-    with open("tags", "r") as f:
+    with open("./tags", "r") as f:
         tags_dict = json.loads(f.read())
     return tags_dict
 

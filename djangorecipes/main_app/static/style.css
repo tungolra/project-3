@@ -282,14 +282,6 @@ i.material-icons.grey-text {
   background-color: rgb(211, 211, 211, 0.5);
 }
 
-.brush_underline {
-  visibility: hidden;
-}
-
-.brush-underline:hover {
-  visibility: visible;
-}
-
 h2 {
   margin-top: 5px;
   font-weight: 500;
@@ -363,4 +355,11 @@ h4 > .cust-text {
   .logo > img {
     height: 50%;
   }
+}
+.brush_underline {
+  visibility: hidden;
+  position: relative;
+}
+.brush-underline:hover {
+  visibility: visible;
 }

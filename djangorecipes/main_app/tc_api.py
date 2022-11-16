@@ -1,5 +1,5 @@
-import requests
 import environ
+from requests_futures.sessions import FuturesSession
 
 env = environ.Env()
 environ.Env.read_env()
@@ -39,7 +39,9 @@ class TastyCoAPI():
     def get_tips(self,params):
         endpoint = "tips/list"
         response = self.get(endpoint, params)
-        return response.json()
+        if str(response.status_code) == "200":
+            return response.json()
+        return None
 
     def get_tags(self,params):
         endpoint = "tags/list"
@@ -51,10 +53,25 @@ class TastyCoAPI():
         response = self.get(endpoint, params)
         return response.json()
     
+    def response_hook(self, response):
+            return response.json()
+
     def get(self, endpoint, params):
+        if not self.__session:
+            self.__session = FuturesSession()
+
         url = self.__base_url + endpoint
-        response = requests.request("GET", url, headers = self.__headers, params= params)
-        return response
+        future = self.__session.request("GET", url, headers = self.__headers, params= params)
+        data = future.result()
+
+        # start = time.time()
+        # response = requests.request("GET", url, headers = self.__headers, params= params)
+        # data = response
+        # end = time.time()
+        # dt = end - start
+        # print(f"RUNTIME\t {dt}")
+
+        return data
 
 client = TastyCoAPI()
 

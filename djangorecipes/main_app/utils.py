@@ -1,13 +1,12 @@
 '''
     Utility file for parsing TastyCo API results
 '''
-
+import json
 from . import tc_api
 
-def parse_recipe_detail(recipe):
-    nested_recipes = recipe.get("recipes")
-    if nested_recipes:
-        recipe = nested_recipes[0]
+# Helper function, parse recipe data from API for detailed views
+def helper_recipe_detail(recipe_api: dict) -> dict:
+    recipe = helper_nested_recipe(recipe_api)
 
     result = {
         "id" : recipe["id"],
@@ -27,19 +26,17 @@ def parse_recipe_detail(recipe):
     }
 
     for instruction in recipe["instructions"]:
-        result["instructions"].append(parse_instruction(instruction))
+        result["instructions"].append(helper_instructions(instruction))
     
-
     for component in recipe["sections"][0]["components"]:
-        result["ingredients"].append(parse_ingredient(component))
+        result["ingredients"].append(helper_ingredient(component))
         
     return result
 
+# Helper function, parse recipe data from API for summary views
+def helper_recipe_summary(recipe_api:dict) -> dict:
+    recipe = helper_nested_recipe(recipe_api)
 
-def parse_recipe_summary(recipe):
-    nested_recipes = recipe.get("recipes")
-    if nested_recipes:
-        recipe = nested_recipes[0]
     result = {
         "id" : recipe["id"],
         "name": recipe["name"],
@@ -53,11 +50,20 @@ def parse_recipe_summary(recipe):
 
     return result
 
-def parse_instruction(instruction):
+# Helper function, parse recipe data if nested in results[i]
+def helper_nested_recipe(recipe: dict) -> dict:
+    nested = recipe.get("recipes")
+    if nested:
+        return nested[0]
+    return recipe
+
+# Helper function, parse instruction data from API 
+def helper_instructions(instruction: dict) -> str:
     res = str(instruction["position"]) + ". " + instruction["display_text"]
     return res
 
-def parse_ingredient(recipe_component):
+# Helper function, parse ingredients data from APi
+def helper_ingredient(recipe_component: dict) -> dict:
     ingredient = recipe_component["ingredient"]
     measurement = recipe_component["measurements"][0]
 
@@ -67,22 +73,27 @@ def parse_ingredient(recipe_component):
         "quantity"  : measurement["quantity"],
         "measurement" : measurement["unit"]["abbreviation"]
     }
+
     return res
 
-def parse_response(response):
-    result = response.get("results")
-    if result:
-        return result
+# Helper function, parse raw API response and returns relevant data
+def helper_response(response: dict) -> dict:
+    results = response.get("results")
+    if results:
+        return results
     else:
         return response
 
-def parse_recipes_list(recipes, mode="s"):
+# Parse response from API endpoint, recipes/list
+def parse_recipes_list(response: dict, mode:str="s") -> list:
+    recipes = helper_response(response)
+    print()
     func = None
     
     if mode == "d":
-        func = parse_recipe_detail
+        func = helper_recipe_detail
     elif mode == "s":
-        func = parse_recipe_summary
+        func = helper_recipe_summary
     
 
     for i in range(len(recipes)):
@@ -90,76 +101,72 @@ def parse_recipes_list(recipes, mode="s"):
     
     return recipes
 
-def parse_recipes_auto_complete(response, mode):
-    result = parse_response(response)
-
-    return result[0]
-
-def parse_recipes_similar(response, mode):
-    pass
-
-def parse_recipes_details(response, mode):
+# Parse response from API endpoint, recipes/get-more-info
+def parse_recipes_details(response: dict, mode: str) -> dict:
     func = None
     
     if mode == "d":
-        func = parse_recipe_detail
+        func = helper_recipe_detail
     elif mode == "s":
-        func = parse_recipe_summary
+        func = helper_recipe_summary
 
     return func(response)
 
-def parse_tips(response,mode):
-    pass
+# Parse response from API endpoint, recipes/autocomplete
+def parse_recipes_auto_complete(response: dict) -> dict:
+    result = helper_response(response)
+    return result[0]
 
-def parse_tags(response, type):
-    return [tag for tag in response["results"] if tag["type"] == type]        
-
-def get_all_tag_types():
-    p = {}
-    response = tc_api.client.get_tags(p)
-    tags_list = {}
-
-    for tag in response["results"]:
-        tag_type = tag["type"]
-        
-        if tags_list.get(tag_type):
-            continue
-        tags_list[tag_type] = 1
-
-    return tags_list
-
-def get_tag_values(tag_type: str):
-    p = {}
-    response = tc_api.client.get_tags(p)
-    tag_values_list = {}
-
-    for tag in response["results"]:
-        if tag["type"] != tag_type:
-            continue
-        
-        if tag["name"] in tag_values_list:
-            continue
-        
-        tag_values_list[tag["name"]] = tag["display_name"]
-
-    return tag_values_list
+# Parse response from API endpoint, recipes/list-similarities
+def parse_recipes_similar(response: dict, mode: str) -> list:
+    recipes = helper_response(response)
+    func = None
     
-    pass
+    if mode == "d":
+        func = helper_recipe_detail
+    elif mode == "s":
+        func = helper_recipe_summary
+    
+    for i in range(len(recipes)):
+        recipes[i] = func(recipes[i])
 
-def parse_feeds(responsee, mode):
-    pass
+    return recipes
 
+# Helper function, parse API tip format for browser
+def helper_tip(tip: dict) -> dict:
+    tip_result = {
+        "text" : tip.get("tip_body"),
+        "author_name" : tip.get("author_name"),
+        "author_username" : tip.get("author_username"),
+        "upvotes" : tip.get("upvotes_total")
 
-
-
-
-if __name__ == "__main__":
-    p = {
-        "recipe_id":"8138" #REQUIRED
     }
+    return tip_result
 
-    recipe = tc_api.client.get_recipes_details(p)
+# Parse response from API endpoint, tips/list
+def parse_tips(response: dict) -> list:
+    tips_list = response.get("results")
+    res = []
+    for tip in tips_list:
+        res += [helper_tip(tip)]
+    return res
 
-    data = parse_recipe_detail(recipe)
-    print(data)
+# Return all tag objects for recipes within the API
+def get_all_tags() -> dict:
+    with open("tags", "r") as f:
+        tags_dict = json.loads(f.read())
+    return tags_dict
 
+# Return all keys for tags within the API
+def get_all_tag_types() -> list:
+    tags = get_all_tags()
+    return tags.keys()
+
+# Get all tags of a specific type
+def get_tags_by_type(tag_type: str, value: str) -> list:
+    tags = get_all_tags()[tag_type]
+
+    res = []
+    for tag in tags:
+        res += [tag[value]]
+    return res

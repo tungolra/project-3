@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from importlib import reload
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -118,6 +119,46 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     model = MealPlans
     success_url = '/meal-plans/'
 
+@login_required
+def add_recipe_to_meal_plan(request,recipe_id):
+    mealplan_id = request.POST['mealplan']
+    mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
+    try:
+        #Check if mealplan has this recipe
+        recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
+        print("Mealplan already has this recipe.")
+    except:
+        print("Mealplan does not have this recipe!")
+        try:
+            #Check if recipe exists
+            recipe = Recipes.objects.get(recipe_id=recipe_id)
+        except:
+            recipe = Recipes.objects.create(recipe_id=recipe_id)
+        mealplan_obj.recipes.add(recipe)
+    return redirect('recipe_detail', recipe_id=recipe_id)
+
+def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
+    mptest = MealPlans.objects.get(pk=mealplan_id).recipes.all().values()
+    allrecipes = Recipes.objects.all().values()
+    # recipe = Recipes.objects.get(recipe_id=recipe_id)
+    # mealplan = MealPlans.objects.get(pk=mealplan_id)
+    # print(mealplan.recipes.get(recipe_id=recipe_id))
+    # print ("before delete - recipes in mealplan: ", mptest )
+    # print ("before delete - recipes in DB: ", allrecipes)
+    mealplan_recipe = MealPlans.objects.get(pk=mealplan_id)
+    mealplan_recipe.recipes.remove(recipe_id)
+    print(mealplan_recipe.recipes.all()[1])
+    mealplan_recipe.save()
+    print(mealplan_recipe.recipes.all().values())
+
+    # mealplan.recipes_set.remove(recipe)
+    # recipe.entry_set.remove(mealplan)
+    # print ("after delete - recipes in mealplan: ", mptest)
+    # print ("after delete - recipes in DB: ", allrecipes)
+
+
+    return redirect ('meal_plan_detail', mealplan_id=mealplan_id)
+
 """CRUD for Recipes"""
 def toggle_save_recipe(request, recipe_id):
     try:
@@ -166,24 +207,9 @@ def add_recipe(request, recipe_id):
 
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
-@login_required
-def add_recipe_to_meal_plan(request,recipe_id):
-    mealplan_id = request.POST['mealplan']
-    mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
-    try:
-        #Check if mealplan has this recipe
-        recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
-        print("Mealplan already has this recipe.")
-    except:
-        print("Mealplan does not have this recipe!")
-        try:
-            #Check if recipe exists
-            recipe = Recipes.objects.get(recipe_id=recipe_id)
-        except:
-            recipe = Recipes.objects.create(recipe_id=recipe_id)
-        mealplan_obj.recipes.add(recipe)
-    return redirect('recipe_detail', recipe_id=recipe_id)
 
+
+@login_required
 def delete_recipe(request, recipe_id):
     Recipes.objects.filter(recipe_id=recipe_id).delete()
     return redirect("recipe_index")

@@ -5,6 +5,7 @@
   <div>
     <h2>
       {{meal_plan.title}}
+
       <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
       <a href="{% url 'meal_plan_delete' meal_plan.id %}" class="btn">Delete</a>
     </h2>
@@ -12,6 +13,11 @@
   <h5>(Recipes for this meal plan)</h5>
   <div class="rec-cat">
     {%for recipe in recipe_collection%}
+    <a href="{% url 'delete_recipe_from_meal_plan' recipe.id meal_plan.id %}"
+    ><span class="material-symbols-outlined" style="position: inherit">
+      delete
+    </span>(delete {{recipe.name}})</a
+  >
     <a href="{% url 'recipe_detail' recipe.id%}"
       ><div class="rec-cat-cont">
         <img src="{{recipe.image_url}}" />

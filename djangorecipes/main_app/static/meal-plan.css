@@ -28,15 +28,21 @@ a.button:hover {
 .header-div {
   object-fit: cover;
 }
-.card-content {
-  border: 1px solid black;
-}
 .card {
+  padding: 5px !important;
+  margin: 0px;
   border-radius: 10px;
   position: relative;
   top: 20px;
-  display: flex;
   border: 2px black solid;
-  padding: 5px;
   border-radius: 10px;
+  object-fit: contain;
+}
+.meal-plan-imgs {
+  object-fit: fill;
+  width: 100px;
+  height: 100px;
+}
+.brush-underline {
+  margin: 10px;
 }

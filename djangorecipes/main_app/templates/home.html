@@ -3,15 +3,14 @@
   <a href="{% url 'recipe_detail' data.4.id %}"
     ><div class="header-img">
       <img src="{{ data.4.image_url}}" />
+      <div class="feature-recipe-link">
+        <h5>WHAT'S HOT</h5>
+        <h2>{{ data.4.name}}</h2>
+      </div>
     </div>
   </a>
   <div class="main-alt">
-    <a href="{% url 'recipe_detail' data.4.id %}"
-      ><div class="feature-recipe-link">
-        <h5>WHAT'S HOT</h5>
-        <h2>{{ data.4.name}}</h2>
-      </div></a
-    >
+    <a href="{% url 'recipe_detail' data.4.id %}"></a>
     <div class="carousel">
       <div class="brush-underline">
         <h4>EXPLORE</h4>

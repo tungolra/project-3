@@ -143,7 +143,7 @@ def random_recipe(request):
     "size" : "20",
     }
     response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
+    data = utils.parse_recipes_list(response, "s")
     collect_ids = []
     for idx, item in enumerate(data):
         collect_ids.append(data[idx]['id'])

@@ -1,0 +1,28 @@
+.brush_underline > img {
+  visibility: hidden;
+}
+.brush-underline:hover > img {
+  visibility: visible;
+}
+.header-div {
+  object-fit: cover;
+}
+.card {
+  position: relative;
+  object-fit: contain;
+  text-align: left;
+}
+.meal-plan-imgs {
+  object-fit: fill;
+  width: 100px;
+  height: 100px;
+}
+.brush-underline {
+  margin: 10px;
+}
+.meal-plan-title {
+  padding: 10px;
+}
+.btn {
+  margin: 20px;
+}

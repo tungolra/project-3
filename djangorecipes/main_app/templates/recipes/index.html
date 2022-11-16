@@ -1,13 +1,47 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+/>
 <div class="all">
-  <div class="main">
-    <h4>Your Recipes</h4>
-    <div class="rec-cat" style="border: 1px solid black">
-      <div class="rec-cat-cont" style="border: 1px solid black">
-        <img src="" />
-        <p>details...</p>
+<h4>Your Saved Recipes</h4>
+
+<div class="rec-cat">
+  {%for recipe in recipe_collection%}
+  <a href="{% url 'recipe_detail' recipe.id%}"
+    ><div class="rec-cat-cont" style="border: 1px solid black">
+      <!-- <a href="{% url 'delete_recipe' recipe.id %}"
+        ><span class="material-symbols-outlined" style="position: relative">
+          delete
+        </span></a
+      > -->
+      <img src="{{recipe.image_url}}" />
+      <h6>{{ recipe.name }}</h6>
+      <div class="info">
+        <div class="key">Reviews:</div>
+        <div class="value">{{recipe.rating.total_count}}</div>
       </div>
-    </div>
+      <div class="info">
+        <div class="key">Rating:</div>
+        <div class="value">{{recipe.rating.score|floatformat}}</div>
+      </div>
+      {% if recipe.time == None%}
+      <div class="info">
+        <div class="key">Cook Time:</div>
+        <div class="value">30-45min</div>
+      </div>
+      {% else %}
+      <div class="info">
+        <div class="key">Cook Time:</div>
+        <div class="value">{{recipe.time}}min</div>
+      </div>
+      {% endif %}
+      <div class="info">
+        <div class="key">Servings:</div>
+        <div class="value">{{ recipe.num_servings}}</div>
+      </div>
+    </div></a>
   </div>
+  {%endfor%}
 </div>
 {% endblock %}

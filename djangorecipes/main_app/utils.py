@@ -65,14 +65,20 @@ def helper_instructions(instruction: dict) -> str:
 # Helper function, parse ingredients data from APi
 def helper_ingredient(recipe_component: dict) -> dict:
     ingredient = recipe_component["ingredient"]
-    measurement = recipe_component["measurements"][0]
 
+     
     res = {
         "name"  : ingredient["name"],
         "id"    : ingredient["id"],
-        "quantity"  : measurement["quantity"],
-        "measurement" : measurement["unit"]["abbreviation"]
+        "quantity" : "As much as you want of",
+        "measurement" : ""
+
     }
+
+    if len(recipe_component["measurements"]) > 0:
+        measurement = recipe_component["measurements"][0]
+        res["quantity"] = measurement["quantity"]
+        res["measurement"] = measurement["unit"]["abbreviation"]
 
     return res
 
@@ -153,7 +159,7 @@ def parse_tips(response: dict) -> list:
 
 # Return all tag objects for recipes within the API
 def get_all_tags() -> dict:
-    with open("tags", "r") as f:
+    with open("./tags", "r") as f:
         tags_dict = json.loads(f.read())
     return tags_dict
 

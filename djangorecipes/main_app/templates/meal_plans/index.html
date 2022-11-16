@@ -1,8 +1,41 @@
-{% extends 'base.html'%} {% block content %}
 <div class="all">
-  <h1>All Meal Plans</h1>
-  <a href="{% url 'meal_plan_new' %}">Add New Meal Plan</a>
+{% extends 'base.html'%}{% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
+<link rel="stylesheet" href="{% static 'style2.css' %}" />
+<div class="cover"></div>
+>
+<div class="header-div"></div>
+<h5>All Meal Plans</h5>
+<div class="button-container">
+  <a
+    class="btn waves-effect waves-custom waves-light"
+    href="{% url 'meal_plan_new' %}"
+    >Add New Meal Plan</a
+  >
   {% for plan in meal_plans %}
-  <a href="{% url 'meal_plan_detail' plan.id %}"><div>{{plan.title}}</div></a>
 </div>
-{% endfor %} {% endblock %}
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card z-depth-0">
+      <div class="card-content">
+        <div>
+          <a href="{% url 'meal_plan_detail' plan.id %}"
+            ><div class="meal-plan-title">
+              {{plan.title}} <span>{{plan.id}}</span>
+            </div>
+          </a>
+        </div>
+        <div class="meal-plan-imgs">
+          <img class="meal-plan-imgs" src="https://i.imgur.com/btbBlMF.jpeg" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="brush-underline">
+    <img src="{% static 'images/underline.png'%}" />
+</div> -->
+  <br />
+  {% endfor %} {% endblock %}
+</div>
+</div>
+

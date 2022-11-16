@@ -370,6 +370,8 @@ h4 > .cust-text {
 }
 .logo-blk {
   visibility: visible;
+  position: absolute;
+  left: 50px;
 }
 .logo-wht {
   visibility: hidden;

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,7 @@ from .models import MealPlans, Recipes
 from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
+import random
 
 def home(request):
     p = {
@@ -57,20 +59,23 @@ def home(request):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-    
+
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
-def example(request):
-    p = {
-        "from" : "0",
-        "size" : "2",
-        "tags" : "american"
-    }
-    
-    response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
+# def example(request):
+#     p = {
+#         "from" : "0",
+#         "size" : "2",
+#         "tags" : "american"
+#     }
+#     response = tc_api.client.get_recipes_list(p)
+#     data = utils.parse_recipes_list(response["results"], "s")
 
-    return render(request, "example.html", {"data" : data} )
+    # response_tags = utils.get_all_tag_types()
+    # print(f"Response tags\n{response_tags}")
+    # cuisine_tag_values = utils.get_tag_values("cuisine")
+    # print(f"Cusine Tags\n{cuisine_tag_values}")
+    # return render(request, "example.html", {"data" : data} )
 
 """Meal Plans"""
 @login_required
@@ -132,34 +137,82 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
+def random_recipe(request):
+    p = {
+    "from" : "0",
+    "size" : "20",
+    }
+    response = tc_api.client.get_recipes_list(p)
+    data = utils.parse_recipes_list(response["results"], "s")
+    collect_ids = []
+    for idx, item in enumerate(data):
+        collect_ids.append(data[idx]['id'])
+    recipe_id = collect_ids[random.randint(0, len(collect_ids))]
+    return recipe_detail(request, recipe_id)
 
-def recipe_index(request): 
-    return render(request, 'recipes/index.html')
+@login_required
+def recipe_index(request):
+    recipes = Recipes.objects.all().values()
+    recipe_collection = []
+    for idx, item in enumerate(recipes): 
+        recipe_id = recipes[idx]['recipe_id']
+        p = {
+            "id":f"{recipe_id}"
+        }
+        response = tc_api.client.get_recipes_details(p)
+        data = utils.parse_recipes_details(response, "s")
+        recipe_collection.append(data)
+    unique = []
+    [unique.append(recipe) for recipe in recipe_collection if recipe not in unique]
+    return render(request, 'recipes/index.html', {'recipe_collection': unique})
 
+@login_required
 def add_recipe(request, recipe_id):
-
     mealplans = MealPlans.objects.filter(user=request.user)
     p = {
-        "id":f"{recipe_id}" #REQUIRED
+        "id":f"{recipe_id}"
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
 
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
+@login_required
 def add_recipe_to_meal_plan(request, recipe_id):
     mealplan_id = request.POST['mealplan']
-    # add guard for existing recipes in DB
-    new_recipe = Recipes.objects.create(recipe_id = recipe_id)
-    MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+    recipeDB = Recipes.objects.all().values()
+
+        ## if recipe already exists in the data base, don't create a new recipe instance
+    # if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
+    #     print("hit first if")
+    #     return HttpResponse("This recipe is already in your meal plan!")
+    # for idx, item in enumerate(recipeDB):
+    #     if recipe_id == recipeDB[idx]['recipe_id']:
+    #         print("hit second if")
+    #         MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
+    #         break
+
+            
+        ## if recipe already exists in the meal plan, add prompt "already added to meal plan"
+        # else:
+        #     print("hit nested else")
+        # else: 
+        #     print("else")
+        # ## if recipe isn't in recipe db and it's not in the meal plan, create and add
+        #     new_recipe = Recipes.objects.create(recipe_id = recipe_id)
+        #     MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(new_recipe)
+    if MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.filter(recipe_id__contains={'recipe_id': recipe_id}):
+        MealPlans.objects.get(user=request.user, id=mealplan_id).recipes.add(recipe_id)
+
     return redirect('recipe_detail', recipe_id=recipe_id)
 
-# def recipe_cuisine_index(request): 
-#     return render(request, 'recipes/cuisine_index.html')
+def delete_recipe(request, recipe_id):
+    MealPlans.objects.get(user=request.user)
+    redirect("")
 
 def recipe_detail(request, recipe_id):
     p = {
-        "id":f"{recipe_id}" #REQUIRED
+        "id":f"{recipe_id}" 
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")

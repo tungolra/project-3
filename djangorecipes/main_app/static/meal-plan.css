@@ -1,18 +1,3 @@
-/* .button-container {
-  padding: 5px;
-  border-radius: 10px;
-  max-width: fit-content;
-  text-align: center;
-  position: relative;
-  top: 10px;
-  left: 20px;
-}
-a.button:hover {
-  color: white;
-}
-.button-container:hover {
-  background-color: black;
-} */
 .brush_underline > img {
   visibility: hidden;
 }
@@ -23,13 +8,9 @@ a.button:hover {
   object-fit: cover;
 }
 .card {
-  padding: 5px !important;
-  margin: 0px;
-  border-radius: 10px;
   position: relative;
-  top: 20px;
-  border-radius: 10px;
   object-fit: contain;
+  text-align: left;
 }
 .meal-plan-imgs {
   object-fit: fill;
@@ -38,4 +19,10 @@ a.button:hover {
 }
 .brush-underline {
   margin: 10px;
+}
+.meal-plan-title {
+  padding: 10px;
+}
+.btn {
+  margin: 20px;
 }

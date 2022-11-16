@@ -15,6 +15,7 @@ urlpatterns = [
     #temp start
     # path('recipe/', views.recipe_view, name="recipe_view"),
     #temp end
+    path('recipe/<int:recipe_id>/save', views.save_recipe, name='save_recipe'),
     path('recipe/<int:recipe_id>/add', views.add_recipe, name='add_recipe'),
     path('recipe/<int:recipe_id>/add-to-mealplan/', views.add_recipe_to_meal_plan, name='add_recipe_to_meal_plan'),
     path('recipe/index/', views.recipe_index, name="recipe_index"),

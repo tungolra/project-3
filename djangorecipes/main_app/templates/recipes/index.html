@@ -8,13 +8,13 @@
 
 <div class="rec-cat">
   {%for recipe in recipe_collection%}
+  <a href="{% url 'delete_recipe' recipe.id %}"
+    ><span class="material-symbols-outlined" style="position: inherit">
+      delete
+    </span>(delete {{recipe.name}})</a
+  >
   <a href="{% url 'recipe_detail' recipe.id%}"
     ><div class="rec-cat-cont" style="border: 1px solid black">
-      <!-- <a href="{% url 'delete_recipe' recipe.id %}"
-        ><span class="material-symbols-outlined" style="position: relative">
-          delete
-        </span></a
-      > -->
       <img src="{{recipe.image_url}}" />
       <h6>{{ recipe.name }}</h6>
       <div class="info">

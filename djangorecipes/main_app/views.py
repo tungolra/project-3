@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -17,10 +16,8 @@ def home(request):
         "from" : "938",
         "size" : "12",
     }
-
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response)
-
     cuisine_tags_values = utils.get_tags_by_type("cuisine", "display_name")
 
     """
@@ -54,28 +51,12 @@ def home(request):
     # response_autocomplete = tc_api.client.get_recipes_auto_complete(p_autocomplete)
     # data_autocomplete = utils.parse_recipes_auto_complete(response_autocomplete)
 
-
     for idx, item in enumerate(data):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-
+    #PASS IN TOP-RATED RECIPES INSTEAD OF FIRST N FROM LIST
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
-
-# def example(request):
-#     p = {
-#         "from" : "0",
-#         "size" : "2",
-#         "tags" : "american"
-#     }
-#     response = tc_api.client.get_recipes_list(p)
-#     data = utils.parse_recipes_list(response["results"], "s")
-
-    # response_tags = utils.get_all_tag_types()
-    # print(f"Response tags\n{response_tags}")
-    # cuisine_tag_values = utils.get_tag_values("cuisine")
-    # print(f"Cusine Tags\n{cuisine_tag_values}")
-    # return render(request, "example.html", {"data" : data} )
 
 """Meal Plans"""
 @login_required
@@ -136,7 +117,40 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     model = MealPlans
     success_url = '/meal-plans/'
 
+@login_required
+def add_recipe_to_meal_plan(request,recipe_id):
+    mealplan_id = request.POST['mealplan']
+    mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
+    try:
+        #Check if mealplan has this recipe
+        recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
+        print("Mealplan already has this recipe.")
+    except:
+        print("Mealplan does not have this recipe!")
+        try:
+            #Check if recipe exists
+            recipe = Recipes.objects.get(recipe_id=recipe_id)
+        except:
+            recipe = Recipes.objects.create(recipe_id=recipe_id)
+        mealplan_obj.recipes.add(recipe)
+    return redirect('recipe_detail', recipe_id=recipe_id)
+
+def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
+    mealplan = MealPlans.objects.get(pk=mealplan_id)
+    recipe = Recipes.objects.get(recipe_id=recipe_id)
+    mealplan.recipes.remove(recipe)
+    return redirect ('meal_plan_detail', mealplan_id=mealplan_id)
+
 """CRUD for Recipes"""
+def toggle_save_recipe(request, recipe_id):
+    try:
+        print("This recipe is already in the DB!")
+        Recipes.objects.get(recipe_id=recipe_id)
+    except:
+        print("This recipe not included in Recipes DB")
+        Recipes.objects.create(recipe_id=recipe_id)
+    return redirect('recipe_detail', recipe_id=recipe_id)
+
 def random_recipe(request):
     p = {
     "from" : "0",
@@ -162,9 +176,7 @@ def recipe_index(request):
         response = tc_api.client.get_recipes_details(p)
         data = utils.parse_recipes_details(response, "s")
         recipe_collection.append(data)
-    unique = []
-    [unique.append(recipe) for recipe in recipe_collection if recipe not in unique]
-    return render(request, 'recipes/index.html', {'recipe_collection': unique})
+    return render(request, 'recipes/index.html', {'recipe_collection': recipe_collection})
 
 @login_required
 def add_recipe(request, recipe_id):
@@ -177,32 +189,12 @@ def add_recipe(request, recipe_id):
 
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
+
+
 @login_required
-def add_recipe_to_meal_plan(request,recipe_id):
-    mealplan_id = request.POST['mealplan']
-
-    mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
-    
-
-    try:
-        #Check if mealplan has this recipe
-        recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
-        print("Mealplan already has this recipe.")
-    except:
-        print("Mealplan does not have this recipe!")
-        try:
-            #Check if recipe exists
-            recipe = Recipes.objects.get(recipe_id=recipe_id)
-        except:
-            recipe = Recipes.objects.create(recipe_id=recipe_id)
-
-        mealplan_obj.recipes.add(recipe)
-    
-    return redirect('recipe_detail', recipe_id=recipe_id)
-
 def delete_recipe(request, recipe_id):
-    MealPlans.objects.get(user=request.user)
-    redirect("")
+    Recipes.objects.filter(recipe_id=recipe_id).delete()
+    return redirect("recipe_index")
 
 def recipe_detail(request, recipe_id):
     p = {

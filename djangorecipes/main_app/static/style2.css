@@ -13,7 +13,6 @@ nav {
   background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
-  /* visibility: hidden; */
 }
 
 .header-img {
@@ -100,6 +99,7 @@ i {
 
 .logo {
   max-width: 100%;
+  margin-top: 10px;
 }
 
 .author {
@@ -365,19 +365,18 @@ h4 > .cust-text {
   visibility: visible;
 }
 .logo {
-  max-width: 100%;
+  width: 100%;
   margin-top: 10px;
 }
 .logo-blk {
+  display: block;
+  margin: auto;
   visibility: visible;
   position: absolute;
   left: 50px;
 }
 .logo-wht {
   visibility: hidden;
-}
-.logo > img {
-  margin-top: 10px;
 }
 .style2 {
   visibility: visible;

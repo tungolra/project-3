@@ -113,7 +113,7 @@ def parse_recipes_details(response: dict, mode: str) -> dict:
     return func(response)
 
 # Parse response from API endpoint, recipes/autocomplete
-def parse_recipes_auto_complete(response: dict, mode: str) -> dict:
+def parse_recipes_auto_complete(response: dict) -> dict:
     result = helper_response(response)
     return result[0]
 

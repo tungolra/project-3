@@ -1,10 +1,4 @@
-a.button {
-  font-weight: bold;
-  color: black;
-  text-align: center;
-}
-.button-container {
-  border: 2px black solid;
+/* .button-container {
   padding: 5px;
   border-radius: 10px;
   max-width: fit-content;
@@ -18,7 +12,7 @@ a.button:hover {
 }
 .button-container:hover {
   background-color: black;
-}
+} */
 .brush_underline > img {
   visibility: hidden;
 }

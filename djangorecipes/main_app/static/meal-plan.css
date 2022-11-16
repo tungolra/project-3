@@ -28,7 +28,6 @@ a.button:hover {
   border-radius: 10px;
   position: relative;
   top: 20px;
-  border: 2px black solid;
   border-radius: 10px;
   object-fit: contain;
 }

@@ -5,7 +5,11 @@
 <div class="header-div"></div>
 <h5>All Meal Plans</h5>
 <div class="button-container">
-  <a class="button" href="{% url 'meal_plan_new' %}">Add New Meal Plan</a>
+  <a
+    class="btn waves-effect waves-custom waves-light"
+    href="{% url 'meal_plan_new' %}"
+    >Add New Meal Plan</a
+  >
   {% for plan in meal_plans %}
 </div>
 <div class="row">

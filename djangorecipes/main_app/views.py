@@ -60,6 +60,24 @@ def home(request):
     #PASS IN TOP-RATED RECIPES INSTEAD OF FIRST N FROM LIST
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
+def recipe_cuisine_index(request, cuisine_tag):
+    p = {
+        "from" : random.randrange(9000),
+        "size" : "12",
+        "tags" : str(cuisine_tag)
+        
+    }
+
+    response = tc_api.client.get_recipes_list(p)
+    recipes = utils.parse_recipes_list(response)
+
+    data = {
+        'recipes' : recipes,
+        'cuisine' : cuisine_tag
+    }
+
+    return render(request, 'recipes/cuisine_index.html', data)
+
 """Meal Plans"""
 @login_required
 def meal_plan_index(request): 

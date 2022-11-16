@@ -70,7 +70,7 @@ def helper_ingredient(recipe_component: dict) -> dict:
     res = {
         "name"  : ingredient["name"],
         "id"    : ingredient["id"],
-        "quantity" : "You decide!",
+        "quantity" : "As much as you want of",
         "measurement" : ""
 
     }

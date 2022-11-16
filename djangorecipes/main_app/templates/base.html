@@ -28,13 +28,19 @@
     </script>
   </head>
   <body>
-    <nav>
+    <nav class="z-depth-0">
       <div class="nav-wrapper">
         <a href="#" data-target="slide-out" class="sidenav-trigger"
           ><i class="material-icons">menu</i></a
         >
-        <a href="/" class="logo"
+        <!-- <a href="#" data-target="slide-out" class="sidenav-trigger style2"
+        ><i class="material-icons">menu</i></a
+      > -->
+        <a href="/" class="logo logo-wht"
           ><img src="{% static 'images/logo-wht.png'%}" alt=""
+        /></a>
+        <a href="/" class="logo logo-blk"
+          ><img src="{% static 'images/logo-blk.png'%}" alt=""
         /></a>
         <ul class="right">
           {% if user.is_authenticated %}
@@ -86,16 +92,16 @@
           >
         </div>
       </li>
-      <li>
-        <a href="#!">All Recipes</a>
-      </li>
       {% if user.is_authenticated %}
+      <li>
+        <a href="{% url 'recipe_index' %}">My Recipes</a>
+      </li>
       <li>
         <a href="/meal-plans/">My Meal Plans</a>
       </li>
       {% else %} {%endif%}
       <li><a href="#!">Cuisines</a></li>
-      <li><a href="#!">Surprise Me!</a></li>
+      <li><a href="{% url 'random_recipe' %}">Surprise Me!</a></li>
     </ul>
     <main class="container">{% block content %} {% endblock %}</main>
   </body>

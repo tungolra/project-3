@@ -1,16 +1,14 @@
 {% extends 'base.html'%} {% block content %}
-<div class="all">
-  <div class="main">
-    <h2>Create New Meal Plan</h2>
-    <form action="{% url 'meal_plan_create' %}" method="post">
-      {% csrf_token %}
-      <br />
-      {{ form.as_table }}
+<div class="main">
+  <h2>Create New Meal Plan</h2>
+  <form action="{% url 'meal_plan_create' %}" method="post">
+    {% csrf_token %}
+    <br />
+    {{ form.as_table }}
 
-      <button class="btn waves-effect waves-light" type="submit" name="action">
-        Submit!
-      </button>
-    </form>
-  </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Submit!
+    </button>
+  </form>
 </div>
 {% endblock %}

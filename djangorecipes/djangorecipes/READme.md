@@ -1,28 +1,40 @@
 <!-- logo here -->
-
 <!-- - app title -->
-# Culinarian
+![image](/images/logo-wht.png)
 
-### Simplified Meal Prep
+### *Get Cooking.* => [Culinarian](https://culinarian-sei55.herokuapp.com/)
+<sub>Skip the autobiography and get cooking.</sup>
+____
+### Why this?
+
+*In Canada people waste an estimated [$30 billion](https://www.cbc.ca/news/business/canada-food-waste-1.3813965) of food every year.*
+<br>
+*The average Canadian spends almost [$3,000 ](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110012501)every year on dining out.* 
+<br>
+By creating one app to quickly find and save delicious recipes
 
 ### Try it out!
 
-<!-- - screenshots/gif -->
-gif here
-link to heroku app here
-
 <!-- - getting started -->
-### Instructions
-- [Culinarian](#)
+<!-- ### Instructions -->
+<!-- gif here -->
+1. Launch Culinarian [here](https://culinarian-sei55.herokuapp.com/).
+2. Browse over __ recipes from Tasty API.
+3. Search recipes by ingredients, cuisine or ___ !
+3. View recipes, ingredients, instructions, reviews, images, and nutritional information all on one page, without the prologue!
+4. Save recipes to customizable meal plans. 
+5. Export a grocery list containing all the ingredients needed for your meal plan.
+6. Get cooking!
 
 <!-- - technologies used -->
 ### Technologies
 - Python
 - Django
-- [Tasty API](#https://rapidapi.com/apidojo/api/tasty/)
+- [Tasty API](https://rapidapi.com/apidojo/api/tasty/)
 
 <!-- future enhancements -->
 ### What's Next?
 
-### Unsorted
+### Deliverables
+
 - [User Stories](#https://www.notion.so/f802231124e345e38edb4db5b1e4b008?v=12e1bfb756a147a88750053b30b02be1])

@@ -169,10 +169,7 @@ def add_recipe(request, recipe_id):
 @login_required
 def add_recipe_to_meal_plan(request,recipe_id):
     mealplan_id = request.POST['mealplan']
-
     mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
-    
-
     try:
         #Check if mealplan has this recipe
         recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
@@ -184,14 +181,12 @@ def add_recipe_to_meal_plan(request,recipe_id):
             recipe = Recipes.objects.get(recipe_id=recipe_id)
         except:
             recipe = Recipes.objects.create(recipe_id=recipe_id)
-
         mealplan_obj.recipes.add(recipe)
-    
     return redirect('recipe_detail', recipe_id=recipe_id)
 
 def delete_recipe(request, recipe_id):
-    MealPlans.objects.get(user=request.user)
-    redirect("")
+    Recipes.objects.filter(recipe_id=recipe_id).delete()
+    return redirect("recipe_index")
 
 def recipe_detail(request, recipe_id):
     p = {

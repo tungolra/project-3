@@ -222,10 +222,6 @@ def get_all_tag_types() -> list:
     return tags.keys()
 
 # Get all tags of a specific type
-def get_tags_by_type(tag_type: str, value: str) -> list:
+def get_tags_by_type(tag_type: str) -> list:
     tags = get_all_tags()[tag_type]
-
-    res = []
-    for tag in tags:
-        res += [tag[value]]
-    return res
+    return tags

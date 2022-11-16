@@ -13,12 +13,14 @@ import random
 
 def home(request):
     p = {
-        "from" : "938",
+        "from" : random.randrange(9000),
         "size" : "12",
     }
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response)
-    cuisine_tags_values = utils.get_tags_by_type("cuisine", "display_name")
+    tags = utils.get_tags_by_type("cuisine")
+    cuisine_tags_values = [tag["display_name"] for tag in tags]
+
 
     """
         Usage for getting reviews

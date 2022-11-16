@@ -17,6 +17,8 @@ nav {
 
 .header-img {
   max-width: 100%;
+  position: relative;
+  top: -65px;
 }
 
 .header-img > img {
@@ -93,8 +95,14 @@ h4 {
   margin: 0 0 20px 0;
 }
 
-.main {
+.main,
+.main-alt {
   margin: 20px;
+}
+
+.main-alt {
+  position: relative;
+  top: -65px;
 }
 
 i {
@@ -392,5 +400,27 @@ h4 > .cust-text {
   .header-img {
     top: 0px;
     margin: 30px;
+  }
+  .main-alt {
+    top: 0px;
+  }
+  .sidenav {
+    transform: translateX(0%);
+    position: fixed;
+    width: 30vw;
+    max-width: 250px;
+  }
+
+  nav a.sidenav-trigger {
+    display: none;
+  }
+
+  .all {
+    margin-left: 250px;
+  }
+}
+@media only screen and (min-width: 993px) {
+  nav a.sidenav-trigger {
+    display: flex;
   }
 }

@@ -9,11 +9,12 @@ nav {
   background-color: transparent;
 }
 
-/* .nav-wrapper {
+.nav-wrapper {
   background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
-} */
+  /* visibility: hidden; */
+}
 
 .header-img {
   max-width: 100%;
@@ -375,4 +376,7 @@ h4 > .cust-text {
 }
 .logo > img {
   margin-top: 10px;
+}
+.style2 {
+  visibility: visible;
 }

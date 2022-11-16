@@ -371,3 +371,6 @@ h4 > .cust-text {
 .brush-underline:hover {
   visibility: visible;
 }
+.style2 {
+  visibility: hidden;
+}

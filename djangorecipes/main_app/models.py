@@ -15,8 +15,8 @@ class MealPlans(models.Model):
     recipes = models.ManyToManyField(Recipes)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'Collection Name: {self.title}'
+    # def __str__(self):
+    #     return f'Collection Name: {self.title}'
 
     def get_absolute_url(self):
         return reverse('details', kwargs={'mealplan_id': self.id})

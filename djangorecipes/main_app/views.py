@@ -17,9 +17,40 @@ def home(request):
     }
 
     response = tc_api.client.get_recipes_list(p)
-    data = utils.parse_recipes_list(response["results"], "s")
+    data = utils.parse_recipes_list(response)
 
     cuisine_tags_values = utils.get_tags_by_type("cuisine", "display_name")
+
+    """
+        Usage for getting reviews
+    """
+
+    # p_tips = {
+    #     "id" : "3562",
+    #     "size" : "3"
+    # }
+    # response_tips = tc_api.client.get_tips(p_tips)
+    # reviews = utils.parse_tips(response_tips)
+    # # print(reviews)
+
+    """
+        Usage for getting similar recipes
+    """
+    # p_similar = {
+    #     "recipe_id" : "3562"
+    # }
+    # response_similar = tc_api.client.get_recipes_similar(p_similar)
+    # data_similar = utils.parse_recipes_similar(response_similar, "s")
+    # print(data_similar)
+
+    p_autocomplete = {
+        "prefix" : "chicken soup"
+    }
+
+    response_autocomplete = tc_api.client.get_recipes_auto_complete(p_autocomplete)
+    data_autocomplete = utils.parse_recipes_auto_complete(response_autocomplete)
+    print(data_autocomplete)
+
 
     for idx, item in enumerate(data):
         if data[idx]['rating']['score']:

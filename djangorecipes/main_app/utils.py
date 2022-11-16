@@ -78,14 +78,16 @@ def helper_ingredient(recipe_component: dict) -> dict:
 
 # Helper function, parse raw API response and returns relevant data
 def helper_response(response: dict) -> dict:
-    result = response.get("results")
-    if result:
-        return result
+    results = response.get("results")
+    if results:
+        return results
     else:
         return response
 
 # Parse response from API endpoint, recipes/list
-def parse_recipes_list(recipes: dict, mode:str="s") -> list:
+def parse_recipes_list(response: dict, mode:str="s") -> list:
+    recipes = helper_response(response)
+    print()
     func = None
     
     if mode == "d":
@@ -113,22 +115,45 @@ def parse_recipes_details(response: dict, mode: str) -> dict:
 # Parse response from API endpoint, recipes/autocomplete
 def parse_recipes_auto_complete(response: dict, mode: str) -> dict:
     result = helper_response(response)
-
     return result[0]
 
-# TODO
 # Parse response from API endpoint, recipes/list-similarities
 def parse_recipes_similar(response: dict, mode: str) -> list:
-    pass
+    recipes = helper_response(response)
+    func = None
+    
+    if mode == "d":
+        func = helper_recipe_detail
+    elif mode == "s":
+        func = helper_recipe_summary
+    
+    for i in range(len(recipes)):
+        recipes[i] = func(recipes[i])
 
-# TODO
+    return recipes
+
+# Helper function, parse API tip format for browser
+def helper_tip(tip: dict) -> dict:
+    tip_result = {
+        "text" : tip.get("tip_body"),
+        "author_name" : tip.get("author_name"),
+        "author_username" : tip.get("author_username"),
+        "upvotes" : tip.get("upvotes_total")
+
+    }
+    return tip_result
+
 # Parse response from API endpoint, tips/list
-def parse_tips(response: dict,mode: str) -> list:
-    pass
+def parse_tips(response: dict) -> list:
+    tips_list = response.get("results")
+    res = []
+    for tip in tips_list:
+        res += [helper_tip(tip)]
+    return res
 
 # Return all tag objects for recipes within the API
 def get_all_tags() -> dict:
-    with open("tags.txt", "r") as f:
+    with open("tags", "r") as f:
         tags_dict = json.loads(f.read())
     return tags_dict
 

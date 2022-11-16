@@ -39,7 +39,9 @@ class TastyCoAPI():
     def get_tips(self,params):
         endpoint = "tips/list"
         response = self.get(endpoint, params)
-        return response.json()
+        if str(response.status_code) == "200":
+            return response.json()
+        return None
 
     def get_tags(self,params):
         endpoint = "tags/list"

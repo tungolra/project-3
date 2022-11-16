@@ -9,11 +9,11 @@ nav {
   background-color: transparent;
 }
 
-.nav-wrapper {
-  /* background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent); */
+/* .nav-wrapper {
+  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
-}
+} */
 
 .header-img {
   max-width: 100%;
@@ -364,15 +364,15 @@ h4 > .cust-text {
   visibility: visible;
 }
 .logo {
-    max-width: 100%;
-    margin-top: 10px;
-  }
-  .logo-blk {
-    visibility: hidden;
-  }
-  .logo-wht {
-    visibility: visible;
-  }
-  .logo > img {
-    margin-top: 10px;
-  }
+  max-width: 100%;
+  margin-top: 10px;
+}
+.logo-blk {
+  visibility: visible;
+}
+.logo-wht {
+  visibility: hidden;
+}
+.logo > img {
+  margin-top: 10px;
+}

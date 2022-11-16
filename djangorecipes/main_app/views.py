@@ -121,6 +121,7 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
 """CRUD for Recipes"""
 def save_recipe(request, recipe_id):
     try:
+        print("This recipe is already in the DB!")
         Recipes.objects.get(recipe_id=recipe_id)
     except:
         print("This recipe not included in Recipes DB")

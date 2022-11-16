@@ -138,25 +138,9 @@ def add_recipe_to_meal_plan(request,recipe_id):
     return redirect('recipe_detail', recipe_id=recipe_id)
 
 def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
-    mptest = MealPlans.objects.get(pk=mealplan_id).recipes.all().values()
-    allrecipes = Recipes.objects.all().values()
-    # recipe = Recipes.objects.get(recipe_id=recipe_id)
-    # mealplan = MealPlans.objects.get(pk=mealplan_id)
-    # print(mealplan.recipes.get(recipe_id=recipe_id))
-    # print ("before delete - recipes in mealplan: ", mptest )
-    # print ("before delete - recipes in DB: ", allrecipes)
-    mealplan_recipe = MealPlans.objects.get(pk=mealplan_id)
-    mealplan_recipe.recipes.remove(recipe_id)
-    print(mealplan_recipe.recipes.all()[1])
-    mealplan_recipe.save()
-    print(mealplan_recipe.recipes.all().values())
-
-    # mealplan.recipes_set.remove(recipe)
-    # recipe.entry_set.remove(mealplan)
-    # print ("after delete - recipes in mealplan: ", mptest)
-    # print ("after delete - recipes in DB: ", allrecipes)
-
-
+    mealplan = MealPlans.objects.get(pk=mealplan_id)
+    recipe = Recipes.objects.get(recipe_id=recipe_id)
+    mealplan.recipes.remove(recipe)
     return redirect ('meal_plan_detail', mealplan_id=mealplan_id)
 
 """CRUD for Recipes"""

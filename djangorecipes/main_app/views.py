@@ -119,7 +119,7 @@ class MealPlanDelete(LoginRequiredMixin, generic.DeleteView):
     success_url = '/meal-plans/'
 
 """CRUD for Recipes"""
-def save_recipe(request, recipe_id):
+def toggle_save_recipe(request, recipe_id):
     try:
         print("This recipe is already in the DB!")
         Recipes.objects.get(recipe_id=recipe_id)
@@ -153,9 +153,7 @@ def recipe_index(request):
         response = tc_api.client.get_recipes_details(p)
         data = utils.parse_recipes_details(response, "s")
         recipe_collection.append(data)
-    unique = []
-    [unique.append(recipe) for recipe in recipe_collection if recipe not in unique]
-    return render(request, 'recipes/index.html', {'recipe_collection': unique})
+    return render(request, 'recipes/index.html', {'recipe_collection': recipe_collection})
 
 @login_required
 def add_recipe(request, recipe_id):

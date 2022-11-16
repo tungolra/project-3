@@ -141,6 +141,15 @@ def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
     mealplan.recipes.remove(recipe)
     return redirect ('meal_plan_detail', mealplan_id=mealplan_id)
 
+def groceries_index(request, mealplan_id):
+    ## pass in recipes for the meal plan 
+    recipes = MealPlans.objects.get(pk=mealplan_id).recipes.all().values()
+    print (recipes)
+    ## collect ingredients
+    ## compile ingredients
+    ## pass in list
+    return render(request, 'meal_plans/groceries.html')
+
 """CRUD for Recipes"""
 def toggle_save_recipe(request, recipe_id):
     try:

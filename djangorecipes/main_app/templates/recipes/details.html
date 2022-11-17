@@ -78,7 +78,7 @@
       </ul>
     </div>
 
-    <div class="sim-ing">Show me recipes with similar ingredients</div>
+    <a href="{% url 'show_similar_index' recipe.id %}"><div class="sim-ing">Show me recipes with similar ingredients</div></a>
     <video width="320" height="240" controls>
       <source src="{{recipe.video_url}}" type="video/mp4">
 

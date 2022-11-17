@@ -229,6 +229,20 @@ def recipe_detail(request, recipe_id):
     data = utils.parse_recipes_details(response, "d")
     return render(request, "recipes/details.html", {"recipe":data})
 
+def show_similar_index(request, recipe_id):
+    search_params = {
+        'recipe_id': recipe_id
+    }
+    response = tc_api.client.get_recipes_similar(search_params)
+    recipes = utils.parse_recipes_list(response)
+   
+    for idx, item in enumerate(recipes):
+        if recipes[idx]['rating']['score']:
+            recipes[idx]['rating']['score'] = round(recipes[idx]['rating']['score'] * 100, 0)
+        recipes[idx]['rating']['total_count'] = recipes[idx]['rating']['count_positive'] + recipes[idx]['rating']['count_negative']
+ 
+    return render(request, 'recipes/recipe_list.html', {'recipes': recipes, 'title': 'Show me more...' })
+
 """OAuth Functions"""
 def signup(request):
     error_message = ''

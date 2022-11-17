@@ -1,4 +1,5 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
+<link rel="stylesheet" href="{% static 'style.css' %}" />
 <div class="all">
   <div class="header-img">
     <img src="{{ recipe.image_url }}" />
@@ -13,14 +14,16 @@
         >
       </div>
       <div>
-        <a href="{% url 'save_recipe' recipe.id%}"><i class="material-icons grey-text">favorite</i></a>
+        <a href="{% url 'save_recipe' recipe.id%}"
+          ><i class="material-icons grey-text">favorite</i></a
+        >
       </div>
       <div>
         <a href=""><i class="material-icons grey-text">share</i></a>
       </div>
     </div>
 
-  <h3>{{ recipe.name }}</h3>
+    <h3>{{ recipe.name }}</h3>
 
     <div class="summary">
       <div class="reviews">

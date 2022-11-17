@@ -9,40 +9,43 @@
 
   <div class="rec-cat">
     {%for recipe in recipe_collection%}
-    <a href="{% url 'delete_recipe' recipe.id %}"
-      ><span class="material-symbols-outlined" style="position: inherit">
-        delete </span
-      >(delete {{recipe.name}})</a
-    >
-    <a href="{% url 'recipe_detail' recipe.id%}"
-      ><div class="rec-cat-cont" style="border: 1px solid black">
-        <img src="{{recipe.image_url}}" />
-        <h6>{{ recipe.name }}</h6>
-        <div class="info">
-          <div class="key">Reviews:</div>
-          <div class="value">{{recipe.rating.total_count}}</div>
-        </div>
-        <div class="info">
-          <div class="key">Rating:</div>
-          <div class="value">{{recipe.rating.score|floatformat}}</div>
-        </div>
-        {% if recipe.time == None%}
-        <div class="info">
-          <div class="key">Cook Time:</div>
-          <div class="value">30-45min</div>
-        </div>
-        {% else %}
-        <div class="info">
-          <div class="key">Cook Time:</div>
-          <div class="value">{{recipe.time}}min</div>
-        </div>
-        {% endif %}
-        <div class="info">
-          <div class="key">Servings:</div>
-          <div class="value">{{ recipe.num_servings}}</div>
-        </div>
-      </div></a
-    >
+    <div class="card">
+      <a href="{% url 'recipe_detail' recipe.id%}"
+        ><div class="rec-cat-cont">
+          <img src="{{recipe.image_url}}" />
+          <h6>{{ recipe.name }}</h6>
+          <div class="info">
+            <div class="key">Reviews:</div>
+            <div class="value">{{recipe.rating.total_count}}</div>
+          </div>
+          <div class="info">
+            <div class="key">Rating:</div>
+            <div class="value">{{recipe.rating.score|floatformat}}</div>
+          </div>
+          {% if recipe.time == None%}
+          <div class="info">
+            <div class="key">Cook Time:</div>
+            <div class="value">30-45min</div>
+          </div>
+          {% else %}
+          <div class="info">
+            <div class="key">Cook Time:</div>
+            <div class="value">{{recipe.time}}min</div>
+          </div>
+          {% endif %}
+          <div class="info">
+            <div class="key">Servings:</div>
+            <div class="value">{{ recipe.num_servings}}</div>
+          </div>
+        </div></a
+      >
+      <br />
+      <a href="{% url 'delete_recipe' recipe.id %}"
+        ><span class="material-symbols-outlined btn" style="position: inherit">
+          delete
+        </span>
+      </a>
+    </div>
   </div>
   {%endfor%}
 </div>

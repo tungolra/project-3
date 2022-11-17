@@ -1,4 +1,5 @@
 {% extends 'base.html'%} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'style2.css' %}" />
 <div class="all">
   <div class="main">
     <a href="{%url 'meal_plan_index'%}"><h6>All Meal Plans</h6></a>
@@ -6,8 +7,8 @@
     <div>
       <h2>
         {{meal_plan.title}}
-  
-      <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
+
+        <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
         <a href="{% url 'meal_plan_delete' meal_plan.id %}" class="btn"
           >Delete</a
         >
@@ -17,11 +18,11 @@
     <div class="rec-cat">
       {%for recipe in recipe_collection%}
       <a href="{% url 'delete_recipe_from_meal_plan' recipe.id meal_plan.id %}"
-    ><span class="material-symbols-outlined" style="position: inherit">
-      delete
-    </span>(delete {{recipe.name}})</a
-  >
-    <a href="{% url 'recipe_detail' recipe.id%}"
+        ><span class="material-symbols-outlined" style="position: inherit">
+          delete </span
+        >(delete {{recipe.name}})</a
+      >
+      <a href="{% url 'recipe_detail' recipe.id%}"
         ><div class="rec-cat-cont">
           <img src="{{recipe.image_url}}" />
           <h6>{{ recipe.name }}</h6>

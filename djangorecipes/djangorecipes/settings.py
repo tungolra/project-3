@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'djangorecipes.wsgi.application'
 is_production = True
 if (is_production):
     DATABASES = {
-        'default': dj_database_url.config(env('DATABASE_URL'))
+        'default': dj_database_url.config(default=env('DATABASE_URL'))
     }
 else:
     DATABASES = {

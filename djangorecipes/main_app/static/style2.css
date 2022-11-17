@@ -259,7 +259,10 @@ h5 {
 i.material-icons.grey-text {
   font-size: 26px !important;
 }
-
+i.material-icons {
+  position: fixed;
+  left: 10px;
+}
 .i-list-text {
   display: flex;
   flex-direction: row;
@@ -376,7 +379,6 @@ h4 > .cust-text {
 .brush-underline:hover {
   visibility: visible;
 }
-
 .style2 {
   visibility: visible;
 }

@@ -218,7 +218,7 @@ def add_recipe(request, recipe_id):
 @login_required
 def delete_recipe(request, recipe_id):
     Recipes.objects.filter(recipe_id=recipe_id).delete()
-    return redirect("recipe_index")
+    return redirect("recipe_detail", recipe_id=recipe_id)
 
 def recipe_detail(request, recipe_id):
     p = {

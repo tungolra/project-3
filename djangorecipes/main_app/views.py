@@ -52,6 +52,21 @@ def cuisine_recipe_list(request, cuisine="american"):
 
     return render(request, 'recipes/recipe_list.html', data)
 
+def similar_recipes(request, recipe_id=1):
+    params = {
+        "recipe_id" : recipe_id
+    }
+
+    response = tc_api.client.get_recipes_similar(params)
+    recipes = utils.parse_recipes_similar(response, "s")
+
+    data = {
+        'recipes' : recipes,
+        'title' : 'Still hungry?'
+    }
+
+    return render(request, 'recipes/recipe_list.html', data)
+
 """Meal Plans"""
 @login_required
 def meal_plan_index(request): 

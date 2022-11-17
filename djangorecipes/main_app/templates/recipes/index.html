@@ -5,48 +5,87 @@
 />
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
 <div class="all">
-  <h4>Your Saved Recipes</h4>
+  <div class="main">
+    <h4>Your Saved Recipes</h4>
 
-  <div class="rec-cat">
-    {%for recipe in recipe_collection%}
-    <div class="card">
-      <a href="{% url 'recipe_detail' recipe.id%}"
-        ><div class="rec-cat-cont">
-          <img src="{{recipe.image_url}}" />
-          <h6>{{ recipe.name }}</h6>
-          <div class="info">
-            <div class="key">Reviews:</div>
-            <div class="value">{{recipe.rating.total_count}}</div>
-          </div>
-          <div class="info">
-            <div class="key">Rating:</div>
-            <div class="value">{{recipe.rating.score|floatformat}}</div>
-          </div>
-          {% if recipe.time == None%}
-          <div class="info">
-            <div class="key">Cook Time:</div>
-            <div class="value">30-45min</div>
-          </div>
-          {% else %}
-          <div class="info">
-            <div class="key">Cook Time:</div>
+    <div class="rec-cat">
+      {%for recipe in recipe_collection%}
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <a href="{% url 'recipe_detail' recipe.id %}"
+            ><img src="{{recipe.image_url}}"
+          /></a>
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"
+            >{{recipe.name}}<i class="material-icons right">more_vert</i></span
+          >
+          <p>
+            Rating: {{recipe.rating.score|floatformat}} | {{recipe.time}} mins |
+            {{recipe.num_servings}} servings
+          </p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"
+            >{{recipe.name}}<i class="material-icons right">close</i></span
+          >
+          <div class="centered">
+            <div class="key">Cook Time</div>
             <div class="value">{{recipe.time}}min</div>
-          </div>
-          {% endif %}
-          <div class="info">
-            <div class="key">Servings:</div>
+            <div class="key">Servings</div>
             <div class="value">{{ recipe.num_servings}}</div>
+            <div class="key">Calories</div>
+            <div class="value">{{ recipe.nutrition.calories}}</div>
+            <div class="key">Protein</div>
+            <div class="value">{{recipe.nutrition.protein}}</div>
+            <div class="key">Carbs</div>
+            <div class="value">{{recipe.nutrition.carbohydrates}}</div>
+            <div class="key">Fat</div>
+            <div class="value">{{recipe.nutrition.fat}}</div>
           </div>
-        </div></a
-      >
-      <br />
-      <a href="{% url 'delete_recipe' recipe.id %}"
-        ><span class="material-symbols-outlined btn" style="position: inherit">
-          delete
-        </span>
-      </a>
+        </div>
+      </div>
+      {%endfor%}
     </div>
+    {% endblock %}
+
+    <!-- <div class="card">
+    <a href="{% url 'recipe_detail' recipe.id%}"
+      ><div class="rec-cat-cont">
+        <img src="{{recipe.image_url}}" />
+        <h6>{{ recipe.name }}</h6>
+        <div class="info">
+          <div class="key">Reviews:</div>
+          <div class="value">{{recipe.rating.total_count}}</div>
+        </div>
+        <div class="info">
+          <div class="key">Rating:</div>
+          <div class="value">{{recipe.rating.score|floatformat}}</div>
+        </div>
+        {% if recipe.time == None%}
+        <div class="info">
+          <div class="key">Cook Time:</div>
+          <div class="value">30-45min</div>
+        </div>
+        {% else %}
+        <div class="info">
+          <div class="key">Cook Time:</div>
+          <div class="value">{{recipe.time}}min</div>
+        </div>
+        {% endif %}
+        <div class="info">
+          <div class="key">Servings:</div>
+          <div class="value">{{ recipe.num_servings}}</div>
+        </div>
+      </div></a
+    >
+    <br />
+    <a href="{% url 'delete_recipe' recipe.id %}"
+      ><span class="material-symbols-outlined btn" style="position: inherit">
+        delete
+      </span>
+    </a>
   </div>
-  {%endfor%}
+</div> -->
+  </div>
 </div>
-{% endblock %}

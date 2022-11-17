@@ -91,17 +91,20 @@ WSGI_APPLICATION = 'djangorecipes.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangorecipes',
+
+
+is_production = True
+if (is_production):
+    DATABASES = {
+        'default': dj_database_url.config(env('DATABASE_URL'))
     }
-}
-
-DATABASES = {
-    'default': dj_database_url.config(env('DATABASE_URL'))
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'djangorecipes',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

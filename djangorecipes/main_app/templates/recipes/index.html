@@ -13,8 +13,14 @@
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
           <a href="{% url 'recipe_detail' recipe.id %}"
-            ><img src="{{recipe.image_url}}"
-          /></a>
+            ><img src="{{recipe.image_url}}" /></a
+          ><a
+            href="{% url 'delete_recipe' recipe.id %}"
+            id="delete-but"
+            class="btn-floating halfway-fab waves-effect waves-light red left"
+            style="position: absolute; top: 15px"
+            ><i class="material-icons">delete</i></a
+          >
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4"
@@ -48,44 +54,5 @@
       {%endfor%}
     </div>
     {% endblock %}
-
-    <!-- <div class="card">
-    <a href="{% url 'recipe_detail' recipe.id%}"
-      ><div class="rec-cat-cont">
-        <img src="{{recipe.image_url}}" />
-        <h6>{{ recipe.name }}</h6>
-        <div class="info">
-          <div class="key">Reviews:</div>
-          <div class="value">{{recipe.rating.total_count}}</div>
-        </div>
-        <div class="info">
-          <div class="key">Rating:</div>
-          <div class="value">{{recipe.rating.score|floatformat}}</div>
-        </div>
-        {% if recipe.time == None%}
-        <div class="info">
-          <div class="key">Cook Time:</div>
-          <div class="value">30-45min</div>
-        </div>
-        {% else %}
-        <div class="info">
-          <div class="key">Cook Time:</div>
-          <div class="value">{{recipe.time}}min</div>
-        </div>
-        {% endif %}
-        <div class="info">
-          <div class="key">Servings:</div>
-          <div class="value">{{ recipe.num_servings}}</div>
-        </div>
-      </div></a
-    >
-    <br />
-    <a href="{% url 'delete_recipe' recipe.id %}"
-      ><span class="material-symbols-outlined btn" style="position: inherit">
-        delete
-      </span>
-    </a>
-  </div>
-</div> -->
   </div>
 </div>

@@ -226,6 +226,7 @@ def recipe_detail(request, recipe_id):
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
+    print (data)
     return render(request, "recipes/details.html", {"recipe":data})
 
 """OAuth Functions"""

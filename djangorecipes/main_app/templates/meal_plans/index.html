@@ -2,21 +2,22 @@
 <link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
 <div class="all">
-  <div class="cover"></div>
-  <div class="header-div"></div>
-  <h5>All Meal Plans</h5>
-  <div class="button-container">
-    <a
-      class="btn waves-effect waves-custom waves-light"
-      href="{% url 'meal_plan_new' %}"
-      >Add New Meal Plan</a
-    >
-    {% for plan in meal_plans %}
-  </div>
-  <div class="row">
-    <div class="col s12 m6">
-      <div class="card">
-        <div class="card-content">
+  <div class="main">
+    <div class="cover"></div>
+    <div class="header-div"></div>
+    <h5>All Meal Plans</h5>
+    <div class="button-container">
+      <a
+        class="btn waves-effect waves-custom waves-light"
+        href="{% url 'meal_plan_new' %}"
+        >Add New Meal Plan</a
+      >
+      {% for plan in meal_plans %}
+    </div>
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card">
+          <div class="card-content">
             <a href="{% url 'meal_plan_detail' plan.id %}"
               ><div class="card-title activator grey-text text-darken-4">
                 {{plan.title}}

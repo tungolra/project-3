@@ -1,22 +1,25 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
-<table class="striped">
-  <thead>
-    <tr>
-      <th>Ingredient</th>
-      <th>Measurement</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
-  <tbody>
-      {%for name, measurement in ingredients.items %}
-    <tr style="font-weight: normal">
-      <td>{{name}}</td>
-      <td>{{measurement.unit}}</td>
-      <td>{{measurement.count}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
+<div class="all">
+  <div class="main">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Ingredient</th>
+          <th>Measurement</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for name, measurement in ingredients.items %}
+        <tr style="font-weight: normal">
+          <td>{{name}}</td>
+          <td>{{measurement.unit}}</td>
+          <td>{{measurement.count}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

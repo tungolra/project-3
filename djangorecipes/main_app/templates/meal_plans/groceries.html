@@ -1,11 +1,14 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
+<link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
+<link rel="stylesheet" href="{% static 'style2.css' %}" />
+<h5>Grocery List</h5>
 <table>
   <tr>
     <th>Ingredient</th>
     <th>Measurement</th>
     <th>Quantity</th>
   </tr>
-   {%for name, measurement in ingredients.items %}
+  {%for name, measurement in ingredients.items %}
   <tr>
     <td>{{name}}</td>
     <td>{{measurement.unit}}</td>

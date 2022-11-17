@@ -1,7 +1,28 @@
 /* this style is for white logo: home.html,recipe/details.html */
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
+/* parent */
+.logo {
+  /* max-width: 100%; */
+  position: absolute;
+  top: 10px;
+  left: 80px;
+  /* margin-top: 10px; */
+}
+/* .logo > img {
+  margin-top: 10px;
+} */
+/* child */
+.logo-blk {
+  visibility: hidden;
+  height: 39;
+  width: 158;
+}
+/* child */
+.logo-wht {
+  visibility: visible;
+  height: 39;
+  width: 158;
+}
 main {
   font-family: "Poppins", sans-serif;
   font-weight: 900;
@@ -49,7 +70,8 @@ nav {
   text-align: center;
   font-size: small;
   color: black;
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   height: 50vh;
   max-height: 350px;
 }
@@ -114,17 +136,6 @@ h4 {
 
 i {
   font-size: 40px !important;
-}
-
-.logo {
-  max-width: 100%;
-  margin-top: 10px;
-}
-.logo-blk {
-  visibility: hidden;
-}
-.logo-wht {
-  visibility: visible;
 }
 .author {
   text-align: center;
@@ -258,10 +269,6 @@ h5 {
   font-weight: 100;
 }
 
-.logo > img {
-  margin-top: 10px;
-}
-
 .ingredients-list {
   margin: 0px 0px 0px 20px;
   font-size: 20px;
@@ -271,6 +278,10 @@ h5 {
 i.material-icons.grey-text {
   font-size: 26px !important;
 }
+/* i.material-icons {
+  position: absolute;
+  right: 2px;
+} */
 
 .i-list-text {
   display: flex;
@@ -385,9 +396,12 @@ h4 > .cust-text {
     width: 24px;
   }
   h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   h2 {
+    font-size: 2rem;
+  }
+  h3 {
     font-size: 2rem;
   }
   .logo > img {
@@ -399,9 +413,13 @@ h4 > .cust-text {
   }
   .carousel {
     max-height: 240px;
+    max-width: 100vw;
   }
   .brush-underline > img {
-    width: 100px;
+    width: 90px;
+  }
+  .brush-underline-long > img {
+    width: 160px;
   }
 }
 

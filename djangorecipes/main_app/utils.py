@@ -123,12 +123,12 @@ def helper_ingredient(recipe_component: dict) -> dict:
     res = {
         "name"  : ingredient["name"],
         "id"    : ingredient["id"],
-        "quantity" : "As much as you want of",
+        "quantity" : "As necessary",
         "measurement" : ""
 
     }
-
-    if len(recipe_component["measurements"]) > 0:
+    measurement = recipe_component["measurements"][0]
+    if measurement["quantity"] and measurement["unit"]["abbreviation"]:
         measurement = recipe_component["measurements"][0]
         res["quantity"] = measurement["quantity"]
         res["measurement"] = measurement["unit"]["abbreviation"]
@@ -222,10 +222,15 @@ def get_all_tag_types() -> list:
     return tags.keys()
 
 # Get all tags of a specific type
-def get_tags_by_type(tag_type: str, value: str) -> list:
+def get_tags_by_type(tag_type: str) -> list:
     tags = get_all_tags()[tag_type]
+    return tags
 
-    res = []
-    for tag in tags:
-        res += [tag[value]]
-    return res
+# Get a tag from it's name
+def get_tag_by_name(tag_name: str) -> dict:
+    tags_dict = get_all_tags()
+    for tags in tags_dict.items():
+        for tag in tags[1]:
+            if tag["name"] == tag_name:
+                return tag
+    return None

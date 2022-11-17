@@ -1,9 +1,8 @@
-<div class="all">
 {% extends 'base.html'%}{% block content %} {% load static %}
 <link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
+<div class="all">
 <div class="cover"></div>
->
 <div class="header-div"></div>
 <h5>All Meal Plans</h5>
 <div class="button-container">
@@ -25,17 +24,20 @@
             </div>
           </a>
         </div>
-        <div class="meal-plan-imgs">
+        <!-- <div class="meal-plan-imgs">
           <img class="meal-plan-imgs" src="https://i.imgur.com/btbBlMF.jpeg" />
-        </div>
+        </div> -->
+
+
+       
+
       </div>
     </div>
-  </div>
-  <!-- <div class="brush-underline">
+    <!-- <div class="brush-underline">
     <img src="{% static 'images/underline.png'%}" />
 </div> -->
-  <br />
-  {% endfor %} {% endblock %}
+    <br />
+    {% endfor %} {% endblock %}
+  </div>
 </div>
-</div>
-
+ </div>

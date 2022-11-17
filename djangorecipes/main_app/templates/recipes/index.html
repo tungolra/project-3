@@ -5,14 +5,22 @@
 />
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
 <div class="all">
-  <h4>Your Saved Recipes</h4>
+  <div class="main">
+    <h4>Your Saved Recipes</h4>
 
-  <div class="rec-cat">
-    {%for recipe in recipe_collection%}
-    <div class="card">
-      <a href="{% url 'recipe_detail' recipe.id%}">
+    <div class="rec-cat">
+      {%for recipe in recipe_collection%}
+      <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator" src="{{recipe.image_url}}" />
+          <a href="{% url 'recipe_detail' recipe.id %}"
+            ><img src="{{recipe.image_url}}" /></a
+          ><a
+            href="{% url 'delete_recipe' recipe.id %}"
+            id="delete-but"
+            class="btn-floating halfway-fab waves-effect waves-light red left"
+            style="position: absolute; top: 15px"
+            ><i class="material-icons">delete</i></a
+          >
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4"
@@ -27,22 +35,24 @@
           <span class="card-title grey-text text-darken-4"
             >{{recipe.name}}<i class="material-icons right">close</i></span
           >
-          <p>
-            Here is some more information about this product that is only
-            revealed once clicked on.{{recipe.id}}
-          </p>
-          <a href="{% url 'recipe_detail' recipe.id %}"></a>
-        </div></a
-        >
-        <br />
-        <a href="{% url 'delete_recipe' recipe.id %}"
-          ><span class="material-symbols-outlined btn" style="position: inherit">
-            delete
-          </span>
-        </a>
+          <div class="centered">
+            <div class="key">Cook Time</div>
+            <div class="value">{{recipe.time}}min</div>
+            <div class="key">Servings</div>
+            <div class="value">{{ recipe.num_servings}}</div>
+            <div class="key">Calories</div>
+            <div class="value">{{ recipe.nutrition.calories}}</div>
+            <div class="key">Protein</div>
+            <div class="value">{{recipe.nutrition.protein}}</div>
+            <div class="key">Carbs</div>
+            <div class="value">{{recipe.nutrition.carbohydrates}}</div>
+            <div class="key">Fat</div>
+            <div class="value">{{recipe.nutrition.fat}}</div>
+          </div>
         </div>
+      </div>
+      {%endfor%}
     </div>
+    {% endblock %}
   </div>
-  {%endfor%}
 </div>
-{% endblock %}

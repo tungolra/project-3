@@ -2,6 +2,7 @@
     Utility file for parsing TastyCo API results
 '''
 import json
+from random import random,randrange
 from . import tc_api
 
 # Helper function, parse recipe data from API for detailed views
@@ -9,17 +10,17 @@ def helper_recipe_detail(recipe_api: dict) -> dict:
     recipe = helper_nested_recipe(recipe_api)
 
     result = {
-        "id" : recipe["id"],
-        "name": recipe["name"],
-        "time": recipe["cook_time_minutes"],
+        "id" : helper_get_id(recipe["id"]),
+        "name": helper_get_name(recipe["name"]),
+        "time": helper_get_time(recipe["cook_time_minutes"]),
         "instructions" : [],
         "ingredients": [],
-        "num_servings" : recipe["num_servings"],
-        "rating" : recipe["user_ratings"], 
-        "image_url" : recipe["thumbnail_url"],
-        "image_alt_text" : recipe["thumbnail_alt_text"],
-        "video_url" : recipe["original_video_url"],
-        "nutrition" : recipe["nutrition"],
+        "num_servings" : helper_get_num_servings(recipe["num_servings"]),
+        "rating" : helper_get_rating(recipe["user_ratings"]), 
+        "image_url" : helper_get_image_url(recipe["thumbnail_url"]),
+        "image_alt_text" : helper_alt_text(recipe["thumbnail_alt_text"]),
+        "video_url" : helper_video_url(recipe["original_video_url"]),
+        "nutrition" : helper_nutrition(recipe["nutrition"]),
         # TO ADD,
         # tags
         # Author
@@ -38,17 +39,69 @@ def helper_recipe_summary(recipe_api:dict) -> dict:
     recipe = helper_nested_recipe(recipe_api)
 
     result = {
-        "id" : recipe["id"],
-        "name": recipe["name"],
-        "time": recipe["cook_time_minutes"],
-        "num_servings" : recipe["num_servings"],
-        "rating" : recipe["user_ratings"], 
-        "image_url" : recipe["thumbnail_url"],
-        "image_alt_text" : recipe["thumbnail_alt_text"],
-        "nutrition" : recipe["nutrition"]
+        "id" : helper_get_id(recipe["id"]),
+        "name": helper_get_name(recipe["name"]),
+        "time": helper_get_time(recipe["cook_time_minutes"]),
+        "num_servings" : helper_get_num_servings(recipe["num_servings"]),
+        "rating" : helper_get_rating(recipe["user_ratings"]), 
+        "image_url" : helper_get_image_url(recipe["thumbnail_url"]),
+        "image_alt_text" : helper_alt_text(recipe["thumbnail_alt_text"]),
+        "nutrition" : helper_nutrition(recipe["nutrition"]),
     }
 
     return result
+
+# Helper for random id if id doesn't exist
+def helper_get_id(id):
+    if id:
+        return id
+    return "Missing ID!"
+
+# Helper fill in name if name doesn't exist
+def helper_get_name(name):
+    if name:
+        return name
+    return "Tasty! #" + str((randrange(9999)+ 10000))
+
+# Helper for time if time doesn't exist
+def helper_get_time(time):
+    if time:
+        return time
+    times = [25, 40 , 55, 60, 75]
+    index =randrange(5)
+    return times[index]
+
+# Helper for num_servings
+def helper_get_num_servings(num):
+    if num:
+        return num
+    servings = [2,4,5,8]
+    index =randrange(4)
+    return servings[index]
+
+# Helper
+def helper_get_rating(rating):
+    keys = rating.keys()
+    res = {
+        'count_positive': rating['count_positive'] or randrange(999),
+        'count_negative': rating['count_negative'] or randrange(999),
+        'score': rating['score'] or random()
+    }
+    return res
+
+def helper_get_image_url(url):
+    return url
+
+def helper_alt_text(text):
+    return text
+
+def helper_video_url(url):
+    return url
+
+def helper_nutrition(nutrition):
+    return nutrition
+
+
 
 # Helper function, parse recipe data if nested in results[i]
 def helper_nested_recipe(recipe: dict) -> dict:
@@ -70,12 +123,12 @@ def helper_ingredient(recipe_component: dict) -> dict:
     res = {
         "name"  : ingredient["name"],
         "id"    : ingredient["id"],
-        "quantity" : "As much as you want of",
+        "quantity" : "As necessary",
         "measurement" : ""
 
     }
-
-    if len(recipe_component["measurements"]) > 0:
+    measurement = recipe_component["measurements"][0]
+    if measurement["quantity"] and measurement["unit"]["abbreviation"]:
         measurement = recipe_component["measurements"][0]
         res["quantity"] = measurement["quantity"]
         res["measurement"] = measurement["unit"]["abbreviation"]
@@ -169,10 +222,15 @@ def get_all_tag_types() -> list:
     return tags.keys()
 
 # Get all tags of a specific type
-def get_tags_by_type(tag_type: str, value: str) -> list:
+def get_tags_by_type(tag_type: str) -> list:
     tags = get_all_tags()[tag_type]
+    return tags
 
-    res = []
-    for tag in tags:
-        res += [tag[value]]
-    return res
+# Get a tag from it's name
+def get_tag_by_name(tag_name: str) -> dict:
+    tags_dict = get_all_tags()
+    for tags in tags_dict.items():
+        for tag in tags[1]:
+            if tag["name"] == tag_name:
+                return tag
+    return None

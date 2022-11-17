@@ -33,7 +33,32 @@
     </div>
     <div class="rec-cat">
       {% for recipe in data %}
-      <a href="{% url 'recipe_detail' recipe.id %}"
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="{{recipe.image_url}}" />
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"
+            >{{recipe.name}}<i class="material-icons right">more_vert</i></span
+          >
+          <p>
+            Rating: {{recipe.rating.score|floatformat}} | {{recipe.time}} mins |
+            {{recipe.num_servings}} servings
+          </p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"
+            >{{recipe.name}}<i class="material-icons right">close</i></span
+          >
+          <p>
+            Here is some more information about this product that is only
+            revealed once clicked on.{{recipe.id}}
+          </p>
+          <a href="{% url 'recipe_detail' recipe.id %}"></a>
+        </div>
+      </div>
+
+      <!-- <a href="{% url 'recipe_detail' recipe.id %}"
         ><div class="rec-cat-cont">
           <img src="{{recipe.image_url}}" />
           <h6>{{ recipe.name }}</h6>
@@ -61,7 +86,7 @@
             <div class="value">{{ recipe.num_servings}}</div>
           </div>
         </div></a
-      >
+      > -->
       {% endfor %}
       <!-- Random recipes end -->
     </div>

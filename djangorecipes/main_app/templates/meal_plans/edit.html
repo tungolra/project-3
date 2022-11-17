@@ -1,18 +1,20 @@
 {% extends 'base.html'%} {% block content %} {% load static %}
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
-<div class="main">
-  <h2>{{meal_plan.title}}</h2>
-  <form action="{% url 'meal_plan_update' meal_plan.id %}" method="post">
-    {%csrf_token%}
-    <h5>New Title:</h5>
-    <input name="name" />
-    <button
-      class="btn waves-effect waves-light right"
-      type="submit"
-      name="action"
-    >
-      Update!
-    </button>
-  </form>
+<div class="all">
+  <div class="main">
+    <h2>{{meal_plan.title}}</h2>
+    <form action="{% url 'meal_plan_update' meal_plan.id %}" method="post">
+      {%csrf_token%}
+      <h5>New Title:</h5>
+      <input name="name" />
+      <button
+        class="btn waves-effect waves-light right"
+        type="submit"
+        name="action"
+      >
+        Update!
+      </button>
+    </form>
+  </div>
 </div>
 {% endblock %}

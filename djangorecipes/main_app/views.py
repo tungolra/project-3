@@ -3,16 +3,13 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-# for all CBV models
 from django.views import generic
 from .models import MealPlans, Recipes
 from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
 import random
-import pint
-from pint import UnitRegistry
-ureg = UnitRegistry()
+
 
 
 def home(request):
@@ -25,43 +22,10 @@ def home(request):
     tags = utils.get_tags_by_type("cuisine")
     cuisine_tags_values = tags
 
-
-    """
-        Usage for getting reviews
-    """
-
-    # p_tips = {
-    #     "id" : "3562",
-    #     "size" : "3"
-    # }
-    # response_tips = tc_api.client.get_tips(p_tips)
-    # reviews = utils.parse_tips(response_tips)
-    # # print(reviews)
-
-    """
-        Usage for getting similar recipes
-    """
-    # p_similar = {
-    #     "recipe_id" : "3562"
-    # }
-    # response_similar = tc_api.client.get_recipes_similar(p_similar)
-    # data_similar = utils.parse_recipes_similar(response_similar, "s")
-    # print(data_similar)
-    """
-        Usage for getting autocomplete suggestions
-    """
-
-    # p_autocomplete = {
-    #     "prefix" : "chicken soup"
-    # }
-    # response_autocomplete = tc_api.client.get_recipes_auto_complete(p_autocomplete)
-    # data_autocomplete = utils.parse_recipes_auto_complete(response_autocomplete)
-
     for idx, item in enumerate(data):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-    #PASS IN TOP-RATED RECIPES INSTEAD OF FIRST N FROM LIST
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def cuisine_recipe_list(request, cuisine="american"):
@@ -70,7 +34,6 @@ def cuisine_recipe_list(request, cuisine="american"):
         "size" : "12",
         "from" : random.randrange(30)
     }
-    print(search_params["tag"])
     response = tc_api.client.get_recipes_list(search_params)
     recipes = utils.parse_recipes_list(response)
    
@@ -166,12 +129,14 @@ def add_recipe_to_meal_plan(request,recipe_id):
         mealplan_obj.recipes.add(recipe)
     return redirect('recipe_detail', recipe_id=recipe_id)
 
+@login_required
 def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
     mealplan = MealPlans.objects.get(pk=mealplan_id)
     recipe = Recipes.objects.get(recipe_id=recipe_id)
     mealplan.recipes.remove(recipe)
     return redirect ('meal_plan_detail', mealplan_id=mealplan_id)
 
+@login_required
 def groceries_index(request, mealplan_id):
     def _convert_add(val1, val2):
         return val1 + val2
@@ -202,6 +167,7 @@ def groceries_index(request, mealplan_id):
     return render(request, 'meal_plans/groceries.html', {'ingredients': i_result})
 
 """CRUD for Recipes"""
+@login_required
 def toggle_save_recipe(request, recipe_id):
     try:
         print("This recipe is already in the DB!")
@@ -248,8 +214,6 @@ def add_recipe(request, recipe_id):
     data = utils.parse_recipes_details(response, "d")
 
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
-
-
 
 @login_required
 def delete_recipe(request, recipe_id):

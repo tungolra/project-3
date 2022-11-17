@@ -233,7 +233,11 @@ def recipe_detail(request, recipe_id):
     
     data = utils.parse_recipes_details(response, "d")
     data_rev = utils.parse_tips(response_rev)
-    return render(request, "recipes/details.html", {"recipe":data, "reviews": data_rev})
+    recipeDB = Recipes.objects.all().values()
+    ids = []
+    for recipe in recipeDB:
+        ids.append(recipe['recipe_id'])
+    return render(request, "recipes/details.html", {"recipe":data, "reviews": data_rev, 'ids': ids})
 
 """OAuth Functions"""
 def signup(request):

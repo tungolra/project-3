@@ -15,12 +15,22 @@
 				<a href="{% url 'add_recipe' recipe.id %}"
 					><i class="material-icons grey-text">date_range</i></a
 				>
+        
+      </div>
+        {% if recipe.id in ids %}
+      <div>
+        <a href="{% url 'save_recipe' recipe.id%}"
+          ><i class="material-icons red-text">favorite</i></a
+        >
 			</div>
+      {%else %}
 			<div>
 				<a href="{% url 'save_recipe' recipe.id%}"
 					><i class="material-icons grey-text">favorite</i></a
 				>
 			</div>
+      {%endif%}
+      
 			<div>
 				<a href=""><i class="material-icons grey-text">share</i></a>
 			</div>

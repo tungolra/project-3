@@ -266,7 +266,7 @@ h5 {
   font-weight: 100;
 }
 
-i.material-icons.grey-text {
+i.material-icons.grey-text, i.material-icons.red-text {
   font-size: 26px !important;
 }
 

@@ -1,74 +1,95 @@
 {% extends 'base.html'%} {% block content %}{% load static %}
 <div class="all">
-	<a href="{% url 'recipe_detail' data.4.id %}"
-		><div class="header-img">
-			<img src="{{ data.4.image_url}}" />
-		</div>
-	</a>
-	<div class="main-alt">
-		<a href="{% url 'recipe_detail' data.4.id %}"
-			><div class="feature-recipe-link">
-				<h5>WHAT'S HOT</h5>
-				<h2>{{ data.4.name}}</h2>
-			</div></a
-		>
-		<div class="carousel">
-			<div class="brush-underline">
-				<h4>EXPLORE</h4>
-				<img src="{% static 'images/underline.png'%}" />
-			</div>
-			{% for tag in cuisine_tag_values %}
-			<a
-				class="carousel-item"
-				href="{% url 'recipe_list' tag.name %}"
-				><img
-					class="carousel-img"
-					src="https://www.wholesomeyum.com/wp-content/uploads/2020/10/wholesomeyum-Easy-Roasted-Thanksgiving-Turkey-Recipe-45.jpg"
-				/>
-				<div class="carousel-text black-text">{{ tag.display_name }}</div></a
-			>
+  <a href="{% url 'recipe_detail' data.4.id %}"
+    ><div class="header-img">
+      <img src="{{ data.4.image_url}}" />
+      <div class="feature-recipe-link">
+        <h5>WHAT'S HOT</h5>
+        <h2>{{ data.4.name}}</h2>
+      </div>
+    </div>
+  </a>
+  <div class="main-alt">
+    <a href="{% url 'recipe_detail' data.4.id %}"></a>
+    <div class="carousel">
+      <div class="brush-underline">
+        <h4>EXPLORE</h4>
+        <img src="{% static 'images/underline.png'%}" />
+      </div>
+      {% for tag in cuisine_tag_values %}
+      <a class="carousel-item" href=""
+        ><img
+          class="carousel-img"
+          src="https://www.wholesomeyum.com/wp-content/uploads/2020/10/wholesomeyum-Easy-Roasted-Thanksgiving-Turkey-Recipe-45.jpg"
+        />
+        <div class="carousel-text black-text">{{ tag }}</div></a
+      >
+      {% endfor %}
+    </div>
+    <!-- Random recipes start -->
+    <div class="brush-underline-long">
+      <h4>FEATURED RECIPES</h4>
+      <img src="{% static 'images/underline.png'%}" />
+    </div>
+    <div class="rec-cat">
+      {% for recipe in data %}
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="{{recipe.image_url}}" />
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"
+            >{{recipe.name}}<i class="material-icons right">more_vert</i></span
+          >
+          <p>
+            Rating: {{recipe.rating.score|floatformat}} | {{recipe.time}} mins |
+            {{recipe.num_servings}} servings
+          </p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"
+            >{{recipe.name}}<i class="material-icons right">close</i></span
+          >
+          <p>
+            Here is some more information about this product that is only
+            revealed once clicked on.{{recipe.id}}
+          </p>
+          <a href="{% url 'recipe_detail' recipe.id %}"></a>
+        </div>
+      </div>
 
-			{% endfor %}
-		</div>
-		<!-- Random recipes start -->
-		<div class="brush-underline-long">
-			<h4>FEATURED RECIPES</h4>
-			<img src="{% static 'images/underline.png'%}" />
-		</div>
-		<div class="rec-cat">
-			{% for recipe in data %}
-			<a href="{% url 'recipe_detail' recipe.id %}"
-				><div class="rec-cat-cont">
-					<img src="{{recipe.image_url}}" />
-					<h6>{{ recipe.name }}</h6>
-					<div class="info">
-						<div class="key">Reviews:</div>
-						<div class="value">{{recipe.rating.total_count}}</div>
-					</div>
-					<div class="info">
-						<div class="key">Rating:</div>
-						<div class="value">{{recipe.rating.score|floatformat}}</div>
-					</div>
-					{% if recipe.time == None%}
-					<div class="info">
-						<div class="key">Cook Time:</div>
-						<div class="value">30-45min</div>
-					</div>
-					{% else %}
-					<div class="info">
-						<div class="key">Cook Time:</div>
-						<div class="value">{{recipe.time}}min</div>
-					</div>
-					{% endif %}
-					<div class="info">
-						<div class="key">Servings:</div>
-						<div class="value">{{ recipe.num_servings}}</div>
-					</div>
-				</div></a
-			>
-			{% endfor %}
-			<!-- Random recipes end -->
-		</div>
-		{% endblock %}
-	</div>
+      <!-- <a href="{% url 'recipe_detail' recipe.id %}"
+        ><div class="rec-cat-cont">
+          <img src="{{recipe.image_url}}" />
+          <h6>{{ recipe.name }}</h6>
+          <div class="info">
+            <div class="key">Reviews:</div>
+            <div class="value">{{recipe.rating.total_count}}</div>
+          </div>
+          <div class="info">
+            <div class="key">Rating:</div>
+            <div class="value">{{recipe.rating.score|floatformat}}</div>
+          </div>
+          {% if recipe.time == None%}
+          <div class="info">
+            <div class="key">Cook Time:</div>
+            <div class="value">30-45min</div>
+          </div>
+          {% else %}
+          <div class="info">
+            <div class="key">Cook Time:</div>
+            <div class="value">{{recipe.time}}min</div>
+          </div>
+          {% endif %}
+          <div class="info">
+            <div class="key">Servings:</div>
+            <div class="value">{{ recipe.num_servings}}</div>
+          </div>
+        </div></a
+      > -->
+      {% endfor %}
+      <!-- Random recipes end -->
+    </div>
+    {% endblock %}
+  </div>
 </div>

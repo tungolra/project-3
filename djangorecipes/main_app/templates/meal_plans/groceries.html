@@ -1,0 +1,17 @@
+{% extends 'base.html'%} {% block content %} {% load static%}
+<table>
+  <tr>
+    <th>Ingredient</th>
+    <th>Measurement</th>
+    <th>Quantity</th>
+  </tr>
+   {%for name, measurement in ingredients.items %}
+  <tr>
+    <td>{{name}}</td>
+    <td>{{measurement.unit}}</td>
+    <td>{{measurement.count}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

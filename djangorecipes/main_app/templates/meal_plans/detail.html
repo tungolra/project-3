@@ -8,7 +8,8 @@
       <h2>
         {{meal_plan.title}}
 
-        <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
+        <a href="{% url 'groceries_index' meal_plan.id %}" class="btn">Groceries</a>
+      <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
         <a href="{% url 'meal_plan_delete' meal_plan.id %}" class="btn"
           >Delete</a
         >

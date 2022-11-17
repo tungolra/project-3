@@ -1,4 +1,5 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html'%} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'style2.css' %}" />
 <div class="main">
   <h2>{{meal_plan.title}}</h2>
   <form action="{% url 'meal_plan_update' meal_plan.id %}" method="post">

@@ -21,6 +21,7 @@ def helper_recipe_detail(recipe_api: dict) -> dict:
         "image_alt_text" : helper_alt_text(recipe["thumbnail_alt_text"]),
         "video_url" : helper_video_url(recipe["original_video_url"]),
         "nutrition" : helper_nutrition(recipe["nutrition"]),
+        "author" : helper_get_user(recipe["credits"][0]["name"])
         # TO ADD,
         # tags
         # Author
@@ -62,6 +63,20 @@ def helper_get_name(name):
     if name:
         return name
     return "Tasty! #" + str((randrange(9999)+ 10000))
+
+# Helper fill in name if author doesn't exist:
+def helper_get_user(author):
+    if author:
+        return author
+    authors = [
+        "Ralphioli", "Kendralicious", "Lucifer", "Sweet Saadness",
+        "Hotboxin Coder", "Sleepy Mascara", "Daddio", "Cat Friend",
+        "Rambo", "Shares Too Much", "Iron Stomach Canada", "Hairy Helper"
+    ]
+
+    index = randrange(len(authors))
+
+    return authors[index]
 
 # Helper for time if time doesn't exist
 def helper_get_time(time):
@@ -195,7 +210,7 @@ def parse_recipes_similar(response: dict, mode: str) -> list:
 def helper_tip(tip: dict) -> dict:
     tip_result = {
         "text" : tip.get("tip_body"),
-        "author_name" : tip.get("author_name"),
+        "author_name" : helper_get_user(tip.get("author_name")),
         "author_username" : tip.get("author_username"),
         "upvotes" : tip.get("upvotes_total")
 

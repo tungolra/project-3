@@ -1,20 +1,22 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
-<link rel="stylesheet" href="{% static 'meal-plan.css' %}" />
 <link rel="stylesheet" href="{% static 'style2.css' %}" />
-<h5>Grocery List</h5>
-<table>
-  <tr>
-    <th>Ingredient</th>
-    <th>Measurement</th>
-    <th>Quantity</th>
-  </tr>
-  {%for name, measurement in ingredients.items %}
-  <tr>
-    <td>{{name}}</td>
-    <td>{{measurement.unit}}</td>
-    <td>{{measurement.count}}</td>
-  </tr>
-  {% endfor %}
+<table class="striped">
+  <thead>
+    <tr>
+      <th>Ingredient</th>
+      <th>Measurement</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+      {%for name, measurement in ingredients.items %}
+    <tr style="font-weight: normal">
+      <td>{{name}}</td>
+      <td>{{measurement.unit}}</td>
+      <td>{{measurement.count}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% endblock %}

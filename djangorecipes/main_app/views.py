@@ -175,12 +175,7 @@ def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
 def groceries_index(request, mealplan_id):
     def _convert_add(val1, val2):
         return val1 + val2
-    ## pass in recipes for the meal plan 
     recipes = MealPlans.objects.get(pk=mealplan_id).recipes.all().values()
-
-    # print (recipes)
-    ## collect ingredients
-    # ingredients = []
     i_result = {}
     
     for idx, item in enumerate(recipes): 
@@ -192,14 +187,10 @@ def groceries_index(request, mealplan_id):
         data = utils.parse_recipes_details(response, "d")
         ingredients = data['ingredients']
         for ingredient in ingredients:
-            # objs['name'] = ingredient.get('name')
-            # objs['quantity'] = ingredient.get('quantity')
-            # objs['measurement'] = obj.get('measurement')
             i_key = ingredient['name']
             new_val = ingredient.get('quantity')
             i_measurement = i_result.get(i_key)
             if i_measurement:
-                # print(new_val)
                 i_result[i_key].update({
                     'count': _convert_add(i_measurement['count'], new_val)
                     })
@@ -207,7 +198,7 @@ def groceries_index(request, mealplan_id):
                 i_result.update({i_key:{
                     'count':new_val, 'unit': ingredient.get('measurement')
                     }})
-    print(i_result)
+
     return render(request, 'meal_plans/groceries.html', {'ingredients': i_result})
 
 """CRUD for Recipes"""

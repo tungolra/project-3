@@ -26,6 +26,7 @@ def home(request):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
+    print(cuisine_tags_values)
     return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
 
 def cuisine_recipe_list(request, cuisine="american"):
@@ -226,7 +227,6 @@ def recipe_detail(request, recipe_id):
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
-    print (data)
     return render(request, "recipes/details.html", {"recipe":data})
 
 """OAuth Functions"""

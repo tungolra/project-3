@@ -57,8 +57,8 @@
     <div class="anchor-links">
       <a class="anch-link" href="#directions"><div>Directions</div></a>
       <a class="anch-link" href="#nutrition"><div>Nutrition</div></a>
+      <a class="anch-link" href="#video"><div>Video</div></a>
       <a class="anch-link" href="#reviews"><div>Reviews</div></a>
-      <a class="anch-link" href="#photos"><div>Photos</div></a>
     </div>
 
     <div class="ingredients">
@@ -77,13 +77,11 @@
         {% endfor%}
       </ul>
     </div>
-
-    <div class="sim-ing">Show me recipes with similar ingredients</div>
-    <video width="320" height="240" controls>
-      <source src="{{recipe.video_url}}" type="video/mp4">
-
-      
-    </video>
+    <div class="center">
+      <button id="sim-ing" class="btn waves-effect waves-light">
+        Show me similar recipes
+      </button>
+    </div>
 
     <div id="directions" class="directions">
       <h5>Directions</h5>
@@ -116,12 +114,19 @@
       </div>
     </div>
 
-    <div id="reviews" class="reviews">
-      <h5>Reviews</h5>
+    <div id="video" class="video">
+      <h5>Video</h5>
+      <div class="center">
+        <div class="video">
+          <video width="320" height="240" controls>
+            <source src="{{recipe.video_url}}" type="video/mp4" />
+          </video>
+        </div>
+      </div>
     </div>
 
-    <div id="photos" class="photos">
-      <h5>Photos</h5>
+    <div id="reviews" class="reviews">
+      <h5>Reviews</h5>
     </div>
   </div>
   {% endblock %}

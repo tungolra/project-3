@@ -269,10 +269,6 @@ h5 {
 i.material-icons.grey-text {
   font-size: 26px !important;
 }
-/* i.material-icons {
-  position: absolute;
-  right: 2px;
-} */
 
 .i-list-text {
   display: flex;
@@ -288,17 +284,16 @@ i.material-icons.grey-text {
   font-style: italic;
 }
 
-.sim-ing {
-  color: white;
-  font-size: large;
-  font-weight: 200;
+.cent-el {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#sim-ing {
   margin: 30px;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #4a7ba1;
-  border: 1px solid white;
-  border-radius: 50px;
+  width: 100vw;
 }
 
 .feature-recipe-link {

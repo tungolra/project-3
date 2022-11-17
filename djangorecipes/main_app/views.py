@@ -212,7 +212,6 @@ def add_recipe(request, recipe_id):
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
-
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
 @login_required

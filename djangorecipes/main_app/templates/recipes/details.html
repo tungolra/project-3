@@ -137,9 +137,11 @@
     <div id="reviews" class="reviews">
       <h5>Reviews</h5>
       {% for review in reviews %}
-      <div class="review_container">
-        <div class="review_authoer">Culinarian {{review.author_name}}</div>
-        <div class="review_text">{{review.text}}</div>
+      <div style="margin-left: 20px">
+        <div class="value author-review" style="padding-top: 20px">
+          <span class="key">Culinarian</span> {{review.author_name}} :
+        </div>
+        <div class="key review-text">"{{review.text}}"</div>
       </div>
       {% endfor %}
     </div>

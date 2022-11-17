@@ -24,7 +24,6 @@ def helper_recipe_detail(recipe_api: dict) -> dict:
         "author" : helper_get_user(recipe["credits"][0]["name"])
         # TO ADD,
         # tags
-        # Author
     }
 
     for instruction in recipe["instructions"]:
@@ -38,7 +37,6 @@ def helper_recipe_detail(recipe_api: dict) -> dict:
 # Helper function, parse recipe data from API for summary views
 def helper_recipe_summary(recipe_api:dict) -> dict:
     recipe = helper_nested_recipe(recipe_api)
-
     result = {
         "id" : helper_get_id(recipe["id"]),
         "name": helper_get_name(recipe["name"]),

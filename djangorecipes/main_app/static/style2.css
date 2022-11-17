@@ -343,7 +343,9 @@ h4 > .cust-text {
   display: none;
   color: black;
 }
+.meal-plan-title {
 
+}
 @media only screen and (max-width: 650px) {
   .nutrition-content {
     height: 90px;

@@ -10,6 +10,10 @@ from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
 import random
+import pint
+from pint import UnitRegistry
+ureg = UnitRegistry()
+
 
 def home(request):
     p = {
@@ -142,13 +146,42 @@ def delete_recipe_from_meal_plan(request, recipe_id, mealplan_id):
     return redirect ('meal_plan_detail', mealplan_id=mealplan_id)
 
 def groceries_index(request, mealplan_id):
+    def _convert_add(val1, val2):
+        return val1 + val2
     ## pass in recipes for the meal plan 
     recipes = MealPlans.objects.get(pk=mealplan_id).recipes.all().values()
-    print (recipes)
+
+    # print (recipes)
     ## collect ingredients
-    ## compile ingredients
-    ## pass in list
-    return render(request, 'meal_plans/groceries.html')
+    # ingredients = []
+    i_result = {}
+    
+    for idx, item in enumerate(recipes): 
+        recipe_id = recipes[idx]['recipe_id']
+        p = {
+            "id":f"{recipe_id}"
+        }
+        response = tc_api.client.get_recipes_details(p)
+        data = utils.parse_recipes_details(response, "d")
+        ingredients = data['ingredients']
+        for ingredient in ingredients:
+            # objs['name'] = ingredient.get('name')
+            # objs['quantity'] = ingredient.get('quantity')
+            # objs['measurement'] = obj.get('measurement')
+            i_key = ingredient['name']
+            new_val = ingredient.get('quantity')
+            i_measurement = i_result.get(i_key)
+            if i_measurement:
+                # print(new_val)
+                i_result[i_key].update({
+                    'count': _convert_add(i_measurement['count'], new_val)
+                    })
+            else: 
+                i_result.update({i_key:{
+                    'count':new_val, 'unit': ingredient.get('measurement')
+                    }})
+    print(i_result)
+    return render(request, 'meal_plans/groceries.html', {'ingredients': i_result})
 
 """CRUD for Recipes"""
 def toggle_save_recipe(request, recipe_id):

@@ -1,3 +1,18 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
+{{ingredients}}
+<table>
+  <tr>
+    <th>Measurement</th>
+    <th>Quantity</th>
+    <th>Ingredient</th>
+  </tr>
+  {%for data in ingredients%}
+  <tr>
+    <td>{{data.measurement}}</td>
+    <td>{{data.quantity}}</td>
+    <td>{{data.name}}</td>
+  </tr>
+  {% endfor %}
+</table>
 
 {% endblock %}

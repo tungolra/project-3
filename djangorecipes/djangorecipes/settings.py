@@ -91,6 +91,12 @@ WSGI_APPLICATION = 'djangorecipes.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'djangorecipes',
+    }
+}
 
 DATABASES = {
     'default': dj_database_url.config(env('DATABASE_URL'))

@@ -14,7 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -30,12 +30,15 @@
   <body>
     <nav class="z-depth-0">
       <div class="nav-wrapper">
-        <a href="#" data-target="slide-out" class="sidenav-trigger"
+        <a href="#" data-target="slide-out" class="sidenav-trigger style1"
           ><i class="material-icons">menu</i></a
         >
-        <!-- <a href="#" data-target="slide-out" class="sidenav-trigger style2"
-        ><i class="material-icons">menu</i></a
-      > -->
+        <a
+          href="#"
+          data-target="slide-out"
+          class="sidenav-trigger style2 black-text"
+          ><i class="material-icons">menu</i></a
+        >
         <a href="/" class="logo logo-wht"
           ><img src="{% static 'images/logo-wht.png'%}" alt=""
         /></a>

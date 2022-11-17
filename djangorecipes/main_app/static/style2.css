@@ -1,5 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
+/* parent */
+.logo {
+  /* max-width: 100%; */
+  position: absolute;
+  top: 10px;
+  left: 80px;
+}
+/* not sure if this is necessary */
+/* .logo > img {
+  margin-top: 10px;
+} */
+/* child */
+.logo-blk {
+  visibility: visible;
+  height: 39;
+  width: 158;
+}
+/* child */
+.logo-wht {
+  visibility: hidden;
+  height: 39;
+  width: 158;
+}
 main {
   font-family: "Poppins", sans-serif;
   font-weight: 900;
@@ -10,10 +32,8 @@ nav {
 }
 
 .nav-wrapper {
-  background-image: linear-gradient(to bottom, rgb(0, 0, 0, 0.7), transparent);
   width: 100vw;
   z-index: 1;
-  /* visibility: hidden; */
 }
 
 .header-img {
@@ -96,10 +116,6 @@ h4 {
 
 i {
   font-size: 40px !important;
-}
-
-.logo {
-  max-width: 100%;
 }
 
 .author {
@@ -234,10 +250,6 @@ h5 {
   font-weight: 100;
 }
 
-.logo > img {
-  margin-top: 10px;
-}
-
 .ingredients-list {
   margin: 0px 0px 0px 20px;
   font-size: 20px;
@@ -247,7 +259,10 @@ h5 {
 i.material-icons.grey-text {
   font-size: 26px !important;
 }
-
+i.material-icons {
+  position: fixed;
+  left: 10px;
+}
 .i-list-text {
   display: flex;
   flex-direction: row;
@@ -363,21 +378,6 @@ h4 > .cust-text {
 }
 .brush-underline:hover {
   visibility: visible;
-}
-.logo {
-  max-width: 100%;
-  margin-top: 10px;
-}
-.logo-blk {
-  visibility: visible;
-  position: absolute;
-  left: 50px;
-}
-.logo-wht {
-  visibility: hidden;
-}
-.logo > img {
-  margin-top: 10px;
 }
 .style2 {
   visibility: visible;

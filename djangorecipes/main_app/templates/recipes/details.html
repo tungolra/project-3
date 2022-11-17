@@ -1,133 +1,190 @@
 {% extends 'base.html'%} {% block content %} {% load static%}
-<link rel="stylesheet" href="{% static 'style.css' %}" />
+<link
+	rel="stylesheet"
+	href="{% static 'style.css' %}"
+/>
 <div class="all">
-  <div class="header-img">
-    <img src="{{ recipe.image_url }}" />
-  </div>
+	<div class="header-img">
+		<img src="{{ recipe.image_url }}" />
+	</div>
 
-  <div class="main-alt">
-    <div class="author">Author</div>
-    <div class="center">
-      <div>
-        <a href="{% url 'add_recipe' recipe.id %}"
-          ><i class="material-icons grey-text">date_range</i></a
-        >
+	<div class="main-alt">
+		<div class="author">Chef {{ recipe.author}}</div>
+		<div class="center">
+			<div>
+				<a href="{% url 'add_recipe' recipe.id %}"
+					><i class="material-icons grey-text">date_range</i></a
+				>
+        
       </div>
+        {% if recipe.id in ids %}
       <div>
         <a href="{% url 'save_recipe' recipe.id%}"
-          ><i class="material-icons grey-text">favorite</i></a
+          ><i class="material-icons red-text">favorite</i></a
         >
-      </div>
-      <div>
-        <a href=""><i class="material-icons grey-text">share</i></a>
-      </div>
-    </div>
+			</div>
+      {%else %}
+			<div>
+				<a href="{% url 'save_recipe' recipe.id%}"
+					><i class="material-icons grey-text">favorite</i></a
+				>
+			</div>
+      {%endif%}
+      
+			<div>
+				<a href=""><i class="material-icons grey-text">share</i></a>
+			</div>
+		</div>
 
-    <h3>{{ recipe.name }}</h3>
+		<h3>{{ recipe.name }}</h3>
 
-    <div class="summary">
-      <div class="reviews">
-        <div><i class="material-icons black-text">star</i></div>
-        <div class="sum-value">{{recipe.rating.count_positive}}</div>
-        <div>Reviews</div>
-      </div>
-      <div class="time">
-        <div><i class="material-icons black-text">access_time</i></div>
-        <div class="sum-value">{{ recipe.time }} mins</div>
-        <div>Cook Time</div>
-      </div>
-      <div class="servings">
-        <div><i class="material-icons black-text">local_dining</i></div>
-        <div class="sum-value">{{ recipe.num_servings}}</div>
-        <div>Servings</div>
-      </div>
-      <div class="calories">
-        <div>
-          <img
-            class="cal-icon"
-            src="{% static 'images/icons8-calories-30 1@2x.png'%}"
-            alt=""
-          />
-        </div>
-        <div class="sum-value">{{ recipe.nutrition.calories }}</div>
-        <div>Calories</div>
-      </div>
-    </div>
+		<div class="summary">
+			<div class="reviews">
+				<div><i class="material-icons black-text">star</i></div>
+				<div class="sum-value">{{recipe.rating.count_positive}}</div>
+				<div>Reviews</div>
+			</div>
+			<div class="time">
+				<div><i class="material-icons black-text">access_time</i></div>
+				<div class="sum-value">{{ recipe.time }} mins</div>
+				<div>Cook Time</div>
+			</div>
+			<div class="servings">
+				<div><i class="material-icons black-text">local_dining</i></div>
+				<div class="sum-value">{{ recipe.num_servings}}</div>
+				<div>Servings</div>
+			</div>
+			<div class="calories">
+				<div>
+					<img
+						class="cal-icon"
+						src="{% static 'images/icons8-calories-30 1@2x.png'%}"
+						alt=""
+					/>
+				</div>
+				<div class="sum-value">{{ recipe.nutrition.calories }}</div>
+				<div>Calories</div>
+			</div>
+		</div>
 
-    <div class="anchor-links">
-      <a class="anch-link" href="#directions"><div>Directions</div></a>
-      <a class="anch-link" href="#nutrition"><div>Nutrition</div></a>
-      <a class="anch-link" href="#video"><div>Video</div></a>
-      <a class="anch-link" href="#reviews"><div>Reviews</div></a>
-    </div>
+		<div class="anchor-links">
+			<a
+				class="anch-link"
+				href="#directions"
+				><div>Directions</div></a
+			>
+			<a
+				class="anch-link"
+				href="#nutrition"
+				><div>Nutrition</div></a
+			>
+			<a
+				class="anch-link"
+				href="#video"
+				><div>Video</div></a
+			>
+			<a
+				class="anch-link"
+				href="#reviews"
+				><div>Reviews</div></a
+			>
+		</div>
 
-    <div class="ingredients">
-      <h5>Ingredients</h5>
-      <ul class="ingredients-list">
-        {% for i in recipe.ingredients %}
-        <li>
-          <div class="i-list-text">
-            <i class="material-icons grey-text">add_circle</i>
-            <div>
-              {{ i.quantity }} {{ i.measurement }}
-              <span class="i-name">{{ i.name }}</span>
-            </div>
-          </div>
-        </li>
-        {% endfor%}
-      </ul>
-    </div>
-    <div class="center">
-      <button id="sim-ing" class="btn waves-effect waves-light">
-        Show me similar recipes
-      </button>
-    </div>
+		<div class="ingredients">
+			<h5>Ingredients</h5>
+			<ul class="ingredients-list">
+				{% for i in recipe.ingredients %}
+				<li>
+					<div class="i-list-text">
+						<i class="material-icons grey-text">add_circle</i>
+						<div>
+							{{ i.quantity }} {{ i.measurement }}
+							<span class="i-name">{{ i.name }}</span>
+						</div>
+					</div>
+				</li>
+				{% endfor%}
+			</ul>
+		</div>
+		<div class="center">
+			<button
+				id="sim-ing"
+				class="btn waves-effect waves-light"
+			>
+				Show me similar recipes
+			</button>
+		</div>
 
-    <div id="directions" class="directions">
-      <h5>Directions</h5>
-      {% for step in recipe.instructions %}
-      <ul class="instructions">
-        <li>{{ step }}</li>
-      </ul>
-      {% endfor%}
-    </div>
+		<div
+			id="directions"
+			class="directions"
+		>
+			<h5>Directions</h5>
+			{% for step in recipe.instructions %}
+			<ul class="instructions">
+				<li>{{ step }}</li>
+			</ul>
+			{% endfor%}
+		</div>
 
-    <div id="nutrition" class="nutrition">
-      <h5>Nutrition</h5>
-      <div class="nutrition-container">
-        <div class="nutrition-content">
-          <div>{{ recipe.nutrition.protein}}g</div>
-          <div>Protein</div>
-        </div>
-        <div class="nutrition-content">
-          <div>{{ recipe.nutrition.sugar}}g</div>
-          <div>Sugar</div>
-        </div>
-        <div class="nutrition-content">
-          <div>{{ recipe.nutrition.carbohydrates}}g</div>
-          <div>Carbs</div>
-        </div>
-        <div class="nutrition-content">
-          <div>{{ recipe.nutrition.fat}}g</div>
-          <div>Fats</div>
-        </div>
-      </div>
-    </div>
+		<div
+			id="nutrition"
+			class="nutrition"
+		>
+			<h5>Nutrition</h5>
+			<div class="nutrition-container">
+				<div class="nutrition-content">
+					<div>{{ recipe.nutrition.protein}}g</div>
+					<div>Protein</div>
+				</div>
+				<div class="nutrition-content">
+					<div>{{ recipe.nutrition.sugar}}g</div>
+					<div>Sugar</div>
+				</div>
+				<div class="nutrition-content">
+					<div>{{ recipe.nutrition.carbohydrates}}g</div>
+					<div>Carbs</div>
+				</div>
+				<div class="nutrition-content">
+					<div>{{ recipe.nutrition.fat}}g</div>
+					<div>Fats</div>
+				</div>
+			</div>
+		</div>
 
-    <div id="video" class="video">
-      <h5>Video</h5>
-      <div class="center">
-        <div class="video">
-          <video width="320" height="240" controls>
-            <source src="{{recipe.video_url}}" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
+		<div
+			id="video"
+			class="video"
+		>
+			<h5>Video</h5>
+			<div class="center">
+				<div class="video">
+					<video
+						width="320"
+						height="240"
+						controls
+					>
+						<source
+							src="{{recipe.video_url}}"
+							type="video/mp4"
+						/>
+					</video>
+				</div>
+			</div>
+		</div>
 
-    <div id="reviews" class="reviews">
-      <h5>Reviews</h5>
-    </div>
-  </div>
-  {% endblock %}
+		<div
+			id="reviews"
+			class="reviews"
+		>
+			<h5>Reviews</h5>
+			{% for review in reviews %}
+			<div class="review_container">
+				<div class="review_authoer">Culinarian {{review.author_name}}</div>
+				<div class="review_text">{{review.text}}</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endblock %}
 </div>

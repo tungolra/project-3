@@ -224,10 +224,20 @@ def recipe_detail(request, recipe_id):
     p = {
         "id":f"{recipe_id}" 
     }
+    p_rev = {
+        "id" : f"{recipe_id}",
+        "size" : "10"
+    }
     response = tc_api.client.get_recipes_details(p)
+    response_rev = tc_api.client.get_tips(p_rev)
+    
     data = utils.parse_recipes_details(response, "d")
-    print (data)
-    return render(request, "recipes/details.html", {"recipe":data})
+    data_rev = utils.parse_tips(response_rev)
+    recipeDB = Recipes.objects.all().values()
+    ids = []
+    for recipe in recipeDB:
+        ids.append(recipe['recipe_id'])
+    return render(request, "recipes/details.html", {"recipe":data, "reviews": data_rev, 'ids': ids})
 
 """OAuth Functions"""
 def signup(request):

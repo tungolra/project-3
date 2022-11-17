@@ -266,7 +266,8 @@ h5 {
   font-weight: 100;
 }
 
-i.material-icons.grey-text, i.material-icons.red-text {
+i.material-icons.grey-text,
+i.material-icons.red-text {
   font-size: 26px !important;
 }
 
@@ -466,4 +467,10 @@ h4 > .cust-text {
 }
 .style2 {
   visibility: hidden;
+}
+.author-review {
+  padding-bottom: 10px;
+}
+.review-text {
+  font-style: italic;
 }

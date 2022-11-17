@@ -11,7 +11,7 @@
     {%for recipe in recipe_collection%}
     <div class="card">
       <a href="{% url 'recipe_detail' recipe.id%}"
-        ><div class="rec-cat-cont" style="border: 1px solid black">
+        ><div class="rec-cat-cont">
           <img src="{{recipe.image_url}}" />
           <h6>{{ recipe.name }}</h6>
           <div class="info">

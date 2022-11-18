@@ -131,13 +131,11 @@ def add_recipe_to_meal_plan(request,recipe_id):
     mealplan_id = request.POST['mealplan']
     mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
     try:
-        #Check if mealplan has this recipe
         recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
         print("Mealplan already has this recipe.")
     except:
         print("Mealplan does not have this recipe!")
         try:
-            #Check if recipe exists
             recipe = Recipes.objects.get(recipe_id=recipe_id)
         except:
             recipe = Recipes.objects.create(recipe_id=recipe_id)

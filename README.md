@@ -1,5 +1,3 @@
-<!-- logo here -->
-<!-- - app title -->
 
 ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/logo-wht.png)
 
@@ -23,9 +21,6 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 
 ## Try it out!
 
-<!-- - getting started -->
-<!-- ### Instructions -->
-<!-- gif here -->
 ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2002_1.gif)
 ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2004-min.gif)
 
@@ -36,15 +31,12 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 8. Export a grocery list containing all the ingredients needed for your meal plan.
 9. Get cooking!
 
-<!-- - technologies used -->
-
 ## Technologies
 
 - Python
 - Django
 - [Tasty API](https://rapidapi.com/apidojo/api/tasty/)
 
-<!-- future enhancements -->
 
 ## What's Next?
 

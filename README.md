@@ -6,7 +6,7 @@
 ### _Get Cooking._ => [Culinarian](https://culinarian-sei55.herokuapp.com/)
 
 <sub>Skip the autobiography and get cooking.</sup>
-
+![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2002_1.gif)
 ---
 
 ### Concept:
@@ -26,7 +26,7 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 <!-- - getting started -->
 <!-- ### Instructions -->
 <!-- gif here -->
-![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2002_1.gif)
+![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2004-min.gif)
 
 1. Launch Culinarian [here](https://culinarian-sei55.herokuapp.com/).
 2. Browse over \_\_ recipes from Tasty API.

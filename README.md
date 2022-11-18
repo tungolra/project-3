@@ -32,7 +32,6 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 1. Launch Culinarian [here](https://culinarian-sei55.herokuapp.com/).
 2. Browse over 9 000 recipes from Tasty API.
 5. View recipes, ingredients, instructions, reviews, images, and nutritional information all on one page, without the prologue!
-6. 
 7. Save recipes to customizable meal plans.
 8. Export a grocery list containing all the ingredients needed for your meal plan.
 9. Get cooking!

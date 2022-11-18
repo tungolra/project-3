@@ -121,8 +121,9 @@ def helper_nutrition(nutrition):
         nutrition =  {
             'calories': randrange(5,25),
             'protein': randrange(5,25),
+            'carbohydrates': randrange(5,25),
+            'fat': randrange(5,25),
             'sugar': randrange(5,25),
-            'fats': randrange(5,25),
             'fiber': randrange(5,25)
         }
     return nutrition

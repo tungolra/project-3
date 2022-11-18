@@ -26,11 +26,11 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 <!-- - getting started -->
 <!-- ### Instructions -->
 <!-- gif here -->
+![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2002_1.gif)
 ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2004-min.gif)
 
 1. Launch Culinarian [here](https://culinarian-sei55.herokuapp.com/).
 2. Browse over 9 000 recipes from Tasty API.
-4. ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/Sequence%2002_1.gif)
 5. View recipes, ingredients, instructions, reviews, images, and nutritional information all on one page, without the prologue!
 6. 
 7. Save recipes to customizable meal plans.
@@ -49,7 +49,9 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 
 ### What's Next?
 
-\_
+- A search option where you can query by diet, ingredients, cuisine etc.
+- The ability to create recipes.
+- A functional share button to pass recipes along to others. 
 
 ### Deliverables
 

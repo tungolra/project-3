@@ -11,8 +11,14 @@
         <a href="{% url 'groceries_index' meal_plan.id %}" class="btn"
           >Groceries</a
         >
-        <a href="{% url 'meal_plan_edit' meal_plan.id %}" class="btn">Edit</a>
-        <a href="{% url 'meal_plan_delete' meal_plan.id %}" class="btn"
+        <a
+          href="{% url 'meal_plan_edit' meal_plan.id %}"
+          class="btn waves-effect waves-custom waves-light"
+          >Edit</a
+        >
+        <a
+          href="{% url 'meal_plan_delete' meal_plan.id %}"
+          class="btn waves-effect waves-custom waves-light"
           >Delete</a
         >
       </h2>
@@ -66,8 +72,3 @@
   </div>
 </div>
 {% endblock %}
-<a href="{% url 'delete_recipe_from_meal_plan' recipe.id meal_plan.id %}"
-  ><span class="material-symbols-outlined" style="position: inherit">
-    delete </span
-  >(delete {{recipe.name}})</a
->

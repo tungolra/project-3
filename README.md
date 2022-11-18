@@ -9,7 +9,7 @@
 ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/browse.gif)
 ---
 
-### Concept:
+## Concept:
 
 <sup>_In Canada people waste an estimated [$30 billion](https://www.cbc.ca/news/business/canada-food-waste-1.3813965) of food every year._ </sup>
 <br>
@@ -21,7 +21,7 @@ Culinarian keeps cooking simple.
 With one app, you can explore and save recipes to a meal plan. Once you've planned your recipes, a grocery list is generated so you know **exactly** how much of each ingredient you need.
 <br>
 
-### Try it out!
+## Try it out!
 
 <!-- - getting started -->
 <!-- ### Instructions -->
@@ -38,7 +38,7 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 
 <!-- - technologies used -->
 
-### Technologies
+## Technologies
 
 - Python
 - Django
@@ -46,12 +46,12 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 
 <!-- future enhancements -->
 
-### What's Next?
+## What's Next?
 
 - A search option where you can query by diet, ingredients, cuisine etc.
 - The ability to create recipes.
 - A functional share button to pass recipes along to others. 
 
-### Deliverables
+## Deliverables
 
 - [User Stories](#https://www.notion.so/f802231124e345e38edb4db5b1e4b008?v=12e1bfb756a147a88750053b30b02be1])

@@ -111,12 +111,20 @@ def helper_video_url(url):
     return url
 
 def helper_nutrition(nutrition):
-    for nutrient, val in nutrition.items():
-        if val:
-            nutrition[nutrient] = val
-        else:
-            nutrition[nutrient] = randrange(5,50)
-
+    if nutrition:
+        for nutrient, val in nutrition.items():
+            if val:
+                nutrition[nutrient] = val
+            else:
+                nutrition[nutrient] = randrange(5,25)
+    else:
+        nutrition =  {
+            'calories': randrange(5,25),
+            'protein': randrange(5,25),
+            'sugar': randrange(5,25),
+            'fats': randrange(5,25),
+            'fiber': randrange(5,25)
+        }
     return nutrition
 
 

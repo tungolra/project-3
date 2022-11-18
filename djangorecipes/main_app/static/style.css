@@ -411,6 +411,15 @@ h4 > .cust-text {
   .rec-cat {
     grid-template-columns: 1fr 1fr;
   }
+  .sum-value {
+    font-size: small;
+  }
+  .summary {
+    font-size: smaller;
+  }
+  .anchor-links {
+    font-size: small;
+  }
 }
 
 @media only screen and (min-width: 1200px) {

@@ -1,7 +1,7 @@
 <!-- logo here -->
 <!-- - app title -->
 
-![image](/images/logo-wht.png)
+![]([/images/logo-wht.png](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/logo-wht.png))
 
 ### _Get Cooking._ => [Culinarian](https://culinarian-sei55.herokuapp.com/)
 

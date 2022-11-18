@@ -408,6 +408,9 @@ h4 > .cust-text {
   .brush-underline-long > img {
     width: 160px;
   }
+  .rec-cat {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media only screen and (min-width: 1200px) {

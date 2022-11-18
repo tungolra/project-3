@@ -10,8 +10,6 @@ from . import tc_api
 from . import utils
 import random
 
-
-
 def home(request):
     p = {
         "from" : random.randrange(9000),
@@ -227,13 +225,12 @@ def add_recipe(request, recipe_id):
     }
     response = tc_api.client.get_recipes_details(p)
     data = utils.parse_recipes_details(response, "d")
-
     return render(request, 'recipes/add.html', {'recipe_id':recipe_id, 'data':data, 'mealplans': mealplans})
 
 @login_required
 def delete_recipe(request, recipe_id):
     Recipes.objects.filter(recipe_id=recipe_id).delete()
-    return redirect("recipe_index")
+    return redirect("recipe_detail", recipe_id=recipe_id)
 
 def recipe_detail(request, recipe_id):
     p = {

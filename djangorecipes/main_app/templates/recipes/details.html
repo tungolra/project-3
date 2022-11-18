@@ -15,7 +15,7 @@
       </div>
       {% if recipe.id in ids %}
       <div>
-        <a href="{% url 'save_recipe' recipe.id%}"
+        <a href="{% url 'delete_recipe' recipe.id%}"
           ><i class="material-icons red-text">favorite</i></a
         >
       </div>

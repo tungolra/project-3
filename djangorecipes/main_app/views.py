@@ -8,6 +8,7 @@ from .models import MealPlans, Recipes
 from .forms import MealPlanForm, RecipesForm
 from . import tc_api
 from . import utils
+from . import cuisine_tags
 import random
 
 def home(request):
@@ -17,14 +18,15 @@ def home(request):
     }
     response = tc_api.client.get_recipes_list(p)
     data = utils.parse_recipes_list(response)
-    tags = utils.get_tags_by_type("cuisine")
-    cuisine_tags_values = tags
 
     for idx, item in enumerate(data):
         if data[idx]['rating']['score']:
             data[idx]['rating']['score'] = round(data[idx]['rating']['score'] * 100, 0)
         data[idx]['rating']['total_count'] = data[idx]['rating']['count_positive'] + data[idx]['rating']['count_negative']
-    return render(request, 'home.html', {'data': data, 'cuisine_tag_values': cuisine_tags_values})
+    
+    tags = cuisine_tags.tags
+
+    return render(request, 'home.html', {'data': data, 'tags':tags})
 
 def cuisine_recipe_list(request, cuisine="american"):
     search_params = {
@@ -134,13 +136,11 @@ def add_recipe_to_meal_plan(request,recipe_id):
     mealplan_id = request.POST['mealplan']
     mealplan_obj = get_object_or_404(MealPlans, pk=mealplan_id)
     try:
-        #Check if mealplan has this recipe
         recipe = mealplan_obj.recipes.get(recipe_id = recipe_id)
         print("Mealplan already has this recipe.")
     except:
         print("Mealplan does not have this recipe!")
         try:
-            #Check if recipe exists
             recipe = Recipes.objects.get(recipe_id=recipe_id)
         except:
             recipe = Recipes.objects.create(recipe_id=recipe_id)

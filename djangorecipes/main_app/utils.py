@@ -22,8 +22,7 @@ def helper_recipe_detail(recipe_api: dict) -> dict:
         "video_url" : helper_video_url(recipe["original_video_url"]),
         "nutrition" : helper_nutrition(recipe["nutrition"]),
         "author" : helper_get_user(recipe["credits"][0]["name"])
-        # TO ADD,
-        # tags
+
     }
 
     for instruction in recipe["instructions"]:

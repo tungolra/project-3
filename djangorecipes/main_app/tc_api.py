@@ -1,15 +1,14 @@
-import environ
 from requests_futures.sessions import FuturesSession
+from djangorecipes.settings import dotenv
 
-env = environ.Env()
-environ.Env.read_env()
+
 
 class TastyCoAPI():
     def __init__(self):
         self.__session = None
-        self.__base_url = env('TASTYCO_BASE_URL')
+        self.__base_url = dotenv.get('TASTYCO_BASE_URL')
         self.__headers = {
-            'X-RapidAPI-Key': env('TASTYCO_KEY'),
+            'X-RapidAPI-Key': dotenv.get('TASTYCO_KEY'),
             'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
         }
     

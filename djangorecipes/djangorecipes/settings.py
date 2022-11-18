@@ -20,7 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Set up environment variables
 env = environ.Env()
 environ.Env.read_env()
-
+dotenv = {}
+dotenv.update({"TASTYCO_BASE_URL": env('TASTYCO_BASE_URL')})
+dotenv.update({"TASTYCO_KEY": env("TASTYCO_KEY")})
+dotenv.update({"TASTYCO_BASE_URL": env("TASTYCO_BASE_URL")})
+dotenv.update({"DATABASE_URL": env("DATABASE_URL")})
 ### Notes on django-environ module
 
 # Steps to install django-environ
@@ -96,7 +100,7 @@ WSGI_APPLICATION = 'djangorecipes.wsgi.application'
 is_production = True
 if (is_production):
     DATABASES = {
-        'default': dj_database_url.config(default=env('DATABASE_URL'))
+        'default': dj_database_url.config(default=dotenv.get('DATABASE_URL'))
     }
 else:
     DATABASES = {

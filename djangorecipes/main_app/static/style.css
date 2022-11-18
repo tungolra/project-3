@@ -194,7 +194,7 @@ h5 {
   margin-top: 40px;
   text-align: center;
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: space-around;
   align-items: center;
@@ -300,7 +300,6 @@ i.material-icons.red-text {
 .feature-recipe-link {
   text-align: center;
   margin: 20px;
-  margin-bottom: 70px;
   padding: 10px;
   background-color: rgb(211, 211, 211, 0.5);
 }
@@ -418,7 +417,19 @@ h4 > .cust-text {
     font-size: smaller;
   }
   .anchor-links {
+    font-size: smaller;
+  }
+  .anch-link > div {
+    padding: 5px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .nutrition-content {
+    height: 65px;
+    width: 65px;
     font-size: small;
+    padding: 12px 0;
   }
 }
 

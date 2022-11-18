@@ -33,6 +33,9 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 
 ## Technologies
 
+- HTML
+- CSS
+- Materialize
 - Python
 - Django
 - [Tasty API](https://rapidapi.com/apidojo/api/tasty/)

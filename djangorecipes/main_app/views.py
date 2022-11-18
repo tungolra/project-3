@@ -100,8 +100,13 @@ def meal_plan_detail(request, mealplan_id):
         "id":f"{recipe_id}"
         }
         response = tc_api.client.get_recipes_details(p)
-        data = utils.parse_recipes_details(response, "d")
-        recipe_collection.append(data)
+        recipe_data = utils.parse_recipes_details(response, "d")
+        
+        if recipe_data['rating']['score']:
+            recipe_data['rating']['score'] = round(recipe_data['rating']['score'] * 100, 0)
+        recipe_data['rating']['total_count'] = recipe_data['rating']['count_positive'] + recipe_data['rating']['count_negative']
+
+        recipe_collection.append(recipe_data)
     return render(request, 'meal_plans/detail.html', {'meal_plan': meal_plan, 'recipes': recipes, 'recipe_collection': recipe_collection})
 
 # update Meal Plans

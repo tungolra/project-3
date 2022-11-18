@@ -11,6 +11,8 @@
 - Lucas Friedmann
 - Ralph Tungol
 - Kendra Yoshizawa
+- Karishma Jani
+- Nick Collett
 
 ## Concept:
 
@@ -54,4 +56,4 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 
 ## Deliverables
 - [ERD]
-- [User Stories](#https://www.notion.so/f802231124e345e38edb4db5b1e4b008?v=12e1bfb756a147a88750053b30b02be1])
+- [User Stories](https://www.notion.so/f802231124e345e38edb4db5b1e4b008?v=12e1bfb756a147a88750053b30b02be1])

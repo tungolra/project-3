@@ -6,6 +6,11 @@
 <sub>Skip the autobiography and get cooking.</sup>
 ![](https://github.com/kmyosh/project-3/blob/main/djangorecipes/images/browse.gif)
 ---
+## Team :
+- Saad Khan
+- Lucas Friedmann
+- Ralph Tungol
+- Kendra Yoshizawa
 
 ## Concept:
 
@@ -48,5 +53,5 @@ With one app, you can explore and save recipes to a meal plan. Once you've plann
 - A functional share button to pass recipes along to others. 
 
 ## Deliverables
-
+- [ERD]
 - [User Stories](#https://www.notion.so/f802231124e345e38edb4db5b1e4b008?v=12e1bfb756a147a88750053b30b02be1])

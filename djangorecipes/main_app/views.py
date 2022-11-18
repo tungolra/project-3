@@ -10,8 +10,6 @@ from . import tc_api
 from . import utils
 import random
 
-
-
 def home(request):
     p = {
         "from" : random.randrange(9000),

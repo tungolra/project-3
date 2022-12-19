@@ -107,6 +107,6 @@ Using Django's session-based authorization, users can create a new account to be
 
 Ralph Tungol
 Email: rarttungol@gmail.com
-Project Repo: [Repo]()
-Project Site: [Site]()
+Project Repo: [Repo](https://github.com/tungolra/project-3/tree/development)
+Project Site: [Site - _offline_]()
 

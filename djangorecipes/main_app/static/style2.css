@@ -348,6 +348,9 @@ h4 > .cust-text {
   margin: 20px;
 }
 
+.card { 
+  height: auto;
+}
 @media only screen and (max-width: 650px) {
   .nutrition-content {
     height: 90px;
@@ -400,6 +403,7 @@ h4 > .cust-text {
     max-height: 100%;
     object-fit: cover;
   }
+  
   .header-img {
     top: 0px;
     margin: 30px;

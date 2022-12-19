@@ -26,30 +26,59 @@ Lastly, I was responsible for implementing Django’s session-based authorizatio
 
 
 ### Home Page
+Upon sign in, users are taken to the homepage where they will first see a Featured Recipe. Below is the option to Explore by cuisine-type. Lastly, we generate a list of featured recipes. 
+
 <img src="https://i.imgur.com/bu8ZXid.gif">
 <img src="https://i.imgur.com/OOrGzJ0.png">
 
+### Explore Page
+
+Featuring a carousel to browse through a number of cuisine-types from around the world, users can click into a particular cuisine. They will be redirected to another page of recipes. 
+<img src="https://i.imgur.com/gmJyfdy.gif">
+
 ### Nav Bar
-<img alt="navbar" src="">
+
+We've created a responsive nav bar to reduce empty space for larger screens or maximize content-space in smaller screens. 
+<img alt="navbar" src="https://i.imgur.com/eE7p9Ul.gif">
 
 ### My Recipes Page
-<img alt="myrecipes" src="">
+
+When a user views the details for a recipe, they can click the Like icon to save to their recipes. Their newly saved recipe will show in the My Recipes Page. 
+<img alt="myrecipes" src="https://i.imgur.com/xLZ0Nbm.gif">
 
 ### Recipe Details Page
+
+The Recipe Details page resembles a modern website highlighting helpful details related to a single recipe. Users will find out the cooktime, recipe rating, number of servings, and calorie content in the summary details. They have the option to jump to any section of the page - Directions, Nutrition content, instructional videos, and reviews. 
 <img src="https://i.imgur.com/Wzykr4U.gif">
 
 ### My Meal Plans Page
-<img alt="mealplanspage" src="">
+
+On the Meal Plans Page, users can view all their customizable meal plans. Here, they can create new meal plans or view all the recipes collected for a particular meal plan.
+<img alt="mealplanspage" src="https://i.imgur.com/qgkhZ1C.png">
+
+### Adding Recipes to Meal Plan
+
+Through the recipe details page, users can also directly add a recipe to a particular meal plan. This recipe will be available when going into their selected meal plan. 
+<img alt="mealplanspage" src="https://i.imgur.com/oTplFje.gif">
+
+### Creating New Meal Plans
+
+Creating a new meal plan is as easy as inputting a name for their collection. 
+<img alt="mealplanscreate/update" src="https://i.imgur.com/ZqHE0J4.png">
 
 ### Grocery Page
+
+Finally, once users have collected a list of recipes for their meal plan, they can generate a grocery list which compiles the quantities for all unique grocery items. 
 <img src="https://i.imgur.com/hVQQQzV.png">
 
 ### Registration Pages
+Using Django's session-based authorization, users can create a new account to begin their culinary journey. 
+
 #### Log in Page
-<img src="https://i.imgur.com/aXjkvsn.png">
+<img src="https://i.imgur.com/lBQ4uhW.png">
 
 #### Sign up Page
-<img src="https://i.imgur.com/aXjkvsn.png">
+<img src="https://i.imgur.com/iZOOcYy.png">
 
 ### Technologies Used:
 - Python

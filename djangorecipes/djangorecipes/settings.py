@@ -24,8 +24,8 @@ dotenv = {}
 dotenv.update({"TASTYCO_BASE_URL": env('TASTYCO_BASE_URL')})
 dotenv.update({"TASTYCO_KEY": env("TASTYCO_KEY")})
 dotenv.update({"TASTYCO_BASE_URL": env("TASTYCO_BASE_URL")})
-dotenv.update({"DATABASE_URL": env("DATABASE_URL")})
-### Notes on django-environ module
+# dotenv.update({"DATABASE_URL": env("DATABASE_URL")})
+# Notes on django-environ module
 
 # Steps to install django-environ
 # pip install django-environ
@@ -43,7 +43,8 @@ SECRET_KEY = 'django-insecure-cy&@b&gnz4oso&(8n=ee=ls-brngz-(b+l_sa%-l(ryyx#sae6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".culinarian-sei55.herokuapp.com", "localhost",]
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = [".culinarian-sei55.herokuapp.com", "localhost",]
 
 
 # Application definition
@@ -87,7 +88,7 @@ TEMPLATES = [
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = (
- 
+
     'django.core.context_processors.request',
 )
 
@@ -98,19 +99,24 @@ WSGI_APPLICATION = 'djangorecipes.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-is_production = True
-if (is_production):
-    DATABASES = {
-        'default': dj_database_url.config(default=dotenv.get('DATABASE_URL'))
+# is_production = True
+# if (is_production):
+#     DATABASES = {
+#         'default': dj_database_url.config(default=dotenv.get('DATABASE_URL'))
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'djangorecipes',
+#         }
+#     }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'djangorecipes',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'djangorecipes',
-        }
-    }
-
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -142,7 +148,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -158,4 +163,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-

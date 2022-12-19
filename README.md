@@ -24,28 +24,32 @@ Following Django’s MVT architecture, I established the routing and CRUD functi
 
 Lastly, I was responsible for implementing Django’s session-based authorization to validate user credentials.
 
+
+### Home Page
+<img src="https://i.imgur.com/bu8ZXid.gif">
+<img src="https://i.imgur.com/OOrGzJ0.png">
+
+### Nav Bar
+<img alt="navbar" src="">
+
+### My Recipes Page
+<img alt="myrecipes" src="">
+
+### Recipe Details Page
+<img src="https://i.imgur.com/Wzykr4U.gif">
+
+### My Meal Plans Page
+<img alt="mealplanspage" src="">
+
+### Grocery Page
+<img src="https://i.imgur.com/hVQQQzV.png">
+
 ### Registration Pages
 #### Log in Page
 <img src="https://i.imgur.com/aXjkvsn.png">
+
 #### Sign up Page
 <img src="https://i.imgur.com/aXjkvsn.png">
-
-### Home Page
-<img src="https://i.imgur.com/aXjkvsn.png">
-
-### Nav Bar
-<img src="https://i.imgur.com/aXjkvsn.png">
-
-### My Recipes Page
-
-### Recipe Details Page
-<img src="https://i.imgur.com/aXjkvsn.png">
-
-### My Meal Plans Page
-
-### Grocery Page
-<img src="https://i.imgur.com/aXjkvsn.png">
-
 
 ### Technologies Used:
 - Python
